@@ -1,0 +1,122 @@
+
+ <style>
+	body {
+  max-height: fit-content;
+  height: fit-content;
+}
+  </style>
+      
+
+<ngx-spinner
+bdOpacity = 0.9
+bdColor = "rgba(51,51,51,0.55)"
+size = "medium"
+color = "#fff"
+type = "timer"
+[fullScreen] = "true">
+<p style="color: white" > Loading... </p>
+</ngx-spinner>
+<body class="register-page">
+    <div class="all-wrapper menu-side with-pattern">
+      <div class="auth-box-w wider">
+        <div class="logo-w">
+          <a><img alt="" src="../../../assets/img/TrendFX Logo.svg"></a>
+        </div>
+        <h4 class="auth-header">
+          Create Account
+        </h4>
+        <form [formGroup]='registeruserForm'>
+        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. </p>
+
+          <div class="radios">
+            <div class="radio">
+              <input type="radio" id="radio1" name="account_type" 
+              formControlName='account_type' value="demo" checked>
+              <label for="radio1">
+                <div class="checker"></div>
+              Demo Account
+              </label>
+            </div>
+
+            <div class="radio">
+              <input type="radio" id="radio2" name="account_type" 
+              formControlName='account_type' value="real">
+              <label for="radio2">
+                <div class="checker"></div>
+                Real Account
+              </label>
+            </div>
+          </div>
+          <div class="form-group pt-2">
+            <label for="">Name</label>
+            <input class="form-control" name='name' formControlName='name' placeholder="Enter your name" type="text">
+            <div class="pre-icon os-icon os-icon-user-male-circle"></div>
+          </div>
+          <div class="form-group">
+            <label for="">Phone</label>
+            <input class="form-control" name='number' formControlName='number' placeholder="Enter your phone" type="text">
+            <div class="pre-icon os-icon os-icon-phone"></div>
+          </div>
+          <div class="form-group">
+            <label for=""> Email address</label>
+            <input class="form-control" name="email" formControlName='email' placeholder="Enter email" type="email">
+            <div class="pre-icon os-icon os-icon-email-2-at2"></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for=""> Password</label>
+                <input class="form-control" name='password' formControlName='password'
+                 placeholder="Password" type="password">
+                <div class="pre-icon os-icon os-icon-fingerprint"></div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="">Confirm Password</label>
+                <input class="form-control" name="password_confirmation" 
+                formControlName='password_confirmation' placeholder="Password" type="password">
+              </div>
+            </div>
+            <div class="col-sm-6" style="display: none">
+                <div class="form-group">
+                  <label for="">City</label>
+                  <input class="form-control" name="city" 
+                  formControlName='city' value="wah cantt" placeholder="City" type="text">
+                </div>
+              </div>
+              <div class="col-sm-6" style="display: none">
+                  <div class="form-group">
+                    <label for="">Address</label>
+                    <input class="form-control" name="address" 
+                    formControlName='address' value="lahore" placeholder="Address" type="text">
+                  </div>
+                </div>
+                <div class="col-sm-6" style="display: none">
+                    <div class="form-group">
+                      <label for="">Postal Code</label>
+                      <input class="form-control" name="post_code" 
+                      formControlName='post_code' value="90344" placeholder="postal code" 
+                      type="text">
+                    </div>
+                  </div>
+                  <div class="col-sm-6" style="display: none">
+                      <div class="form-group">
+                        <label for="">Country</label>
+                        <input class="form-control" name="country" 
+                        formControlName='country' value="pakistan" placeholder="country"
+                         type="text">
+                      </div>
+                    </div>
+          </div>
+          <div class="buttons-w">
+            <button class="btn btn-primary" 
+            (click)='register(registeruserForm.value)'>Register Now</button>
+          </div>
+          <div *ngIf='message' class="alert alert-success alert-adj" role="alert">
+              <strong>{{message}} </strong>.
+            </div>
+        </form>
+      </div>
+    </div>
+  </body>

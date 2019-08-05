@@ -1,0 +1,57 @@
+
+<ngx-spinner
+bdOpacity = 0.9
+bdColor = "rgba(51,51,51,0.55)"
+size = "medium"
+color = "#fff"
+type = "timer"
+[fullScreen] = "true">
+<p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<body class="auth-wrapper">
+  <div class="all-wrapper menu-side with-pattern">
+    <div class="auth-box-w">
+      <div class="logo-w">
+        <a><img alt="" src="../../../assets/img/TrendFX Logo.svg"></a>
+      </div>
+      <h4 class="auth-header">
+        Login Form
+      </h4>
+
+      <form [formGroup]="loginForm">
+
+        <div class="form-group">
+          <label for="">Email</label>
+          <input class="form-control" name="email" formControlName="email" placeholder="Enter your email" type="text">
+
+          <div class="pre-icon os-icon os-icon-user-male-circle"></div>
+          <div *ngIf="loginForm.controls['email'].touched && !loginForm.controls['email'].valid">
+              <span class="help-block" style="color:red" *ngIf="loginForm.controls['email'].hasError('required')">
+                Email is required</span>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="">Password</label><input class="form-control" name="password" formControlName="password"
+            placeholder="Enter your password" type="password">
+          <div class="pre-icon os-icon os-icon-fingerprint"></div>
+          <div *ngIf="loginForm.controls['email'].touched && !loginForm.controls['email'].valid">
+              <span class="help-block" style="color:red" *ngIf="loginForm.controls['email'].hasError('required')">
+                Password is required</span>
+            </div>
+        </div>
+        <div class="buttons-w">
+          <button class="btn btn-primary" [disabled]="!loginForm.valid" (click)='login(loginForm.value)'>Log me
+            in</button>
+          <div class="form-check-inline">
+            <label class="form-check-label">
+              <a routerLink="users/forgot">Forgot Password</a></label>
+          </div>
+          <div class="alert alert-error" role="alert">
+              <strong>{{message}} </strong>.
+            </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
