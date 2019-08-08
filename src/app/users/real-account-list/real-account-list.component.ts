@@ -37,7 +37,7 @@ export class RealAccountListComponent implements OnInit {
     
     .pipe(
       catchError(err =>{
-        this.errormessage='Something happend wrong try again!';
+        this.errormessage=err.error.data;
 
         this.spinner.hide();
         this.NoRecordFound=false;

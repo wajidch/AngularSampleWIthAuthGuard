@@ -27,7 +27,7 @@ export class UserTransactionHistoryComponent implements OnInit {
       this.apiservice.get('getTransactions')
       .pipe(
         catchError(err =>{
-          this.errormessage='Something happend wrong try again!';
+          this.errormessage=err.error.data;
           this.notFound='';
           this.spinner.hide();
           return throwError(err)
