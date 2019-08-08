@@ -1,0 +1,114 @@
+
+
+<ngx-spinner
+bdOpacity = 0.9
+bdColor = "rgba(51,51,51,0.55)"
+size = "medium"
+color = "#fff"
+type = "timer"
+[fullScreen] = "true">
+<p style="color: white" > Loading... </p>
+</ngx-spinner>
+<body>
+<div class="content-w">
+        <div class="content-i">
+          <div class="content-box">
+            <div class="element-wrapper">
+              <h6 class="element-header">
+               Account Setting
+              </h6>
+              <div class="element-box col-md-12 m-auto">
+                <h5 class="form-header">
+                Edit Profile
+                </h5>
+  <!--              <div class="main-para">-->
+  <!--                Regülasyon gereği para yatırma, para çekme gibi bazı işlemlerinizin kısıtını kaldırmak için bazı bilgilerinizi doğrulamanız gerekmektedir.-->
+  <!--              </div>-->
+                <div>
+  
+                  <form [formGroup]='profileForm'>
+                    <div class="step-contents">
+                      <div class="step-content p-0 active" id="stepContent1">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for=""> Name</label>
+                              <input class="form-control"
+                               placeholder="Name" name='name' formControlName='name' type="text">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for=""> Email</label>
+                              <input class="form-control"
+                               placeholder="Email" name='email' formControlName='email' type="text">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="">Phone</label>
+                              <input class="form-control"
+                               placeholder="Phone" name='number' formControlName='number' type="text">
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="">Post code</label>
+                              <input class="form-control"
+                              name='post_code' formControlName='post_code' placeholder="Post code" type="text">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <div class="form-group">
+                              <label for=""> Address</label>
+                              <input class="form-control" 
+                              placeholder="Address" name='address' formControlName='address' type="text">
+                            </div>
+                          </div>
+  
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for=""> City</label>
+                              <input class="form-control" 
+                              placeholder="City" name='city' formControlName='city' type="text">
+                           
+                           
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="">Country</label>
+                              <input class="form-control" 
+                              placeholder="City" name='country' 
+                              formControlName='country' type="text">
+                           
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-buttons-w text-right">
+                          <button class="btn btn-success" (click)='updateProfile(profileForm.value)'>Save</button>
+                        </div>
+                        <div *ngIf='message' class="alert alert-success alert-adj" role="alert">
+                                <strong>{{message}} </strong>.
+                              </div>
+                              <div *ngIf='errormessage' class="alert alert-error alert-adj" role="alert">
+                                  <strong>{{errormessage}} </strong>.
+                                </div>
+                    </div>
+  
+                    </div>
+                  </form>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
