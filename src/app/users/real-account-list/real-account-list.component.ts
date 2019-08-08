@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { apiService } from 'src/app/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-<<<<<<< HEAD
 import { FormGroup, FormControl } from '@angular/forms';
 import { catchError, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-=======
-
->>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
 @Component({
   selector: 'app-real-account-list',
   templateUrl: './real-account-list.component.html',
@@ -15,7 +11,6 @@ import { throwError } from 'rxjs';
 })
 export class RealAccountListComponent implements OnInit {
 
-<<<<<<< HEAD
   realaccountlist:any;
   createrealAccountForm:FormGroup;
   NoRecordFound: boolean;
@@ -33,18 +28,10 @@ export class RealAccountListComponent implements OnInit {
 
     })
     this.getRealAccountList();
-=======
-  accountList:any;
-  constructor(private apiservice:apiService,private spinner:NgxSpinnerService) { }
-
-  ngOnInit() {
-    this.getRealAccountList
->>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
   }
 
   getRealAccountList(){
 
-<<<<<<< HEAD
     this.spinner.show();
     this.apiservice.get('getRealAccount')
     
@@ -90,15 +77,5 @@ export class RealAccountListComponent implements OnInit {
       this.spinner.hide();
     }))
   }
-=======
-    this.apiservice.get('getAccount').subscribe((res:any)=>{
-
-      
-      this.accountList=res.data;
-      
-    })
-
-  }
->>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
 
 }

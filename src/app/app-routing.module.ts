@@ -30,11 +30,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-<<<<<<< HEAD
   imports: [RouterModule.forRoot(routes,{scrollPositionRestoration: 'enabled'})],
-=======
-  imports: [RouterModule.forRoot(routes)],
->>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

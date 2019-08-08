@@ -10,10 +10,7 @@ export class AppComponent implements OnInit {
   constructor( public router: Router) { }
 
   ngOnInit() {
-<<<<<<< HEAD
     
-=======
->>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
   }
 
 }
