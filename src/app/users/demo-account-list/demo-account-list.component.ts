@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { apiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FormGroup, FormControl } from '@angular/forms';
 import { catchError, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+=======
+
+>>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
 @Component({
   selector: 'app-demo-account-list',
   templateUrl: './demo-account-list.component.html',
@@ -12,6 +16,7 @@ import { throwError } from 'rxjs';
 })
 export class DemoAccountListComponent implements OnInit {
 
+<<<<<<< HEAD
   demoaccountlist:any;
   createdemoAccountForm:FormGroup;
   NoRecordFound:boolean;
@@ -78,4 +83,11 @@ export class DemoAccountListComponent implements OnInit {
       this.spinner.hide();
     }))
   }
+=======
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+>>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
 }

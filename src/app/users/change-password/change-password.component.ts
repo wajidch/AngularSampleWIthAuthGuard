@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { apiService } from 'src/app/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+=======
+
+>>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
@@ -11,6 +15,7 @@ import { throwError } from 'rxjs';
 })
 export class ChangePasswordComponent implements OnInit {
 
+<<<<<<< HEAD
   message:string;
   token=localStorage.getItem('token')
   changepasswordForm:FormGroup
@@ -45,4 +50,11 @@ export class ChangePasswordComponent implements OnInit {
       this.spinner.hide();
     })
   }
+=======
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+>>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
 }

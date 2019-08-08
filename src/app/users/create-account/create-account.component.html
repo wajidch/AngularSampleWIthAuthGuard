@@ -49,6 +49,7 @@ type = "timer"
           </div>
           <div class="form-group pt-2">
             <label for="">Name</label>
+<<<<<<< HEAD
             <div *ngIf="registeruserForm.controls['name'].touched &&
              !registeruserForm.controls['name'].valid">
                 <span class="help-block" style="color:red" 
@@ -57,21 +58,28 @@ type = "timer"
               </div>
             <input class="form-control" name='name' formControlName='name' placeholder="Enter your name" type="text">
             
+=======
+            <input class="form-control" name='name' formControlName='name' placeholder="Enter your name" type="text">
+>>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
             <div class="pre-icon os-icon os-icon-user-male-circle"></div>
           </div>
           <div class="form-group">
             <label for="">Phone</label>
+<<<<<<< HEAD
             <div *ngIf="registeruserForm.controls['number'].touched &&
              !registeruserForm.controls['number'].valid">
                 <span class="help-block" style="color:red" 
                 *ngIf="registeruserForm.controls['number'].hasError('required')">
                   Phone is required</span>
               </div>
+=======
+>>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
             <input class="form-control" name='number' formControlName='number' placeholder="Enter your phone" type="text">
             <div class="pre-icon os-icon os-icon-phone"></div>
           </div>
           <div class="form-group">
             <label for=""> Email address</label>
+<<<<<<< HEAD
             <div *ngIf="registeruserForm.controls['email'].touched &&
              !registeruserForm.controls['email'].valid">
                 <span class="help-block" style="color:red" 
@@ -84,6 +92,8 @@ type = "timer"
                 *ngIf="registeruserForm.controls['email'].hasError('email')">
                   Email format not valid</span>
               </div>
+=======
+>>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
             <input class="form-control" name="email" formControlName='email' placeholder="Enter email" type="email">
             <div class="pre-icon os-icon os-icon-email-2-at2"></div>
           </div>
@@ -91,6 +101,7 @@ type = "timer"
             <div class="col-sm-6">
               <div class="form-group">
                 <label for=""> Password</label>
+<<<<<<< HEAD
                 <div *ngIf="registeruserForm.controls['password'].touched &&
                 !registeruserForm.controls['password'].valid">
                    <span class="help-block" style="color:red" 
@@ -103,6 +114,8 @@ type = "timer"
                    *ngIf="registeruserForm.controls['password'].hasError('minlength')">
                    min length of password is 8 characters</span>
                  </div>
+=======
+>>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
                 <input class="form-control" name='password' formControlName='password'
                  placeholder="Password" type="password">
                 <div class="pre-icon os-icon os-icon-fingerprint"></div>
@@ -111,6 +124,7 @@ type = "timer"
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="">Confirm Password</label>
+<<<<<<< HEAD
                 <div *ngIf="registeruserForm.controls['password_confirmation'].touched &&
                 !registeruserForm.controls['password_confirmation'].valid">
                    <span class="help-block" style="color:red" 
@@ -125,6 +139,10 @@ type = "timer"
                  </div>
                 <input class="form-control" name="password_confirmation" 
                 formControlName='password_confirmation' placeholder="Confirm Password" type="password">
+=======
+                <input class="form-control" name="password_confirmation" 
+                formControlName='password_confirmation' placeholder="Password" type="password">
+>>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
               </div>
             </div>
             <div class="col-sm-6" style="display: none">
@@ -160,14 +178,21 @@ type = "timer"
           </div>
           <div class="buttons-w">
             <button class="btn btn-primary" 
+<<<<<<< HEAD
             (click)='register(registeruserForm.value)' [disabled]='!registeruserForm.valid'>Register Now</button>
+=======
+            (click)='register(registeruserForm.value)'>Register Now</button>
+>>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
           </div>
           <div *ngIf='message' class="alert alert-success alert-adj" role="alert">
               <strong>{{message}} </strong>.
             </div>
+<<<<<<< HEAD
             <div *ngIf='errormessage' class="alert alert-error alert-adj" role="alert">
                 <strong>{{errormessage}} </strong>.
               </div>
+=======
+>>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
         </form>
       </div>
     </div>

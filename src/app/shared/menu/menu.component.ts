@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { apiService } from 'src/app/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+=======
+>>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
 
 @Component({
   selector: 'app-menu',
@@ -9,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+<<<<<<< HEAD
 userName=localStorage.getItem('user_name');
 token=localStorage.getItem('token')
   constructor(private apiservice:apiService,
@@ -29,4 +33,12 @@ token=localStorage.getItem('token')
     })
 
   }
+=======
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+>>>>>>> 7ba362f67e60d3c13efd409f96d277cd50830248
 }
