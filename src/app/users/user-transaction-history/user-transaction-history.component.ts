@@ -14,7 +14,8 @@ export class UserTransactionHistoryComponent implements OnInit {
   transcationList:any;
   notFound:string;
   errormessage: string;
-  constructor(private apiservice:apiService,private spinner:NgxSpinnerService) { }
+  constructor(private apiservice:apiService,
+    private spinner:NgxSpinnerService) { }
 
   ngOnInit() {
     this.getTranscationlist();

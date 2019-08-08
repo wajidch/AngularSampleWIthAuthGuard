@@ -16,18 +16,14 @@ const routes: Routes = [
        
     path: 'users/login', component:LoginComponent
  },
- {
-       
-  path: 'users/createaccount', component:CreateAccountComponent
+ { path: 'users/createaccount', component:CreateAccountComponent
 },
 { path:'users/forgotpassword',component:ForgotPasswordComponent,},
 { path:'users/forgot',component:ForgotEmailVerificationComponent,},
 
 
  
-  { path: 'users',
-
-  loadChildren: './users/users.module#UserModule',}
+  { path: 'users', loadChildren: './users/users.module#UserModule',}
   
 ];
 
