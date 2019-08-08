@@ -32,7 +32,7 @@ export class WithdrawMoneyComponent implements OnInit {
       status:new FormControl('pending',[Validators.required]),
       email:new FormControl(this.email,[Validators.required]),
       user_id:new FormControl(this.userid,[Validators.required]),
-      swift:new FormControl('')
+      swift:new FormControl('',[Validators.required])
       
       
     })
