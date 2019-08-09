@@ -3,6 +3,8 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { apiService } from 'src/app/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 
 @Component({
@@ -19,6 +21,7 @@ export class VerifyAccountComponent implements OnInit {
   filesizeerror: boolean;
   message: string;
   fileImage: any;
+  status:any;
   submitted:boolean=false;
   constructor(private _http: HttpClient,private apiservice:apiService
     ,private spinner:NgxSpinnerService) { }
@@ -57,6 +60,7 @@ export class VerifyAccountComponent implements OnInit {
         }
         this.apiservice.post('fileUpload',formData).subscribe((res)=>{
           console.log("responseee",res)
+         // this.getStatus();
         })
 
 
@@ -97,7 +101,8 @@ export class VerifyAccountComponent implements OnInit {
           file:formData
         }
         this.apiservice.post('fileUpload',formData).subscribe((res)=>{
-          console.log("responseee",res)
+          console.log("responseee",res);
+          //this.getStatus();
         })
 
 
@@ -138,7 +143,8 @@ export class VerifyAccountComponent implements OnInit {
           file:formData
         }
         this.apiservice.post('fileUpload',formData).subscribe((res)=>{
-          console.log("responseee",res)
+          console.log("responseee",res);
+          //this.getStatus();
         })
 
 
@@ -159,5 +165,28 @@ export class VerifyAccountComponent implements OnInit {
     this.spinner.hide();
 
 
+  }
+
+  getStatus()
+  {
+    this.spinner.show();
+    this.apiservice.get('profile')
+    .pipe(
+      catchError(err =>{
+
+        this.spinner.hide();
+        return throwError(err)
+      })
+    )
+    .subscribe((res:any)=>{
+
+      if(res.status===200){
+
+        this.status=res.body.kycs;
+        console.log(res.body.kycs)
+        this.spinner.hide();
+      }
+
+    })
   }
 }

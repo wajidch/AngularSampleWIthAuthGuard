@@ -29214,3 +29214,21 @@ form.create-btn button {
 }
 
 
+/*Angular changes 8-aug-2019*/
+
+.layout-w app-my-profile{
+  width:100% !important;
+}
+.layout-w app-real-account-list{
+  width:100% !important;
+}
+.layout-w app-demo-account-list{
+  width:100% !important;
+}
+.layout-w app-withdraw-money{
+  width:100% !important;
+}
+
+.layout-w app-deposite-money{
+  width:100% !important;
+}

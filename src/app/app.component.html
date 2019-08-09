@@ -1,9 +1,13 @@
 
-<app-menu *ngIf="!router.url.includes('users/login')
+<app-menu  *ngIf="!router.url.includes('users/login')
 && !router.url.includes('users/createaccount') && 
 !router.url.includes('users/forgotpassword') &&
 !router.url.includes('users/forgot')"></app-menu>
-<router-outlet></router-outlet>
+
+
+<router-outlet ></router-outlet>
+
+
 <app-login *ngIf="router.url.includes('users/login')"></app-login>
 <app-create-account *ngIf="router.url.includes('users/createaccount')">
 </app-create-account>

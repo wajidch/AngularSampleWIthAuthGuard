@@ -33,8 +33,13 @@
                               </div>
                             </form>
                             <!--<span class="pending-msj">Pending</span>-->
+                            <!-- <div *ngFor='let list of status'>
+                                <span class="done-msj" 
+                                *ngIf="list.type===Birth certificate">
+                                    {{list.status}}.</span>
+                            </div> -->
+                         
                             <span class="done-msj" *ngIf="birthdayCertificateURl">Upload file successfully.</span>
-
                           </div>
                           <div class="upload-btn">
                             <form 
