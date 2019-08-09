@@ -9,7 +9,7 @@ type = "timer"
 <p style="color: white" > Loading... </p>
 </ngx-spinner>
 
-        <div class="all-wrapper with-side-panel solid-bg-all">
+        
           
           <div class="layout-w">
           
@@ -110,6 +110,8 @@ type = "timer"
                                       <a *ngIf="list.status==='pending'" class="btn btn-warning"
                                       >{{list.status}}</a>
                                       <a *ngIf="list.status==='approved'" class="btn btn-success"
+                                      >{{list.status}}</a>
+                                      <a *ngIf="list.status!='approved' && list.status!='pending'" class="btn btn-success"
                                       >{{list.status}}</a>
                                     </td>
                                
@@ -318,6 +320,6 @@ type = "timer"
             </div>
           </div>
           <div class="display-type"></div>
-        </div>
+     
        
      
