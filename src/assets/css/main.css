@@ -3317,13 +3317,13 @@ fieldset:disabled a.fc-button {
 }
 
 .btn-success {
-  color: #fff;
+  color: #fff !important;
   background-color: #24b314;
   border-color: #24b314;
 }
 
 .btn-success:hover {
-  color: #fff;
+  color: #fff !important;
   background-color: #1d9110;
   border-color: #1b850f;
 }
@@ -3425,13 +3425,13 @@ fieldset:disabled a.fc-button {
 }
 
 .btn-danger {
-  color: #fff;
+  color: #fff !important;
   background-color: #e65252;
   border-color: #e65252;
 }
 
 .btn-danger:hover {
-  color: #fff;
+  color: #fff !important;
   background-color: #e13131;
   border-color: #e02525;
 }
@@ -29230,5 +29230,9 @@ form.create-btn button {
 }
 
 .layout-w app-deposite-money{
+  width:100% !important;
+}
+
+.layout-w app-user-transaction-history{
   width:100% !important;
 }
