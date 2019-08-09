@@ -36,6 +36,10 @@ export class ChangePasswordComponent implements OnInit {
         this.message='';
         retry(2);
         this.spinner.hide();
+        setTimeout(function() {
+          this.errormessage='';
+          
+      }.bind(this), 3000);
         return throwError(err)
       })
     )
@@ -43,6 +47,10 @@ export class ChangePasswordComponent implements OnInit {
       this.errormessage=''
       this.message=res.body.message;
       this.spinner.hide();
+      setTimeout(function() {
+        this.message='';
+        
+    }.bind(this), 3000);
     })
   }
 }

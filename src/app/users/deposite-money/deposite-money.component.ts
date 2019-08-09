@@ -52,6 +52,10 @@ export class DepositeMoneyComponent implements OnInit {
         this.errormessage='Something happend wrong try again!';
         this.message='';
         this.spinner.hide();
+        setTimeout(function() {
+          this.errormessage='';
+          
+      }.bind(this), 3000);
         return throwError(err);
       })
     )
@@ -60,6 +64,10 @@ export class DepositeMoneyComponent implements OnInit {
       this.errormessage=''
       this.message=res.body.message;
       this.spinner.hide();
+      setTimeout(function() {
+        this.message='';
+        
+    }.bind(this), 3000);
     })
   }
   getAccountList()

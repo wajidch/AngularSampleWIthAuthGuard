@@ -21,6 +21,12 @@ type = "timer"
                 <h5 class="form-header">
                 Edit Profile
                 </h5>
+                <div *ngIf='message' class="alert alert-success" role="alert">
+                    <strong>{{message}} </strong>.
+                  </div>
+                  <div *ngIf='errormessage' class="alert alert-error" role="alert">
+                      <strong>{{errormessage}} </strong>.
+                    </div>
   <!--              <div class="main-para">-->
   <!--                Regülasyon gereği para yatırma, para çekme gibi bazı işlemlerinizin kısıtını kaldırmak için bazı bilgilerinizi doğrulamanız gerekmektedir.-->
   <!--              </div>-->
@@ -94,12 +100,7 @@ type = "timer"
                         <div class="form-buttons-w text-right">
                           <button class="btn btn-success" (click)='updateProfile(profileForm.value)'>Save</button>
                         </div>
-                        <div *ngIf='message' class="alert alert-success alert-adj" role="alert">
-                                <strong>{{message}} </strong>.
-                              </div>
-                              <div *ngIf='errormessage' class="alert alert-error alert-adj" role="alert">
-                                  <strong>{{errormessage}} </strong>.
-                                </div>
+                      
                     </div>
   
                     </div>

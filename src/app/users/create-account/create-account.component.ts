@@ -53,16 +53,24 @@ this.apiservice.postwithouttoken('auth/register',val)
     this.spinner.hide();
     this.message='';
     this.errormessage=err.error.errors.email[0];
+    setTimeout(function() {
+      this.errormessage='';
+      
+  }.bind(this), 3000);
     return throwError(err);
   })
 )
 .subscribe((res:any)=>{
 
-  console.log("responseee",res)
 
   this.errormessage='';
   this.spinner.hide();
   this.message=res.body.message
+  setTimeout(function() {
+    this.message='';
+    
+}.bind(this), 3000);
+
 })
 
   }

@@ -26,6 +26,14 @@ type = "timer"
                          <h5 class="form-header">
                             Havale/EFT Para Yatırma İsteği
                          </h5>
+                         <div *ngIf='message' class="alert alert-success
+                          " role="alert">
+                            <strong>{{message}} </strong>.
+                          </div>
+                          <div *ngIf='errormessage' class="alert alert-error
+                          " role="alert">
+                              <strong>{{errormessage}} </strong>.
+                            </div>
                          <div class="row">
                            <div class="col-sm-6">
                              <!-- <div class="form-group">
@@ -144,12 +152,7 @@ type = "timer"
                            <button class="btn btn-success" type="submit" 
                            (click)='depositmoney(depositMoneyForm.value)' [disabled]='!depositMoneyForm.valid'>Gönder</button>
                          </div>
-                         <div *ngIf='message' class="alert alert-success alert-adj" role="alert">
-                            <strong>{{message}} </strong>.
-                          </div>
-                          <div *ngIf='errormessage' class="alert alert-error alert-adj" role="alert">
-                              <strong>{{errormessage}} </strong>.
-                            </div>
+                        
                        </form>
  
                      </div>
