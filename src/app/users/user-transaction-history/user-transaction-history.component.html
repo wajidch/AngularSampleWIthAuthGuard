@@ -101,7 +101,12 @@ type = "timer"
                               <!-- data-target="#onboardingFormModal10" data-toggle="modal" -->
                           <tr *ngFor='let list of transcationList'>
                             <td class="nowrap">
-                              <span class="status-pill smaller green"></span>
+                              <span *ngIf="list.status==='declined'"
+                               class="status-pill smaller red"></span>
+                               <span *ngIf="list.status==='approved'"
+                               class="status-pill smaller green"></span>
+                               <span *ngIf="list.status==='pending'"
+                               class="status-pill smaller yellow"></span>
                               <span>
                                 {{list.status}}</span>
                             </td>
@@ -124,7 +129,11 @@ type = "timer"
                                 {{list.operation_type}}</a>
                             </td>
                             <td class="text-right bolder nowrap">
-                              <span class="text-success">{{list.amount}} {{list.currency}}</span>
+                              <span class="text-success" *ngIf="list.operation_type=='deposit'">
+                                {{list.amount}} {{list.currency}}</span>
+                                <span class="text-danger" 
+                                *ngIf="list.operation_type=='withdraw'">
+                                    {{list.amount}} {{list.currency}}</span>
                             </td>
                           </tr>
                          
