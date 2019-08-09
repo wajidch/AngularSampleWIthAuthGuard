@@ -40,9 +40,17 @@ export class DemoAccountListComponent implements OnInit {
     .pipe(
       catchError(err=>{
 
-        this.errormessage=err.error.data;
-        this.NoRecordFound=false;
+        if(err.status===404){
+          this.spinner.hide();
+          this.NoRecordFound=true;
+          this.errormessage=''
+        }
+        else{
+        this.errormessage='Something happend wrong try again!';
+
         this.spinner.hide();
+        this.NoRecordFound=false;
+        }
         return throwError(err);
       })
     )
