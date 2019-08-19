@@ -19,15 +19,66 @@
                         <div class="col-sm-4">
                           <div class="upload-btn">
                             <form 
-                            class="dropzone pending-img" id="my-awesome-dropzone">
+                            class="dropzone nodata-img" 
+                            *ngIf="statusArray[0].status==='nodata'" id="my-awesome-dropzone">
+                           
                             <img  [src]="birthdayCertificateURl" *ngIf="birthdayCertificateURl" (click)='filebirthdayimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
-                            <input type="file" (change)='uploadBithCertificate($event)' #filebirthdayimg style="display: none">
+                            <input type="file" (change)='uploadBithCertificate($event,undefined)' #filebirthdayimg style="display: none">
 
-                            <div class="dz-message" *ngIf="!birthdayCertificateURl">
+                            <div class="dz-message" 
+                            >
                                 <div>
                                   <a (click)='filebirthdayimg.click()'
                                    style="font-size: 16px;
-                                    margin: 0;cursor: pointer;">Dorgilandi</a>
+                                    margin: 0;cursor: pointer;">Belge Yükle</a>
+
+                                </div>
+                              </div>
+                            </form>
+                            <form 
+                            class="dropzone pending-img" *ngIf="statusArray[0].status==='pending'" id="my-awesome-dropzone">
+                           
+                            <img  [src]="birthdayCertificateURl" *ngIf="birthdayCertificateURl" (click)='filebirthdayimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
+                            <input type="file" (change)='uploadBithCertificate($event,statusArray[0].id)' #filebirthdayimg style="display: none">
+
+                            <div class="dz-message" 
+                            >
+                                <div>
+                                  <a 
+                                   style="font-size: 16px;
+                                    margin: 0;cursor: pointer;">kadar</a>
+
+                                </div>
+                              </div>
+                            </form>
+                            <form 
+                            class="dropzone uploaded-img" *ngIf="statusArray[0].status==='approved'" id="my-awesome-dropzone">
+                           
+                            <img  [src]="birthdayCertificateURl" *ngIf="birthdayCertificateURl" (click)='filebirthdayimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
+                            <input type="file" (change)='uploadBithCertificate($event,statusArray[0].id)' #filebirthdayimg style="display: none">
+
+                            <div class="dz-message" 
+                            >
+                                <div>
+                                  <a 
+                                   style="font-size: 16px;
+                                    margin: 0;cursor: pointer;">Doğrulandı</a>
+
+                                </div>
+                              </div>
+                            </form>
+                            <form 
+                            class="dropzone fail-upload" *ngIf="statusArray[0].status==='declined'" id="my-awesome-dropzone">
+                           
+                            <img  [src]="birthdayCertificateURl" *ngIf="birthdayCertificateURl" (click)='filebirthdayimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
+                            <input type="file" (change)='uploadBithCertificate($event,statusArray[0].id)' #filebirthdayimg style="display: none">
+
+                            <div class="dz-message" 
+                            >
+                                <div>
+                                  <a (click)='filebirthdayimg.click()'
+                                   style="font-size: 16px;
+                                    margin: 0;cursor: pointer;">Reddedildi</a>
 
                                 </div>
                               </div>
@@ -43,18 +94,79 @@
                           </div>
                           <div class="upload-btn">
                             <form 
-                             class="dropzone uploaded-img" id="my-awesome-dropzone2">
-                             <img  [src]="driverlicensURL" *ngIf="driverlicensURL" (click)='filedriverlicensimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
-                             <input type="file" (change)='uploadDriverlicense($event)' #filedriverlicensimg style="display: none">
- 
-                              <div class="dz-message" *ngIf="!driverlicensURL">
+                            class="dropzone nodata-img" *ngIf="statusArray[1].status==='nodata'" id="my-awesome-dropzone">
+                           
+                            <img  [src]="driverlicensURL" *ngIf="driverlicensURL" 
+                            (click)='filedriverlicensimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
+                            <input type="file" 
+                            (change)='uploadDriverlicense($event,undefined)' #filedriverlicensimg style="display: none">
+
+                            <div class="dz-message" 
+                            >
                                 <div>
                                   <a (click)='filedriverlicensimg.click()'
-                                   style="font-size: 16px; margin: 0;
-                                   cursor: pointer;">Dorgilandi</a>
+                                   style="font-size: 16px;
+                                    margin: 0;cursor: pointer;">Belge Yükle</a>
+
                                 </div>
                               </div>
                             </form>
+                            <form 
+                            class="dropzone pending-img" *ngIf="statusArray[1].status==='pending'" id="my-awesome-dropzone">
+                           
+                            <img  [src]="driverlicensURL" *ngIf="driverlicensURL"
+                             (click)='filedriverlicensimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
+                            <input type="file" 
+                            (change)='uploadDriverlicense($event,statusArray[1].id)' #filedriverlicensimg style="display: none">
+
+                            <div class="dz-message" 
+                            >
+                                <div>
+                                  <a 
+                                   style="font-size: 16px;
+                                    margin: 0;cursor: pointer;">kadar</a>
+
+                                </div>
+                              </div>
+                            </form>
+                            <form 
+                            class="dropzone uploaded-img" *ngIf="statusArray[1].status==='approved'" id="my-awesome-dropzone">
+                           
+                            <img  [src]="driverlicensURL" *ngIf="driverlicensURL"
+                             (click)='filebirthdayimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
+                            <input type="file"  (change)='uploadDriverlicense($event,statusArray[1].id)'
+                             #filedriverlicensimg style="display: none">
+
+                            <div class="dz-message" 
+                            >
+                                <div>
+                                  <a 
+                                   style="font-size: 16px;
+                                    margin: 0;cursor: pointer;">Doğrulandı</a>
+
+                                </div>
+                              </div>
+                            </form>
+                            <form 
+                            class="dropzone fail-upload" *ngIf="statusArray[1].status==='declined'" id="my-awesome-dropzone">
+                           
+                            <img  [src]="driverlicensURL" *ngIf="driverlicensURL"
+                             (click)='filedriverlicensimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
+                            <input type="file" 
+                            (change)='uploadDriverlicense($event,statusArray[1].id)'
+                             #filedriverlicensimg  style="display: none">
+
+                            <div class="dz-message" 
+                            >
+                                <div>
+                                  <a (click)='filedriverlicensimg.click()'
+                                   style="font-size: 16px;
+                                    margin: 0;cursor: pointer;">Reddedildi</a>
+
+                                </div>
+                              </div>
+                            </form>
+                           
                             <span class="done-msj" *ngIf="driverlicensURL">Upload file successfully.</span>
                           </div>
         
@@ -72,17 +184,71 @@
                       <div class="row second-row">
                         <div class="col-sm-4">
                           <div class="upload-btn">
-                            <form  class="dropzone fail-upload" id="my-awesome-dropzone3">
-                            <img  [src]="addressURL" *ngIf="addressURL" (click)='fileaddressimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
-                            <input type="file" (change)='uploadAddressDocument($event)' #fileaddressimg style="display: none">
-        
-                              <div class="dz-message" *ngIf="!addressURL">
-                                <div>
-                             <a (click)='fileaddressimg.click()'
-                              style="font-size: 16px; margin: 0;
-                              cursor: pointer;">Dorgilandi</a>
+                            <form 
+                            class="dropzone nodata-img" *ngIf="statusArray[2].status==='nodata'" id="my-awesome-dropzone">
+                           
+                            <img  [src]="addressURL" *ngIf="addressURL" (click)='fileaddressimg.click()'
+                             class="img-preview img-responsive center-block img-circle" alt="">
+                            <input type="file" 
+                            (change)='uploadAddressDocument($event,undefined)' #fileaddressimg style="display: none">
 
-        
+                            <div class="dz-message" 
+                            >
+                                <div>
+                                  <a (click)='fileaddressimg.click()'
+                                   style="font-size: 16px;
+                                    margin: 0;cursor: pointer;">Belge Yükle</a>
+
+                                </div>
+                              </div>
+                            </form>
+                            <form 
+                            class="dropzone pending-img" *ngIf="statusArray[2].status==='pending'" id="my-awesome-dropzone">
+                           
+                            <img  [src]="addressURL" *ngIf="addressURL" (click)='fileaddressimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
+                            <input type="file" 
+                            (change)='uploadAddressDocument($event,statusArray[2].id)' #fileaddressimg style="display: none">
+
+                            <div class="dz-message" 
+                            >
+                                <div>
+                                  <a 
+                                   style="font-size: 16px;
+                                    margin: 0;cursor: pointer;">kadar</a>
+
+                                </div>
+                              </div>
+                            </form>
+                            <form 
+                            class="dropzone uploaded-img" *ngIf="statusArray[2].status==='approved'" id="my-awesome-dropzone">
+                           
+                            <img  [src]="addressURL" *ngIf="addressURL" (click)='fileaddressimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
+                            <input type="file"  (change)='uploadAddressDocument($event,statusArray[2].id)' #fileaddressimg style="display: none">
+
+                            <div class="dz-message" 
+                            >
+                                <div>
+                                  <a 
+                                   style="font-size: 16px;
+                                    margin: 0;cursor: pointer;">Doğrulandı</a>
+
+                                </div>
+                              </div>
+                            </form>
+                            <form 
+                            class="dropzone fail-upload" *ngIf="statusArray[2].status==='declined'" id="my-awesome-dropzone">
+                           
+                            <img  [src]="addressURL" *ngIf="addressURL" (click)='fileaddressimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
+                            <input type="file" 
+                            (change)='uploadAddressDocument($event,statusArray[2].id)' #fileaddressimg  style="display: none">
+
+                            <div class="dz-message" 
+                            >
+                                <div>
+                                  <a (click)='fileaddressimg.click()'
+                                   style="font-size: 16px;
+                                    margin: 0;cursor: pointer;">Reddedildi</a>
+
                                 </div>
                               </div>
                             </form>
@@ -92,7 +258,7 @@
                         </div>
                         <div class="col-sm-8">
                           <p>Adresinizi doğrulayan 3 aydan güncel bir belge yüklemeniz gerekmektedir.</p>
-                          <ul class="check-listnew">
+                          <ul class="check-listnew uploadchecklist">
                             <li><i class="tick-icon"><img src="../../../assets/img/check.svg" alt="check"></i>İkametgah belgesi</li>
                             <li><i class="tick-icon"><img src="../../../assets/img/check.svg" alt="check"></i>Elektrik, su, doğalgaz faturası</li>
                             <li><i class="tick-icon"><img src="../../../assets/img/check.svg" alt="check"></i>Cep telefonu faturası</li>

@@ -17,7 +17,8 @@ export class CreateAccountComponent implements OnInit {
   registeruserForm:FormGroup;
   message:string;
   errormessage: any;
-  constructor(private apiservice:apiService,
+  constructor(
+    private apiservice:apiService,
     private router:Router,
     private spinner:NgxSpinnerService,
     private formBuilder: FormBuilder) { }
@@ -32,11 +33,11 @@ export class CreateAccountComponent implements OnInit {
         Validators.minLength(8)]),
       password_confirmation:new FormControl('',[Validators.required]),
       city:new FormControl('test',[Validators.required]),
-      address:new FormControl('g',[Validators.required]),
+      address:new FormControl('test address',[Validators.required]),
       post_code:new FormControl('87888',[Validators.required]),
       country:new FormControl('turkey',[Validators.required]),
     },
-    {
+        {
             validator: MustMatch('password', 'password_confirmation')
         }
     

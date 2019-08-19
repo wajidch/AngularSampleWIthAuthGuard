@@ -28984,14 +28984,17 @@ Contents:
   border-radius: 5px;
   box-shadow: 0 3px 9px rgba(0,0,0,.5);
 }
-.pending-img{
+.nodata-img{
   border: 2px dashed #047bf8;
+}
+.pending-img{
+  border: 2px dashed #f8e004;
 }
 .uploaded-img{
   border: 2px dashed #339900;
 }
 .fail-upload{
-  border: 2px dashed #047bf8;
+  border: 2px dashed #f80404;
 }
 button{
   cursor: pointer;
@@ -29081,6 +29084,9 @@ body {
 }
 .check-listnew li:nth-child(2){
   padding-right: 0;
+}
+.check-listnew.uploadchecklist li:nth-child(2){
+  padding-right: 25px;
 }
 .check-listnew .tick-icon img{
   width: 20px;

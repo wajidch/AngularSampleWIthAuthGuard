@@ -130,10 +130,10 @@ type = "timer"
                             </td>
                             <td class="text-right bolder nowrap">
                               <span class="text-success" *ngIf="list.operation_type=='deposit'">
-                                {{list.amount}} {{list.currency}}</span>
+                               + {{list.amount}} {{list.currency}}</span>
                                 <span class="text-danger" 
                                 *ngIf="list.operation_type=='withdraw'">
-                                    {{list.amount}} {{list.currency}}</span>
+                                   - {{list.amount}} {{list.currency}}</span>
                             </td>
                           </tr>
                          
