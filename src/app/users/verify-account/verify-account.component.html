@@ -133,7 +133,7 @@
                             class="dropzone uploaded-img" *ngIf="statusArray[1].status==='approved'" id="my-awesome-dropzone">
                            
                             <img  [src]="driverlicensURL" *ngIf="driverlicensURL"
-                             (click)='filebirthdayimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
+                             (click)='filedriverlicensimg.click()' class="img-preview img-responsive center-block img-circle" alt="">
                             <input type="file"  (change)='uploadDriverlicense($event,statusArray[1].id)'
                              #filedriverlicensimg style="display: none">
 
