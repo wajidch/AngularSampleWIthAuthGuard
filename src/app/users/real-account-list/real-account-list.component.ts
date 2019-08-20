@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { FormGroup, FormControl } from '@angular/forms';
 import { catchError, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-real-account-list',
   templateUrl: './real-account-list.component.html',
@@ -15,7 +16,13 @@ export class RealAccountListComponent implements OnInit {
   createrealAccountForm:FormGroup;
   NoRecordFound: boolean;
   errormessage: string;
-  constructor(private apiservice:apiService,private spinner:NgxSpinnerService) { }
+  pager = {
+    current_page:1
+  };
+  pages=[];
+  constructor(private apiservice:apiService,
+    private spinner:NgxSpinnerService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.createrealAccountForm=new FormGroup({
@@ -27,13 +34,18 @@ export class RealAccountListComponent implements OnInit {
       
 
     })
-    this.getRealAccountList();
+   
+    this.route.queryParams.subscribe(x => this.getRealAccountList(x.page || 1));
+   
   }
 
-  getRealAccountList(){
+  loadPage(page){
+    this.getRealAccountList(page)
+  }
+  getRealAccountList(page){
 
     this.spinner.show();
-    this.apiservice.get('getRealAccount')
+    this.apiservice.get(`getRealAccount?page=${page}`)
     
     .pipe(
       catchError(err =>{
@@ -57,7 +69,13 @@ export class RealAccountListComponent implements OnInit {
       
       if(res.status===200)
       {
-        this.realaccountlist=res.body.data;
+        this.pager = res.body.data;
+        console.log("pager",this.pager)
+        this.pages=[]
+        for(let i=1;i<=res.body.data.last_page;i++){
+          this.pages.push(i)
+        }
+        this.realaccountlist=res.body.data.data;
         this.errormessage='';
         this.NoRecordFound=false;
         this.spinner.hide();
@@ -81,7 +99,7 @@ export class RealAccountListComponent implements OnInit {
     this.apiservice.post('storeAccount',val).subscribe((res=>{
 
       document.getElementById('close').click();
-      this.getRealAccountList();
+      this.getRealAccountList(1);
       this.spinner.hide();
     }))
   }

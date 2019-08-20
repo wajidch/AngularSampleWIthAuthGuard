@@ -127,6 +127,28 @@ type = "timer"
                                 <strong>{{errormessage}} </strong>.
                               </div>
                         </table>
+                        <div class="card-footer float-right pb-0 pt-3">
+                          <ul  class="pagination">
+                              <!-- <li [ngClass]="{disabled:pager.current_page === 1}"
+                               class="page-item first-item">
+                                  <a routerLink [queryParams]="{ page: 1 }" 
+                                  class="page-link">First</a>
+                              </li>
+                              <li [ngClass]="{disabled:pager.current_page === 1}" class="page-item previous-item">
+                                  <a routerLink [queryParams]="{ page: pager.current_page - 1 }" class="page-link">Previous</a>
+                              </li> -->
+                              <li *ngFor="let page of pages" [ngClass]="{active:pager.current_page === page}" class="page-item number-item">
+                                  <a  (click)='loadPage(page)'  class="page-link">{{page}}</a>
+                              </li>
+                              <!-- <li [ngClass]="{disabled:pager.current_page === pager.last_page}" class="page-item next-item">
+                                  <a routerLink [queryParams]="{ page: pager.current_page + 1 }" class="page-link">Next</a>
+                              </li>
+                              <li [ngClass]="{disabled:pager.current_page === pager.last_page}" class="page-item last-item">
+                                  <a routerLink [queryParams]="{ page: pager.last_page }" class="page-link">Last</a>
+                              </li> -->
+                          </ul>
+                      </div>
+                      <div class="clearfix"></div>
                         <!--------------------
                         END - Basic Table
                         -------------------->

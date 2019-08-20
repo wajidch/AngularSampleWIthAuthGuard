@@ -34,7 +34,10 @@ export class DepositeMoneyComponent implements OnInit {
       user_id:new FormControl(this.userid,[Validators.required]),
       swift:new FormControl('',[Validators.required]),
       account_id:new FormControl(''),
-      reference_no:new FormControl('546'),
+      bank_id:new FormControl('2345'),
+      bank_reference_id:new FormControl('546'),
+      reference_no:new FormControl('123'),
+      code:new FormControl('324'),
       transaction_id:new FormControl('789')
       
       
@@ -66,7 +69,7 @@ export class DepositeMoneyComponent implements OnInit {
       this.spinner.hide();
       setTimeout(function() {
         this.message='';
-        
+        this.router.navigateByUrl('users/payment-wizard-deposit');
     }.bind(this), 3000);
     })
   }

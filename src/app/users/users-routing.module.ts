@@ -13,6 +13,8 @@ import { VerifyAccountComponent } from './verify-account/verify-account.componen
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { DepositeMoneyComponent } from './deposite-money/deposite-money.component';
 import { UserTransactionHistoryComponent } from './user-transaction-history/user-transaction-history.component';
+import { PaymentWizardDepositComponent } from './payment-wizard-deposit/payment-wizard-deposit.component';
+import { PaymentWizardWithdrawComponent } from './payment-wizard-withdraw/payment-wizard-withdraw.component';
 
 
 const routes: Routes = [
@@ -25,6 +27,8 @@ const routes: Routes = [
      { path:'verifyaccount',component:VerifyAccountComponent,},
      { path:'myprofile',component:MyProfileComponent,},
      { path:'transcationhistory',component:UserTransactionHistoryComponent,},
+     { path:'payment-wizard-deposit',component:PaymentWizardDepositComponent,},
+     { path:'payment-wizard-withdraw',component:PaymentWizardWithdrawComponent,},
 
 
 

@@ -4,6 +4,7 @@ import { apiService } from 'src/app/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-withdraw-money',
@@ -18,7 +19,8 @@ export class WithdrawMoneyComponent implements OnInit {
   userid=localStorage.getItem('id');
   errormessage: string;
   constructor(private apiservice:apiService,
-    private spinner:NgxSpinnerService) { }
+    private spinner:NgxSpinnerService,
+    private router:Router) { }
 
   ngOnInit() {
     this.withdrawMoneyForm=new FormGroup({
@@ -64,6 +66,7 @@ export class WithdrawMoneyComponent implements OnInit {
       this.spinner.hide();
       setTimeout(function() {
         this.message='';
+        this.router.navigateByUrl('users/payment-wizard-withdraw');
         
     }.bind(this), 3000);
     })

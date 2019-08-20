@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { apiService } from 'src/app/services/api.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FormGroup, FormControl } from '@angular/forms';
 import { catchError, retry } from 'rxjs/operators';
@@ -12,77 +12,89 @@ import { throwError } from 'rxjs';
 })
 export class DemoAccountListComponent implements OnInit {
 
-  demoaccountlist:any;
-  createdemoAccountForm:FormGroup;
-  NoRecordFound:boolean;
+  demoaccountlist: any;
+  createdemoAccountForm: FormGroup;
+  NoRecordFound: boolean;
   errormessage: any;
-  constructor(private apiservice:apiService,private router:Router
-    ,private spinner:NgxSpinnerService) { }
+  pager: {
+    current_page:1
+  };
+  pages = [];
+  constructor(private apiservice: apiService, private router: Router
+    , private spinner: NgxSpinnerService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.createdemoAccountForm=new FormGroup({
-      lever:new FormControl(''),
-      account_group:new FormControl(''),
-      account_type:new FormControl('demo'),
-      platform_type:new FormControl('meta trader 4'),
-      currency:new FormControl('USD'),
-      
+    this.createdemoAccountForm = new FormGroup({
+      lever: new FormControl(''),
+      account_group: new FormControl(''),
+      account_type: new FormControl('demo'),
+      platform_type: new FormControl('meta trader 4'),
+      currency: new FormControl('USD'),
+
 
     })
-    this.demoAccountList();
+
+    this.route.queryParams.subscribe(x => this.demoAccountList(x.page || 1));
+
+  }
+  loadPage(page) {
+    this.demoAccountList(page)
   }
 
-
-  demoAccountList(){
+  demoAccountList(page) {
 
     this.spinner.show();
-    this.apiservice.get('getDemoAccount')
-    .pipe(
-      catchError(err=>{
+    this.apiservice.get(`getDemoAccount?page=${page}`)
+      .pipe(
+        catchError(err => {
 
-        if(err.status===404){
+          if (err.status === 404) {
+            this.spinner.hide();
+            this.NoRecordFound = true;
+            this.errormessage = ''
+          }
+          else {
+            this.errormessage = 'Something happend wrong try again!';
+
+            this.spinner.hide();
+            this.NoRecordFound = false;
+          }
+          return throwError(err);
+        })
+      )
+
+      .subscribe((res: any) => {
+
+        if (res.status === 200) {
+
+          this.pager = res.body.data;
+          this.pages = []
+          for (let i = 1; i <= res.body.data.last_page; i++) {
+            this.pages.push(i)
+          }
+          this.demoaccountlist = res.body.data.data;
+          this.errormessage = '';
+          this.NoRecordFound = false;
           this.spinner.hide();
-          this.NoRecordFound=true;
-          this.errormessage=''
         }
-        else{
-        this.errormessage='Something happend wrong try again!';
+        if (res.status === 404) {
+          this.demoaccountlist = []
+          this.NoRecordFound = true;
+          this.errormessage = ''
+          this.spinner.hide();
+        }
 
-        this.spinner.hide();
-        this.NoRecordFound=false;
-        }
-        return throwError(err);
       })
-    )
-    
-    .subscribe((res:any)=>{
-
-      if(res.status===200){
-
-      
-      this.demoaccountlist=res.body.data;
-      this.errormessage='';
-      this.NoRecordFound=false;
-      this.spinner.hide();
-      }
-      if(res.status===404)
-      {
-        this.demoaccountlist=[]
-           this.NoRecordFound=true;
-           this.errormessage=''
-           this.spinner.hide();
-      }
-
-    })
   }
-  createDemoAccount(val){
+  createDemoAccount(val) {
 
-    
+
     this.spinner.show();
-    this.apiservice.post('storeAccount',val).subscribe((res=>{
+    this.apiservice.post('storeAccount', val).subscribe((res => {
 
       document.getElementById('close').click();
-      this.demoAccountList();
+      this.demoAccountList(1);
       this.spinner.hide();
     }))
   }
