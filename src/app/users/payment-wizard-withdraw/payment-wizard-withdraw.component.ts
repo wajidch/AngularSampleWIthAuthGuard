@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-payment-wizard-withdraw',
@@ -22,7 +23,7 @@ export class PaymentWizardWithdrawComponent implements OnInit {
   transcationList: any;
   notFound: string;
   pager: {
-    current_page:1
+    current_page: 1
   };
   pages = [];
   pagesAccount = [];
@@ -32,7 +33,8 @@ export class PaymentWizardWithdrawComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private router: Router,
 
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private loadingBar:LoadingBarService) { }
 
   ngOnInit() {
 
@@ -69,20 +71,23 @@ export class PaymentWizardWithdrawComponent implements OnInit {
   getTranscationlist(page) {
 
     try {
-      this.spinner.show();
+      //this.spinner.show();
+      this.loadingBar.start();
       this.apiservice.get(`getWithdrawTransactions?page=${page}`)
         .pipe(
           catchError(err => {
 
             if (err.status === 404) {
-              this.spinner.hide();
+              //this.spinner.hide();
+              this.loadingBar.complete();
               this.notFound = 'No Record Found';
               this.errormessage = ''
             }
             else {
               this.errormessage = 'Something happend wrong try again!';
 
-              this.spinner.hide();
+              //this.spinner.hide();
+              this.loadingBar.complete();
               this.notFound = '';
             }
 
@@ -102,37 +107,43 @@ export class PaymentWizardWithdrawComponent implements OnInit {
 
             this.transcationList = res.body.data.data;
 
-            this.spinner.hide();
+            //this.spinner.hide();
+            this.loadingBar.complete();
           }
           else {
             this.transcationList = [];
             this.notFound = 'No Record Found';
             this.errormessage = '';
-            this.spinner.hide();
+            //this.spinner.hide();
+            this.loadingBar.complete();
           }
         })
     } catch (error) {
-      this.spinner.hide();
+      //this.spinner.hide();
+      this.loadingBar.complete();
     }
 
   }
   getRealAccountList(page) {
 
-    this.spinner.show();
+   // this.spinner.show();
+   this.loadingBar.start();
     this.apiservice.get(`getRealApprovedAccount?page=${page}`)
 
       .pipe(
         catchError(err => {
 
           if (err.status === 404) {
-            this.spinner.hide();
+            //this.spinner.hide();
+            this.loadingBar.complete();
             this.NoRecordFound = true;
             this.errormessage = ''
           }
           else {
             this.errormessage = 'Something happend wrong try again!';
 
-            this.spinner.hide();
+            //this.spinner.hide();
+            this.loadingBar.complete();
             this.NoRecordFound = false;
           }
           return throwError(err);
@@ -150,7 +161,8 @@ export class PaymentWizardWithdrawComponent implements OnInit {
           }
           this.errormessage = '';
           this.NoRecordFound = false;
-          this.spinner.hide();
+          //this.spinner.hide();
+          this.loadingBar.complete();
 
         }
 
@@ -158,7 +170,8 @@ export class PaymentWizardWithdrawComponent implements OnInit {
           this.realaccountlist = []
           this.errormessage = '';
           this.NoRecordFound = true;
-          this.spinner.hide();
+          //this.spinner.hide();
+          this.loadingBar.complete();
         }
       })
 

@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { apiService } from './services/api.service'
 import { ForgotEmailVerificationComponent } from './users/forgot-email-verification/forgot-email-verification.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { TokenInterceptor } from './services/token.interceptor';
 import { JwtInterceptor } from './services/jwt.interceptor';
 import { LoginComponent } from './users/login/login.component';
@@ -35,7 +36,8 @@ import { authService } from './services/auth.service';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    LoadingBarModule
     
   ],
   providers: [apiService,

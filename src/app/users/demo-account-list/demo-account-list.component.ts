@@ -5,6 +5,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { FormGroup, FormControl } from '@angular/forms';
 import { catchError, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { LoadingBarService } from '@ngx-loading-bar/core';
+
 @Component({
   selector: 'app-demo-account-list',
   templateUrl: './demo-account-list.component.html',
@@ -17,12 +19,13 @@ export class DemoAccountListComponent implements OnInit {
   NoRecordFound: boolean;
   errormessage: any;
   pager: {
-    current_page:1
+    current_page: 1
   };
   pages = [];
   constructor(private apiservice: apiService, private router: Router
     , private spinner: NgxSpinnerService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private loadingBar: LoadingBarService) { }
 
   ngOnInit() {
     this.createdemoAccountForm = new FormGroup({
@@ -44,20 +47,21 @@ export class DemoAccountListComponent implements OnInit {
 
   demoAccountList(page) {
 
-    this.spinner.show();
+    //this.spinner.show();
+    this.loadingBar.start();
     this.apiservice.get(`getDemoAccount?page=${page}`)
       .pipe(
         catchError(err => {
 
           if (err.status === 404) {
-            this.spinner.hide();
+            this.loadingBar.complete();
             this.NoRecordFound = true;
             this.errormessage = ''
           }
           else {
             this.errormessage = 'Something happend wrong try again!';
 
-            this.spinner.hide();
+            this.loadingBar.complete();
             this.NoRecordFound = false;
           }
           return throwError(err);
@@ -76,13 +80,13 @@ export class DemoAccountListComponent implements OnInit {
           this.demoaccountlist = res.body.data.data;
           this.errormessage = '';
           this.NoRecordFound = false;
-          this.spinner.hide();
+          this.loadingBar.complete();
         }
         if (res.status === 404) {
           this.demoaccountlist = []
           this.NoRecordFound = true;
           this.errormessage = ''
-          this.spinner.hide();
+          this.loadingBar.complete();
         }
 
       })
@@ -90,12 +94,14 @@ export class DemoAccountListComponent implements OnInit {
   createDemoAccount(val) {
 
 
-    this.spinner.show();
+    //this.spinner.show();
+    this.loadingBar.start();
     this.apiservice.post('storeAccount', val).subscribe((res => {
 
       document.getElementById('close').click();
       this.demoAccountList(1);
-      this.spinner.hide();
+      //this.spinner.hide();
+      this.loadingBar.complete();
     }))
   }
 }

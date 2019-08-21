@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { MustMatch } from 'src/app/common/must-match-validator';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
@@ -18,7 +19,8 @@ export class ChangePasswordComponent implements OnInit {
   errormessage: any;
   constructor(private apiservice: apiService,
     private spinner: NgxSpinnerService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private loadingBar: LoadingBarService) { }
 
   ngOnInit() {
     this.changepasswordForm = this.formBuilder.group({
@@ -33,15 +35,17 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   updatePassword(val) {
-    this.spinner.show();
+    //this.spinner.show();
+    this.loadingBar.start();
     this.apiservice.put('updatePassword', val)
       .pipe(
         catchError(err => {
 
           this.errormessage = 'Something wrong happend try again!';
           this.message = '';
-          retry(2);
-          this.spinner.hide();
+          
+          //this.spinner.hide();
+          this.loadingBar.complete();
           setTimeout(function () {
             this.errormessage = '';
 
@@ -52,7 +56,8 @@ export class ChangePasswordComponent implements OnInit {
       .subscribe((res: any) => {
         this.errormessage = ''
         this.message = res.body.message;
-        this.spinner.hide();
+        //this.spinner.hide();
+        this.loadingBar.complete();
         setTimeout(function () {
           this.message = '';
 

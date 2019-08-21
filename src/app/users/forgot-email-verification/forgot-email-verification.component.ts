@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { apiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
 
@@ -9,18 +9,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./forgot-email-verification.component.css']
 })
 export class ForgotEmailVerificationComponent implements OnInit {
-  forgotemailForm:FormGroup
-  constructor(private apiservice:apiService,private router:Router) { }
+  forgotemailForm: FormGroup
+  constructor(private apiservice: apiService, private router: Router) { }
 
   ngOnInit() {
-    this.forgotemailForm=new FormGroup({
-      email:new FormControl('',[Validators.required])
+    this.forgotemailForm = new FormGroup({
+      email: new FormControl('', [Validators.required])
     })
   }
-  send(val){
-    
-    this.apiservice.postwithouttoken('auth/forgot',val).subscribe((res:any)=>{
-      console.log("after api response ",res)
+  send(val) {
+
+    this.apiservice.postwithouttoken('auth/forgot', val).subscribe((res: any) => {
+      console.log("after api response ", res)
     })
   }
 

@@ -16,6 +16,7 @@ import { DepositeMoneyComponent } from './deposite-money/deposite-money.componen
 import { UserTransactionHistoryComponent } from './user-transaction-history/user-transaction-history.component';
 import { PaymentWizardDepositComponent } from './payment-wizard-deposit/payment-wizard-deposit.component';
 import { PaymentWizardWithdrawComponent } from './payment-wizard-withdraw/payment-wizard-withdraw.component';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 
 
 
@@ -34,6 +35,7 @@ import { PaymentWizardWithdrawComponent } from './payment-wizard-withdraw/paymen
     CommonModule,
     UserRoutingModule,
     NgxSpinnerModule,
+    LoadingBarModule,
     ReactiveFormsModule,
     FormsModule,
   ]

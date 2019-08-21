@@ -1,135 +1,129 @@
-<ngx-spinner
-bdOpacity = 0.9
-bdColor = "rgba(51,51,51,0.55)"
-size = "medium"
-color = "#fff"
-type = "timer"
-[fullScreen] = "true">
-<p style="color: white" > Loading... </p>
-</ngx-spinner>
-       
-  <!-- <div class="all-wrapper with-side-panel solid-bg-all"> -->
-         
-          <div class="layout-w">
-          
-         
-          
-            <div class="content-w">
-              
-              <div class="content-i">
-                <div class="content-box ">
-                  <div class="element-wrapper content-info">
-                    <h6 class="element-header">
-                     Demo Account Request
-                    </h6>
-                    <div class="element-box">
-    
-    
-                      <!--------------------------alerts messages------------->
-    
-                      <div class="col-md-12">
-                        <div class="element-box-content">
-    
-                          <!-- weldone --------------------->
-                          <!-- <div class="alert alert-success" role="alert">
+<!-- <ngx-spinner bdOpacity=0.9 bdColor="rgba(51,51,51,0.55)" size="medium" color="#fff" type="timer" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner> -->
+<ngx-loading-bar></ngx-loading-bar>
+
+<!-- <div class="all-wrapper with-side-panel solid-bg-all"> -->
+
+<div class="layout-w">
+
+
+
+  <div class="content-w">
+
+    <div class="content-i">
+      <div class="content-box ">
+        <div class="element-wrapper content-info">
+          <h6 class="element-header">
+            Demo Account Request
+          </h6>
+          <div class="element-box">
+
+
+            <!--------------------------alerts messages------------->
+
+            <div class="col-md-12">
+              <div class="element-box-content">
+
+                <!-- weldone --------------------->
+                <!-- <div class="alert alert-success" role="alert">
                             <strong>Well done! </strong>You successfully read this important alert message.
                           </div> -->
-    
-                          <!-- weldone --------------------->
-    
-                          <!-- heads up alert --------------------->
-    
-                          <!--<div class="alert alert-info" role="alert">-->
-                          <!--<strong>Heads up! </strong>This alert needs your attention, but it's not super important.-->
-                          <!--</div>-->
-                          <!-- heads up alert--------------------->
-    
-                          <!-- warnning--------------------->
-                          <!--<div class="alert alert-warning" role="alert">-->
-                          <!--<strong>Warning! </strong>Better check yourself, you're not looking too good.-->
-                          <!--</div>-->
-    
-                          <!-- warnning--------------------->
-    
-                          <!-- dangerous-------------------->
-                          <!--<div class="alert alert-danger" role="alert">-->
-                          <!--<strong>Oh snap! </strong>Change a few things up and try submitting again.-->
-                          <!--</div>-->
-                          <!--</div>-->
-                          <!-- warnning--------------------->
-    
-                          <!--------------------------alerts messages end------------->
-    
-                        </div>
-                      </div>
-                      <!--------------------
+
+                <!-- weldone --------------------->
+
+                <!-- heads up alert --------------------->
+
+                <!--<div class="alert alert-info" role="alert">-->
+                <!--<strong>Heads up! </strong>This alert needs your attention, but it's not super important.-->
+                <!--</div>-->
+                <!-- heads up alert--------------------->
+
+                <!-- warnning--------------------->
+                <!--<div class="alert alert-warning" role="alert">-->
+                <!--<strong>Warning! </strong>Better check yourself, you're not looking too good.-->
+                <!--</div>-->
+
+                <!-- warnning--------------------->
+
+                <!-- dangerous-------------------->
+                <!--<div class="alert alert-danger" role="alert">-->
+                <!--<strong>Oh snap! </strong>Change a few things up and try submitting again.-->
+                <!--</div>-->
+                <!--</div>-->
+                <!-- warnning--------------------->
+
+                <!--------------------------alerts messages end------------->
+
+              </div>
+            </div>
+            <!--------------------
                       START - Controls Above Table
                       -------------------->
-                      <!--------------------
+            <!--------------------
                       END - Controls Above Table
                       -------------------->
-                      <div class="table-responsive">
-                        <!--------------------
+            <div class="table-responsive">
+              <!--------------------
                         START - Basic Table
                         -------------------->
-                       <div class="controls-above-table" style="margin: 20px 0 0;">
-                          <div class="row clearfix">
-                            <div class="col-sm-6 col-md-8"></div>
-                            <div class="col-sm-6 col-md-4">
-                              <form class="create-btn">
-                                <button type="button" class="form-control rounded form-buttonnew"data-toggle="modal" data-target="#myModal3" style="margin-bottom: 15px">Create Request</button>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-    
-    
-    
-                        <table class="table table-lightborder">
-                          <thead>
-                            <tr>
-                              <th>Account Id</th>
-                              <th>Updated At</th>
-                              <th>Platform Type</th>
-                              <th>Account Group</th>
-                              <th>Leverage</th>
-                              <th>Currency</th>
-                              <th class="text-center">Status</th>
-                            </tr>
-                          </thead>
+              <div class="controls-above-table" style="margin: 20px 0 0;">
+                <div class="row clearfix">
+                  <div class="col-sm-6 col-md-8"></div>
+                  <div class="col-sm-6 col-md-4">
+                    <form class="create-btn">
+                      <button type="button" class="form-control rounded form-buttonnew" data-toggle="modal"
+                        data-target="#myModal3" style="margin-bottom: 15px">Create Request</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
 
-                          <tbody *ngIf='!NoRecordFound'>
-                            <tr *ngFor='let list of demoaccountlist'>
-                              <td>{{list.id}}</td>
-                              <td>{{list.updated_at | date:'dd-MM-yyyy hh:mm'}}</td>
-                              <td>{{list.platform_type}}</td>
-                              <td>{{list.account_group}}</td>
-                              <td>{{list.lever}}</td>
-                              <td>{{list.currency}}</td>
-                              <td class="text-center">
-                                <a *ngIf="list.status==='pending'" class="btn btn-warning"
-                                 >{{list.status}}</a>
-                                 <a *ngIf="list.status==='approved'" class="btn btn-success"
-                                 >{{list.status}}</a>
-                                 <a *ngIf="list.status!='approved' && list.status!='pending'" class="btn btn-success"
-                                 >{{list.status}}</a>
-                                </td>
-                            </tr>
-                           
-                          </tbody>
 
-                          <tbody *ngIf='NoRecordFound'>
-                             
-                            <h3>No Record Found</h3>
-                             
-                            </tbody>
-                            <div *ngIf='errormessage' class="alert alert-error alert-adj" role="alert">
-                                <strong>{{errormessage}} </strong>.
-                              </div>
-                        </table>
-                        <div class="card-footer float-right pb-0 pt-3">
-                          <ul  class="pagination">
-                              <!-- <li [ngClass]="{disabled:pager.current_page === 1}"
+
+              <table class="table table-lightborder">
+                <thead>
+                  <tr>
+                    <th>Account Id</th>
+                    <th>Updated At</th>
+                    <th>Platform Type</th>
+                    <th>Account Group</th>
+                    <th>Leverage</th>
+                    <th>Currency</th>
+                    <th class="text-center">Status</th>
+                  </tr>
+                </thead>
+
+                <tbody *ngIf='!NoRecordFound'>
+                  <tr *ngFor='let list of demoaccountlist'>
+                    <td>{{list.id}}</td>
+                    <td>{{list.updated_at | date:'dd-MM-yyyy hh:mm'}}</td>
+                    <td>{{list.platform_type}}</td>
+                    <td>{{list.account_group}}</td>
+                    <td>{{list.lever}}</td>
+                    <td>{{list.currency}}</td>
+                    <td class="text-center">
+                      <a *ngIf="list.status==='pending'" class="btn btn-warning">{{list.status}}</a>
+                      <a *ngIf="list.status==='approved'" class="btn btn-success">{{list.status}}</a>
+                      <a *ngIf="list.status!='approved' && list.status!='pending'"
+                        class="btn btn-success">{{list.status}}</a>
+                    </td>
+                  </tr>
+
+                </tbody>
+
+                <tbody *ngIf='NoRecordFound'>
+
+                  <h3>No Record Found</h3>
+
+                </tbody>
+                <div *ngIf='errormessage' class="alert alert-error alert-adj" role="alert">
+                  <strong>{{errormessage}} </strong>.
+                </div>
+              </table>
+              <div class="card-footer float-right pb-0 pt-3">
+                <ul class="pagination">
+                  <!-- <li [ngClass]="{disabled:pager.current_page === 1}"
                                class="page-item first-item">
                                   <a routerLink [queryParams]="{ page: 1 }" 
                                   class="page-link">First</a>
@@ -137,40 +131,42 @@ type = "timer"
                               <li [ngClass]="{disabled:pager.current_page === 1}" class="page-item previous-item">
                                   <a routerLink [queryParams]="{ page: pager.current_page - 1 }" class="page-link">Previous</a>
                               </li> -->
-                              <li *ngFor="let page of pages" [ngClass]="{active:pager.current_page === page}" class="page-item number-item">
-                                  <a  (click)='loadPage(page)'  class="page-link">{{page}}</a>
-                              </li>
-                              <!-- <li [ngClass]="{disabled:pager.current_page === pager.last_page}" class="page-item next-item">
+                  <li *ngFor="let page of pages" [ngClass]="{active:pager.current_page === page}"
+                    class="page-item number-item">
+                    <a (click)='loadPage(page)' class="page-link">{{page}}</a>
+                  </li>
+                  <!-- <li [ngClass]="{disabled:pager.current_page === pager.last_page}" class="page-item next-item">
                                   <a routerLink [queryParams]="{ page: pager.current_page + 1 }" class="page-link">Next</a>
                               </li>
                               <li [ngClass]="{disabled:pager.current_page === pager.last_page}" class="page-item last-item">
                                   <a routerLink [queryParams]="{ page: pager.last_page }" class="page-link">Last</a>
                               </li> -->
-                          </ul>
-                      </div>
-                      <div class="clearfix"></div>
-                        <!--------------------
+                </ul>
+              </div>
+              <div class="clearfix"></div>
+              <!--------------------
                         END - Basic Table
                         -------------------->
-                      </div>
-                      <!--_________________new account button___________ -->
-    
-    
-    
-                  <!---------------------- create account model ------------------------------>
-    
-                      <!-- Modal -->
-                      <div aria-hidden="true" class="onboarding-modal modal fade animated" id="myModal3" role="dialog" >
-                        <div class="modal-dialog modal-centered" role="document">
-                          <div class="modal-content text-left">
-                            <button aria-label="Close" class="close" id='close' data-dismiss="modal" type="button"><span class="os-icon os-icon-close"></span></button>
-                            <div class="onboarding-content with-gradient">
-                              <h4 class="onboarding-title">
-                              Demo Account Request
-                              </h4>
-                              <form [formGroup]="createdemoAccountForm">
-    
-                                  <!-- <div class="row">
+            </div>
+            <!--_________________new account button___________ -->
+
+
+
+            <!---------------------- create account model ------------------------------>
+
+            <!-- Modal -->
+            <div aria-hidden="true" class="onboarding-modal modal fade animated" id="myModal3" role="dialog">
+              <div class="modal-dialog modal-centered" role="document">
+                <div class="modal-content text-left">
+                  <button aria-label="Close" class="close" id='close' data-dismiss="modal" type="button"><span
+                      class="os-icon os-icon-close"></span></button>
+                  <div class="onboarding-content with-gradient">
+                    <h4 class="onboarding-title">
+                      Demo Account Request
+                    </h4>
+                    <form [formGroup]="createdemoAccountForm">
+
+                      <!-- <div class="row">
                                     <div class="col-sm-12">
                                       <div class="form-group">
                                         <label for="user">Search
@@ -181,166 +177,164 @@ type = "timer"
                                     </div>
                                   </div>
                                   </div> -->
-                                  <div class="row">
-                                    <div class="col-sm-6">
-      
-                                      <div class="form-group">
-                                        <label for="" > Select Leverage</label>
-                                        <select name='lever' formControlName='lever' class="form-control">
-                                        <option value="User1">
-                                          Leverage1
-                                        </option>
-                                        <option value="User2">
-                                          Leverage2
-                                        </option>
-                                        <option value="User3">
-                                          Leverage3
-                                        </option>
-                                        <option value="User4">
-                                          Leverage4
-                                        </option>
-                                        <option value="User5">
-                                          Leverage5
-                                        </option>
-                                      </select>
-                                      </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                      <div class="form-group">
-                                        <label for=""  > Select Group</label>
-                                        <select class="form-control" name='account_group'
-                                         formControlName='account_group'>
-                                        <option value="Group1">
-                                         Group1
-                                        </option>
-                                        <option value="Group2">
-                                          Group2
-                                        </option>
-                                        <option value="Group3">
-                                          Group3
-                                        </option>
-                                        <option value="Group4">
-                                          Group4
-                                        </option>
-                                        <option value="Group5">
-                                          Group5
-                                        </option>
-                                      </select>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-sm-12 text-right">
-                                      <div class="element-box-content ">
-                                        <button class="btn btn-success" 
-                                        (click)='createDemoAccount(createdemoAccountForm.value)'
-                                          type="submit">Submit</button>
-                                       
-                                      </div>
-                                    </div>
-                                  </div>
-                                </form>
-                            </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+
+                          <div class="form-group">
+                            <label for=""> Select Leverage</label>
+                            <select name='lever' formControlName='lever' class="form-control">
+                              <option value="User1">
+                                Leverage1
+                              </option>
+                              <option value="User2">
+                                Leverage2
+                              </option>
+                              <option value="User3">
+                                Leverage3
+                              </option>
+                              <option value="User4">
+                                Leverage4
+                              </option>
+                              <option value="User5">
+                                Leverage5
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for=""> Select Group</label>
+                            <select class="form-control" name='account_group' formControlName='account_group'>
+                              <option value="Group1">
+                                Group1
+                              </option>
+                              <option value="Group2">
+                                Group2
+                              </option>
+                              <option value="Group3">
+                                Group3
+                              </option>
+                              <option value="Group4">
+                                Group4
+                              </option>
+                              <option value="Group5">
+                                Group5
+                              </option>
+                            </select>
                           </div>
                         </div>
                       </div>
-                      <div aria-hidden="true" class="onboarding-modal modal fade animated" id="myModal4" role="dialog" tabindex="-1">
-                        <div class="modal-dialog modal-centered" role="document">
-                          <div class="modal-content text-left">
-                            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span class="os-icon os-icon-close"></span></button>
-                            <div class="onboarding-content with-gradient">
-                              <h4 class="onboarding-title">
-                          Demo Account Request
-                              </h4>
-                              <form>
-    
-                                <div class="form-group row">
-                                  <label class="col-sm-6" for=""> <strong>Name</strong></label>
-                                  <div class="col-sm-6">
-                                    John Mark
-                                  </div>
-                                </div>
-                                <div class="form-group row">
-                                  <label class="col-sm-6" for=""><strong>Email</strong></label>
-                                  <div class="col-sm-6">
-                                    john@mail.com
-                                  </div>
-                                </div>
-                                <div class="form-group row">
-                                  <label class="col-sm-6" for=""><strong>Phone</strong></label>
-                                  <div class="col-sm-6">
-                                    12345
-                                  </div>
-                                </div>
-                                <div class="row">
-    
-                                  <div class="col-sm-6">
-                                    <div class="form-group">
-                                      <label for="" > Select Leverage</label><select class="form-control">
-                                      <option value="User1">
-                                        Leverage1
-                                      </option>
-                                      <option value="User2">
-                                        Leverage2
-                                      </option>
-                                      <option value="User3">
-                                        Leverage3
-                                      </option>
-                                      <option value="User4">
-                                        Leverage4
-                                      </option>
-                                      <option value="User5">
-                                        Leverage5
-                                      </option>
-                                    </select>
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                    <div class="form-group">
-                                      <label for=""  > Select Group</label><select class="form-control">
-                                      <option value="User1">
-                                        Group1
-                                      </option>
-                                      <option value="User2">
-                                        Group2
-                                      </option>
-                                      <option value="User3">
-                                        Group3
-                                      </option>
-                                      <option value="User4">
-                                        Group4
-                                      </option>
-                                      <option value="User5">
-                                        Group5
-                                      </option>
-                                    </select>
-                                    </div>
-                                  </div>
-                                </div>
-    
-                                <br>
-    
-                                <div class="form-buttons-w">
-                                  <div class="element-box-content text-right">
-                                    <button class="btn btn-success" type="submit">Approve</button>
-                                    <button class="btn btn-danger" type="submit"> Disapprove</button>
-                                  </div>
-                                </div>
-                              </form>
-                            </div>
+                      <div class="row">
+                        <div class="col-sm-12 text-right">
+                          <div class="element-box-content ">
+                            <button class="btn btn-success" (click)='createDemoAccount(createdemoAccountForm.value)'
+                              type="submit">Submit</button>
+
                           </div>
                         </div>
                       </div>
-                    </div>
-                      <!----------------------end account modal-------------------->
-    
-                      <!-- end account botton  -->
-                    </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div aria-hidden="true" class="onboarding-modal modal fade animated" id="myModal4" role="dialog"
+              tabindex="-1">
+              <div class="modal-dialog modal-centered" role="document">
+                <div class="modal-content text-left">
+                  <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+                      class="os-icon os-icon-close"></span></button>
+                  <div class="onboarding-content with-gradient">
+                    <h4 class="onboarding-title">
+                      Demo Account Request
+                    </h4>
+                    <form>
+
+                      <div class="form-group row">
+                        <label class="col-sm-6" for=""> <strong>Name</strong></label>
+                        <div class="col-sm-6">
+                          John Mark
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-6" for=""><strong>Email</strong></label>
+                        <div class="col-sm-6">
+                          john@mail.com
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-6" for=""><strong>Phone</strong></label>
+                        <div class="col-sm-6">
+                          12345
+                        </div>
+                      </div>
+                      <div class="row">
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for=""> Select Leverage</label><select class="form-control">
+                              <option value="User1">
+                                Leverage1
+                              </option>
+                              <option value="User2">
+                                Leverage2
+                              </option>
+                              <option value="User3">
+                                Leverage3
+                              </option>
+                              <option value="User4">
+                                Leverage4
+                              </option>
+                              <option value="User5">
+                                Leverage5
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for=""> Select Group</label><select class="form-control">
+                              <option value="User1">
+                                Group1
+                              </option>
+                              <option value="User2">
+                                Group2
+                              </option>
+                              <option value="User3">
+                                Group3
+                              </option>
+                              <option value="User4">
+                                Group4
+                              </option>
+                              <option value="User5">
+                                Group5
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <br>
+
+                      <div class="form-buttons-w">
+                        <div class="element-box-content text-right">
+                          <button class="btn btn-success" type="submit">Approve</button>
+                          <button class="btn btn-danger" type="submit"> Disapprove</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="display-type"></div>
-        <!-- </div> -->
-       
-    
+          <!----------------------end account modal-------------------->
+
+          <!-- end account botton  -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="display-type"></div>
+<!-- </div> -->

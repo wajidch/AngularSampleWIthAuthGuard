@@ -1,39 +1,32 @@
-
-
-<ngx-spinner
-bdOpacity = 0.9
-bdColor = "rgba(51,51,51,0.55)"
-size = "medium"
-color = "#fff"
-type = "timer"
-[fullScreen] = "true">
-<p style="color: white" > Loading... </p>
-</ngx-spinner>
+<!-- <ngx-spinner bdOpacity=0.9 bdColor="rgba(51,51,51,0.55)" size="medium" color="#fff" type="timer" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner> -->
+<ngx-loading-bar></ngx-loading-bar>
 <div class="layout-w">
-    
-     <div class="content-w">
-       <div class="content-i">
- 
-         <div class="content-box">
- 
-           <div class="element-wrapper ">
- 
-             <div class="element-box col-md-12 m-auto">
-               <div class="form-buttons float-right">
-               </div>
-                       <form [formGroup]='withdrawMoneyForm'>
-                         <h5 class="form-header">
-                            Havale/EFT Ile Para Çekme Talebi
-                         </h5>
-                         <div *ngIf='message' class="alert alert-success" role="alert">
-                            <strong>{{message}} </strong>.
-                          </div>
-                          <div *ngIf='errormessage' class="alert alert-error" role="alert">
-                              <strong>{{errormessage}} </strong>.
-                            </div>
-                         <div class="row">
-                           <div class="col-sm-6">
-                             <!-- <div class="form-group">
+
+  <div class="content-w">
+    <div class="content-i">
+
+      <div class="content-box">
+
+        <div class="element-wrapper ">
+
+          <div class="element-box col-md-12 m-auto">
+            <div class="form-buttons float-right">
+            </div>
+            <form [formGroup]='withdrawMoneyForm'>
+              <h5 class="form-header">
+                Havale/EFT Ile Para Çekme Talebi
+              </h5>
+              <div *ngIf='message' class="alert alert-success" role="alert">
+                <strong>{{message}} </strong>.
+              </div>
+              <div *ngIf='errormessage' class="alert alert-error" role="alert">
+                <strong>{{errormessage}} </strong>.
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <!-- <div class="form-group">
                                <label for="">TrendFX Kasa</label>
                                <select class="form-control" name=''>
                                <option>
@@ -41,103 +34,98 @@ type = "timer"
                                </option>
                              </select>
                              </div> -->
-                             <div class="form-group">
-                                <label for="">Ödeme şekli</label>
-                                <select class="form-control"
-                                 name='payment_method' formControlName='payment_method'>
-                                <option selected>
-                                  bank transfer
-                                </option>
-                                
-                              </select>
-                              </div>
+                  <div class="form-group">
+                    <label for="">Ödeme şekli</label>
+                    <select class="form-control" name='payment_method' formControlName='payment_method'>
+                      <option selected>
+                        bank transfer
+                      </option>
 
-                             
-                           </div>
-                           
-                           <div class="col-sm-6">
-                             <div class="form-group">
-                               <label for=""> Transfer Miktarı</label>
-                               <input class="form-control" placeholder="Transfer Amount"
-                               name='amount' formControlName='amount' type="number">
-                             </div>
-                           </div>
-                         </div>
-                         <div class="row">
-                           <div class="col-sm-6">
-                             <div class="form-group">
-                               <label for="">Para Birimi</label>
-                               <select class="form-control" name="currency" 
-                               formControlName='currency'>
-                               <option>
-                                 Dollar ($)
-                               </option>
-                             </select>
-                             </div>
-                           </div>
-                           <div class="col-sm-6">
-                             <div class="form-group">
-                               <label for=""> Hesap Sahibi</label>
-                               <input class="form-control" name="account_owner"
-                               formControlName='account_owner' placeholder="Account Holder" type="text">
-                             </div>
-                           </div>
-                         </div>
-                         <div class="row">
-                           <div class="col-sm-6">
-                             <div class="form-group">
-                               <label for="">Hesap Numarası</label>
-                               <input class="form-control" name="iban"
-                                formControlName='iban' placeholder="IBAN Number" type="text">
-                             </div>
-                           </div>
-                           <div class="col-sm-6">
-                             <div class="form-group">
-                               <label for="">Banka İsmi</label>
-                               <input class="form-control" name="bank_name"
-                                formControlName='bank_name' placeholder="Bank Number" type="text">
-                            
-                              </div>
-                           </div>
-                         </div>
-                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="">opertaion yazın</label>
-                                    <select class="form-control"
-                                     name='operation_type' formControlName='operation_type'>
-                                    <option>
-                                      withdraw 
-                                    </option>
-                                    
-                                  </select>
-                                  </div>
-                             </div>
-                             <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="">Swift kodu</label>
-                                   
-                                  <input class="form-control"  name='swift'
-                                   formControlName='swift' placeholder="Swift Code" type="text">
-                              
-                                  </div>
-                             </div>
-                         </div>
- 
-                         <div class="form-buttons-w text-right">
-                           <button class="btn btn-success" type="submit" 
-                           (click)='withdrawmoney(withdrawMoneyForm.value)' [disabled]='!withdrawMoneyForm.valid'>Gönder</button>
-                         </div>
-                        
-                       </form>
- 
-                     </div>
-                   </div>
- 
-               </div>
- 
-             </div>
-           </div>
-         </div>
-      
-     
+                    </select>
+                  </div>
+
+
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for=""> Transfer Miktarı</label>
+                    <input class="form-control" placeholder="Transfer Amount" name='amount' formControlName='amount'
+                      type="number">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Para Birimi</label>
+                    <select class="form-control" name="currency" formControlName='currency'>
+                      <option>
+                        Dollar ($)
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for=""> Hesap Sahibi</label>
+                    <input class="form-control" name="account_owner" formControlName='account_owner'
+                      placeholder="Account Holder" type="text">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Hesap Numarası</label>
+                    <input class="form-control" name="iban" formControlName='iban' placeholder="IBAN Number"
+                      type="text">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Banka İsmi</label>
+                    <input class="form-control" name="bank_name" formControlName='bank_name' placeholder="Bank Number"
+                      type="text">
+
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">opertaion yazın</label>
+                    <select class="form-control" name='operation_type' formControlName='operation_type'>
+                      <option>
+                        withdraw
+                      </option>
+
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Swift kodu</label>
+
+                    <input class="form-control" name='swift' formControlName='swift' placeholder="Swift Code"
+                      type="text">
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-buttons-w text-right">
+                <button class="btn btn-success" type="submit" (click)='withdrawmoney(withdrawMoneyForm.value)'
+                  [disabled]='!withdrawMoneyForm.valid'>Gönder</button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

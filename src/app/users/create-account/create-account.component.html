@@ -1,182 +1,169 @@
+<style>
+  body {
+    max-height: fit-content;
+    height: fit-content;
+  }
+</style>
 
- <style>
-	body {
-  max-height: fit-content;
-  height: fit-content;
-}
-  </style>
-      
 
-<ngx-spinner
-bdOpacity = 0.9
-bdColor = "rgba(51,51,51,0.55)"
-size = "medium"
-color = "#fff"
-type = "timer"
-[fullScreen] = "true">
-<p style="color: white" > Loading... </p>
-</ngx-spinner>
+<!-- <ngx-spinner bdOpacity=0.9 bdColor="rgba(51,51,51,0.55)" size="medium" color="#fff" type="timer" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner> -->
+<ngx-loading-bar></ngx-loading-bar>
+
 <body class="register-page">
-    <div class="all-wrapper menu-side with-pattern">
-      <div class="auth-box-w wider">
-        <div class="logo-w">
-          <a><img alt="" src="../../../assets/img/TrendFX Logo.svg"></a>
+  <div class="all-wrapper menu-side with-pattern">
+    <div class="auth-box-w wider">
+      <div class="logo-w">
+        <a><img alt="" src="../../../assets/img/TrendFX Logo.svg"></a>
+      </div>
+      <h4 class="auth-header">
+        Create Account
+      </h4>
+      <form [formGroup]='registeruserForm'>
+        <div *ngIf='message' class="alert alert-success" role="alert">
+          <strong>{{message}} </strong>
         </div>
-        <h4 class="auth-header">
-          Create Account
-        </h4>
-        <form [formGroup]='registeruserForm'>
-            <div *ngIf='message' class="alert alert-success" role="alert">
-                <strong>{{message}} </strong>
-              </div>
-              <div *ngIf='errormessage' class="alert alert-error" role="alert">
-                  <strong>{{errormessage}} </strong>
-                </div>
+        <div *ngIf='errormessage' class="alert alert-error" role="alert">
+          <strong>{{errormessage}} </strong>
+        </div>
         <p>Contrary to popular belief, Lorem Ipsum is not simply random text. </p>
 
-          <div class="radios">
-            <div class="radio">
-              <input type="radio" id="radio1" name="account_type" 
-              formControlName='account_type' value="demo" checked>
-              <label for="radio1">
-                <div class="checker"></div>
+        <div class="radios">
+          <div class="radio">
+            <input type="radio" id="radio1" name="account_type" formControlName='account_type' value="demo" checked>
+            <label for="radio1">
+              <div class="checker"></div>
               Demo Account
-              </label>
-            </div>
+            </label>
+          </div>
 
-            <div class="radio">
-              <input type="radio" id="radio2" name="account_type" 
-              formControlName='account_type' value="real">
-              <label for="radio2">
-                <div class="checker"></div>
-                Real Account
-              </label>
-            </div>
+          <div class="radio">
+            <input type="radio" id="radio2" name="account_type" formControlName='account_type' value="real">
+            <label for="radio2">
+              <div class="checker"></div>
+              Real Account
+            </label>
           </div>
-          <div class="form-group pt-2">
-            <label for="">Name</label>
-            <div *ngIf="registeruserForm.controls['name'].touched &&
+        </div>
+        <div class="form-group pt-2">
+          <label for="">Name</label>
+          <div *ngIf="registeruserForm.controls['name'].touched &&
              !registeruserForm.controls['name'].valid">
-                <span class="help-block" style="color:red" 
-                *ngIf="registeruserForm.controls['name'].hasError('required')">
-                  Name is required</span>
-              </div>
-            <input class="form-control" name='name' formControlName='name' placeholder="Enter your name" type="text">
-            
-            <div class="pre-icon os-icon os-icon-user-male-circle"></div>
+            <span class="help-block" style="color:red" *ngIf="registeruserForm.controls['name'].hasError('required')">
+              Name is required</span>
           </div>
-          <div class="form-group">
-            <label for="">Phone</label>
-            <div *ngIf="registeruserForm.controls['number'].touched &&
+          <input class="form-control" name='name' formControlName='name' placeholder="Enter your name" type="text">
+
+          <div class="pre-icon os-icon os-icon-user-male-circle"></div>
+        </div>
+        <div class="form-group">
+          <label for="">Phone</label>
+          <div *ngIf="registeruserForm.controls['number'].touched &&
              !registeruserForm.controls['number'].valid">
-                <span class="help-block" style="color:red" 
-                *ngIf="registeruserForm.controls['number'].hasError('required')">
-                  Phone is required</span>
-              </div>
-            <input class="form-control" name='number' formControlName='number' placeholder="Enter your phone" type="text">
-            <div class="pre-icon os-icon os-icon-phone"></div>
+            <span class="help-block" style="color:red" *ngIf="registeruserForm.controls['number'].hasError('required')">
+              Phone is required</span>
           </div>
-          <div class="form-group">
-            <label for=""> Email address</label>
-            <div *ngIf="registeruserForm.controls['email'].touched &&
+          <input class="form-control" name='number' formControlName='number' placeholder="Enter your phone" type="text">
+          <div class="pre-icon os-icon os-icon-phone"></div>
+        </div>
+        <div class="form-group">
+          <label for=""> Email address</label>
+          <div *ngIf="registeruserForm.controls['email'].touched &&
              !registeruserForm.controls['email'].valid">
-                <span class="help-block" style="color:red" 
-                *ngIf="registeruserForm.controls['email'].hasError('required')">
-                  Email is required</span>
-              </div>
-              <div *ngIf="registeruserForm.controls['email'].touched &&
+            <span class="help-block" style="color:red" *ngIf="registeruserForm.controls['email'].hasError('required')">
+              Email is required</span>
+          </div>
+          <div *ngIf="registeruserForm.controls['email'].touched &&
              !registeruserForm.controls['email'].valid">
-                <span class="help-block" style="color:red" 
-                *ngIf="registeruserForm.controls['email'].hasError('email')">
-                  Email format not valid</span>
-              </div>
-            <input class="form-control" name="email" formControlName='email' placeholder="Enter email" type="email">
-            <div class="pre-icon os-icon os-icon-email-2-at2"></div>
+            <span class="help-block" style="color:red" *ngIf="registeruserForm.controls['email'].hasError('email')">
+              Email format not valid</span>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for=""> Password</label>
-                <div *ngIf="registeruserForm.controls['password'].touched &&
+          <input class="form-control" name="email" formControlName='email' placeholder="Enter email" type="email">
+          <div class="pre-icon os-icon os-icon-email-2-at2"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for=""> Password</label>
+              <div *ngIf="registeruserForm.controls['password'].touched &&
                 !registeruserForm.controls['password'].valid">
-                   <span class="help-block" style="color:red" 
-                   *ngIf="registeruserForm.controls['password'].hasError('required')">
-                     Password is required</span>
-                 </div>
-                 <div *ngIf="registeruserForm.controls['password'].touched &&
+                <span class="help-block" style="color:red"
+                  *ngIf="registeruserForm.controls['password'].hasError('required')">
+                  Password is required</span>
+              </div>
+              <div *ngIf="registeruserForm.controls['password'].touched &&
                 !registeruserForm.controls['password'].valid">
-                   <span class="help-block" style="color:red" 
-                   *ngIf="registeruserForm.controls['password'].hasError('minlength')">
-                   min length of password is 8 characters</span>
-                 </div>
-                <input class="form-control" name='password' formControlName='password'
-                 placeholder="Password" type="password">
-                <div class="pre-icon os-icon os-icon-fingerprint"></div>
+                <span class="help-block" style="color:red"
+                  *ngIf="registeruserForm.controls['password'].hasError('minlength')">
+                  min length of password is 8 characters</span>
               </div>
+              <input class="form-control" name='password' formControlName='password' placeholder="Password"
+                type="password">
+              <div class="pre-icon os-icon os-icon-fingerprint"></div>
             </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="">Confirm Password</label>
-                <div *ngIf="registeruserForm.controls['password_confirmation'].touched &&
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="">Confirm Password</label>
+              <div *ngIf="registeruserForm.controls['password_confirmation'].touched &&
                 !registeruserForm.controls['password_confirmation'].valid">
-                   <span class="help-block" style="color:red" 
-                   *ngIf="registeruserForm.controls['password_confirmation'].hasError('required')">
-                    Confirm Password is required</span>
-                 </div>
-                 <div *ngIf="registeruserForm.controls['password_confirmation'].touched &&
-                !registeruserForm.controls['password_confirmation'].valid">
-                   <span class="help-block" style="color:red" 
-                   *ngIf="registeruserForm.controls['password_confirmation'].hasError('mustMatch')">
-                   Confirm password not matched</span>
-                 </div>
-                <input class="form-control" name="password_confirmation" 
-                formControlName='password_confirmation' placeholder="Confirm Password" type="password">
+                <span class="help-block" style="color:red"
+                  *ngIf="registeruserForm.controls['password_confirmation'].hasError('required')">
+                  Confirm Password is required</span>
               </div>
+              <div *ngIf="registeruserForm.controls['password_confirmation'].touched &&
+                !registeruserForm.controls['password_confirmation'].valid">
+                <span class="help-block" style="color:red"
+                  *ngIf="registeruserForm.controls['password_confirmation'].hasError('mustMatch')">
+                  Confirm password not matched</span>
+              </div>
+              <input class="form-control" name="password_confirmation" formControlName='password_confirmation'
+                placeholder="Confirm Password" type="password">
             </div>
-            <div class="col-sm-6" style="display: none">
-                <div class="form-group">
-                  <label for="">City</label>
-                  <input class="form-control" name="city" 
-                  formControlName='city' value="wah cantt" placeholder="City" type="text">
-                </div>
-              </div>
-              <div class="col-sm-6" style="display: none">
-                  <div class="form-group">
-                    <label for="">Address</label>
-                    <input class="form-control" name="address" 
-                    formControlName='address' value="lahore" placeholder="Address" type="text">
-                  </div>
-                </div>
-                <div class="col-sm-6" style="display: none">
-                    <div class="form-group">
-                      <label for="">Postal Code</label>
-                      <input class="form-control" name="post_code" 
-                      formControlName='post_code' value="90344" placeholder="postal code" 
-                      type="text">
-                    </div>
-                  </div>
-                  <div class="col-sm-6" style="display: none">
-                      <div class="form-group">
-                        <label for="">Country</label>
-                        <input class="form-control" name="country" 
-                        formControlName='country' value="pakistan" placeholder="country"
-                         type="text">
-                      </div>
-                    </div>
           </div>
-          <div class="buttons-w">
-            <button class="btn btn-primary" 
-            (click)='register(registeruserForm.value)' [disabled]='!registeruserForm.valid'>Register Now</button>
-           &nbsp;&nbsp;&nbsp;&nbsp;
-            <label class="form-check-label">
-                <a routerLink="users/login">Login</a></label>
+          <div class="col-sm-6" style="display: none">
+            <div class="form-group">
+              <label for="">City</label>
+              <input class="form-control" name="city" formControlName='city' value="wah cantt" placeholder="City"
+                type="text">
+            </div>
           </div>
-          <!-- <div class="form-check-inline">
+          <div class="col-sm-6" style="display: none">
+            <div class="form-group">
+              <label for="">Address</label>
+              <input class="form-control" name="address" formControlName='address' value="lahore" placeholder="Address"
+                type="text">
+            </div>
+          </div>
+          <div class="col-sm-6" style="display: none">
+            <div class="form-group">
+              <label for="">Postal Code</label>
+              <input class="form-control" name="post_code" formControlName='post_code' value="90344"
+                placeholder="postal code" type="text">
+            </div>
+          </div>
+          <div class="col-sm-6" style="display: none">
+            <div class="form-group">
+              <label for="">Country</label>
+              <input class="form-control" name="country" formControlName='country' value="pakistan"
+                placeholder="country" type="text">
+            </div>
+          </div>
+        </div>
+        <div class="buttons-w">
+          <button class="btn btn-primary" (click)='register(registeruserForm.value)'
+            [disabled]='!registeruserForm.valid'>Register Now</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <label class="form-check-label">
+            <a routerLink="users/login">Login</a></label>
+        </div>
+        <!-- <div class="form-check-inline">
               <label class="form-check-label">
                 <a routerLink="users/login">Login</a></label>
             </div> -->
-          
-        </form>
-      </div>
+
+      </form>
     </div>
-  </body>
+  </div>
+</body>

@@ -5,6 +5,7 @@ import { apiService } from 'src/app/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 
 @Component({
@@ -14,23 +15,24 @@ import { throwError } from 'rxjs';
 })
 export class VerifyAccountComponent implements OnInit {
   birthdayCertificateURl: any;
-  driverlicensURL:any;
-  addressURL:any;
+  driverlicensURL: any;
+  addressURL: any;
   imgSelected: boolean;
   imginprocess: boolean;
   filesizeerror: boolean;
   message: string;
   fileImage: any;
-  statusArray:any;
-  submitted:boolean=false;
-  constructor(private _http: HttpClient,private apiservice:apiService
-    ,private spinner:NgxSpinnerService) { }
+  statusArray: any;
+  submitted: boolean = false;
+  constructor(private _http: HttpClient, private apiservice: apiService
+    , private spinner: NgxSpinnerService,
+    private loadingBar:LoadingBarService) { }
 
   ngOnInit() {
     this.getStatus()
   }
-  uploadBithCertificate(event: any,id) {
-    console.log("id",id)
+  uploadBithCertificate(event: any, id) {
+    console.log("id", id)
     if (event && event.target.files.length > 0) {
       const headers = new HttpHeaders();
       headers.append('Content-Type', 'multipart/*');
@@ -48,37 +50,37 @@ export class VerifyAccountComponent implements OnInit {
         const formData = new FormData();
         formData.append('file', file, file.name);
         formData.append('type', 'Birth certificate');
-        if(id!=undefined){
-        formData.append('id', id);
+        if (id != undefined) {
+          formData.append('id', id);
         }
 
-        
+
         const reader = new FileReader();
         this.imgSelected = true;
         reader.onload = (value: any) => {
           this.birthdayCertificateURl = value.target.result;
         }
         reader.readAsDataURL(event.target.files[0]);
-      
-        let fileObj={
-          type:'Birth Certificate',
-          file:formData
+
+        let fileObj = {
+          type: 'Birth Certificate',
+          file: formData
         }
 
-        this.apiservice.post('fileUpload',formData).subscribe((res)=>{
-          console.log("responseee",res)
+        this.apiservice.post('fileUpload', formData).subscribe((res) => {
+          console.log("responseee", res)
           this.getStatus();
         })
 
 
 
-      } 
+      }
     }
 
   }
 
-  uploadDriverlicense(event: any,id) {
-    console.log("id",id)
+  uploadDriverlicense(event: any, id) {
+    console.log("id", id)
     if (event && event.target.files.length > 0) {
       const headers = new HttpHeaders();
       headers.append('Content-Type', 'multipart/*');
@@ -96,9 +98,9 @@ export class VerifyAccountComponent implements OnInit {
         const formData = new FormData();
         formData.append('file', file, file.name);
         formData.append('type', 'Driving license');
-        if(id!=undefined){
+        if (id != undefined) {
           formData.append('id', id);
-          }
+        }
 
         const reader = new FileReader();
         this.imgSelected = true;
@@ -106,25 +108,25 @@ export class VerifyAccountComponent implements OnInit {
           this.driverlicensURL = value.target.result;
         }
         reader.readAsDataURL(event.target.files[0]);
-      
-        let fileObj={
-          type:'Birth Certificate',
-          file:formData
+
+        let fileObj = {
+          type: 'Birth Certificate',
+          file: formData
         }
-        this.apiservice.post('fileUpload',formData).subscribe((res)=>{
-          console.log("responseee",res);
+        this.apiservice.post('fileUpload', formData).subscribe((res) => {
+          console.log("responseee", res);
           this.getStatus();
         })
 
 
 
-      } 
+      }
     }
 
   }
 
-  uploadAddressDocument(event: any,id) {
-    console.log("id",id)
+  uploadAddressDocument(event: any, id) {
+    console.log("id", id)
     if (event && event.target.files.length > 0) {
       const headers = new HttpHeaders();
       headers.append('Content-Type', 'multipart/*');
@@ -142,52 +144,53 @@ export class VerifyAccountComponent implements OnInit {
         const formData = new FormData();
         formData.append('file', file, file.name);
         formData.append('type', 'Address certificate');
-        if(id!=undefined){
+        if (id != undefined) {
           formData.append('id', id);
-          }
+        }
         const reader = new FileReader();
         this.imgSelected = true;
         reader.onload = (value: any) => {
           this.addressURL = value.target.result;
         }
         reader.readAsDataURL(event.target.files[0]);
-      
-        let fileObj={
-          type:'Birth Certificate',
-          file:formData
+
+        let fileObj = {
+          type: 'Birth Certificate',
+          file: formData
         }
-        this.apiservice.post('fileUpload',formData).subscribe((res)=>{
-          console.log("responseee",res);
+        this.apiservice.post('fileUpload', formData).subscribe((res) => {
+          console.log("responseee", res);
           this.getStatus();
         })
 
 
 
-      } 
+      }
     }
 
   }
 
-  DocSubmit(){
+  DocSubmit() {
 
-    this.spinner.show();
-    this.submitted=true;
-    setTimeout(function() {
-      this.submitted=false;
-      
-  }.bind(this), 3000);
-    this.birthdayCertificateURl='';
-    this.driverlicensURL='';
-    this.addressURL='';
+    //this.spinner.show();
+    this.loadingBar.start();
+    this.submitted = true;
+    setTimeout(function () {
+      this.submitted = false;
+
+    }.bind(this), 3000);
+    this.birthdayCertificateURl = '';
+    this.driverlicensURL = '';
+    this.addressURL = '';
     this.getStatus();
-    this.spinner.hide();
+    //this.spinner.hide();
+    this.loadingBar.complete();
 
 
   }
 
-  getStatus()
-  {
-     let statusobarray=[
+  getStatus() {
+    let statusobarray = [
       {
         id: 0,
         user_id: 0,
@@ -196,78 +199,58 @@ export class VerifyAccountComponent implements OnInit {
         status: "nodata",
         created_at: "",
         updated_at: ""
-    },
-    {
-      id: 0,
-      user_id: 0,
-      type: "",
-      file: "",
-      status: "nodata",
-      created_at: "",
-      updated_at: ""
-  },
-  {
-    id: 0,
-    user_id: 0,
-    type: "",
-    file: "",
-    status: "nodata",
-    created_at: "",
-    updated_at: ""
-  }
-    ];
-    this.spinner.show();
-    this.apiservice.get('profile')
-    .pipe(
-      catchError(err =>{
-        if(err.status===404){
-          this.spinner.hide();
-         
-          
-        }
-        this.spinner.hide();
-        return throwError(err)
-      })
-    )
-    .subscribe((res:any)=>{
-
-     
-      if(res.status===200){
-
-        
-        res.body.data.kycs.forEach(function(data ,index){
-          
-            console.log("aa",index)
-
-            statusobarray[index]=data;
-            // this.status[index].user_id=data.user_id;
-            // this.status[index].type=data.type;
-            // this.status[index].file=data.file;
-            // this.status[index].status=data.status;
-            // this.status[index].created_at=data.created_at;
-            // this.status[index].updated_at=data.updated_at
-            // this.status.push({
-              
-            //     id: data.id,
-            //     user_id: data.user_id,
-            //     type: data.type,
-            //     file: data.file,
-            //     status: data.status,
-            //     created_at: data.created_at,
-            //     updated_at: data.updated_at
-            
-            // });
-           
-          
-         
-         
-        })
-        console.log("sss",statusobarray)
-        this.statusArray=statusobarray
-        this.spinner.hide();
+      },
+      {
+        id: 0,
+        user_id: 0,
+        type: "",
+        file: "",
+        status: "nodata",
+        created_at: "",
+        updated_at: ""
+      },
+      {
+        id: 0,
+        user_id: 0,
+        type: "",
+        file: "",
+        status: "nodata",
+        created_at: "",
+        updated_at: ""
       }
+    ];
+    //this.spinner.show();
+    this.loadingBar.start();
+    this.apiservice.get('profile')
+      .pipe(
+        catchError(err => {
+          if (err.status === 404) {
+            //this.spinner.hide();
+            this.loadingBar.complete();
 
 
-    })
+          }
+          //this.spinner.hide();
+          this.loadingBar.complete();
+          return throwError(err)
+        })
+      )
+      .subscribe((res: any) => {
+
+
+        if (res.status === 200) {
+
+
+          res.body.data.kycs.forEach(function (data, index) {
+            statusobarray[index] = data;
+          })
+
+          this.statusArray = statusobarray
+          //this.spinner.hide();
+          this.loadingBar.complete();
+        }
+
+
+      })
   }
 }
