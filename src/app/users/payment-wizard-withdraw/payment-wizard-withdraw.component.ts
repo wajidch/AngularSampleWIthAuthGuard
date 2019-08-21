@@ -63,7 +63,6 @@ export class PaymentWizardWithdrawComponent implements OnInit {
           step6.classList.add("active");
           
         }
-        console.log("currnt", this.currentUrl, 'preee', this.previousUrl)
       };
     });
   }

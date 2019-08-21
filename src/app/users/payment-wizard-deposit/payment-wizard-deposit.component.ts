@@ -65,7 +65,6 @@ let checkroute=localStorage.getItem("changeroute")
           step6.classList.add("active");
           
         }
-        console.log("currnt", this.currentUrl, 'preee', this.previousUrl)
       };
     });
   }
@@ -77,7 +76,7 @@ let checkroute=localStorage.getItem("changeroute")
   getTranscationlist(page) {
 
     try {
-      console.log("page", page)
+      
       //this.spinner.show();
       this.loadingBar.start();
       this.apiservice.get(`getDepositTransactions?page=${page}`)
