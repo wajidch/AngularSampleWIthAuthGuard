@@ -38,7 +38,6 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
     LoadingBarModule,
     ReactiveFormsModule,
     FormsModule,
-  ],
-  
+  ]
 })
 export class UserModule { }

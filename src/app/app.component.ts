@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
    
     this.currentUser=localStorage.getItem('token');
-    console.log("current",this.currentUser)
   }
   
 }
