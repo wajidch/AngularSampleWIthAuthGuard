@@ -65,18 +65,18 @@ export class WithdrawMoneyComponent implements OnInit {
       )
       .subscribe((res: any) => {
 
-        console.log("resss", res);
+        
         this.errormessage = ''
         this.message = res.body.message;
         //this.spinner.hide();
         this.loadingBar.complete();
         setTimeout(function () {
           this.message = '';
-          localStorage.removeItem("changeroute");
-          localStorage.setItem("changeroute",'true');
-          this.router.navigateByUrl('users/payment-wizard-withdraw');
-
+         
         }.bind(this), 3000);
+        localStorage.setItem("changeroute",'true');
+        this.router.navigateByUrl('users/payment-wizard-withdraw');
+
       })
 
   }

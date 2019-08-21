@@ -48,7 +48,7 @@ let checkroute=localStorage.getItem("changeroute")
       if (event instanceof NavigationEnd) {
         this.previousUrl = this.currentUrl;
         this.currentUrl = event.url;
-
+        console.log("change route",checkroute)
         if (this.previousUrl === '/users/depositmoney' 
         && checkroute==='true') {
           var step1 = document.getElementById("stepContent1");

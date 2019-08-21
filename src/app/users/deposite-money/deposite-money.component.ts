@@ -73,11 +73,12 @@ export class DepositeMoneyComponent implements OnInit {
         this.loadingBar.complete();
         setTimeout(function () {
           this.message = '';
-          localStorage.removeItem("changeroute");
-          localStorage.setItem("changeroute",'true');
+          
+        }.bind(this), 3000);
+        localStorage.setItem("changeroute",'true');
 
           this.router.navigateByUrl('users/payment-wizard-deposit');
-        }.bind(this), 3000);
+       
       })
   }
   getAccountList() {

@@ -47,6 +47,7 @@ export class PaymentWizardWithdrawComponent implements OnInit {
         this.currentUrl = event.url;
         let checkroute=localStorage.getItem("changeroute")
 
+        console.log("change route",checkroute)
         if (this.previousUrl === '/users/withdrawmoney'
         && checkroute==='true') {
           var step1 = document.getElementById("stepContent1");
