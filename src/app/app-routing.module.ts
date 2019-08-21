@@ -15,7 +15,7 @@ const routes: Routes = [
  },
 
  {path:'',redirectTo: 'users/login',pathMatch: 'full'},
- {path:'**',redirectTo: 'users/login',pathMatch: 'full'},
+ 
   {
        
     path: 'users/login' ,  component:LoginComponent
