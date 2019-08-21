@@ -45,8 +45,10 @@ export class PaymentWizardWithdrawComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         this.previousUrl = this.currentUrl;
         this.currentUrl = event.url;
+        let checkroute=localStorage.getItem("changeroute")
 
-        if (this.previousUrl === '/users/withdrawmoney') {
+        if (this.previousUrl === '/users/withdrawmoney'
+        && checkroute==='true') {
           var step1 = document.getElementById("stepContent1");
           step1.classList.remove("active");
           var step2 = document.getElementById("stepContent2");
@@ -59,6 +61,7 @@ export class PaymentWizardWithdrawComponent implements OnInit {
           step5.classList.remove("active");
           var step6 = document.getElementById("step3");
           step6.classList.add("active");
+          
         }
         console.log("currnt", this.currentUrl, 'preee', this.previousUrl)
       };
@@ -207,6 +210,7 @@ export class PaymentWizardWithdrawComponent implements OnInit {
 
   }
   payNow() {
+    localStorage.removeItem('changeroute');
     this.router.navigateByUrl('users/withdrawmoney');
   }
 

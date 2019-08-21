@@ -21,12 +21,15 @@ export class JwtInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(tap((event: HttpEvent<any>) => {
       if (event instanceof HttpResponse) {
         // do stuff with response if you want
+       
+
       }
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
 
             this.spinner.hide();
+            localStorage.clear();
             this.router.navigateByUrl('users/login');
 
 

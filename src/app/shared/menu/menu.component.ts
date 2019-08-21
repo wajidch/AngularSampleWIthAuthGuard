@@ -26,7 +26,7 @@ token=localStorage.getItem('token')
     this.apiservice.post('auth/logout',this.token).subscribe((res:any)=>{
       
       localStorage.clear();
-
+      localStorage.removeItem('token');
       //this.spinner.hide();
       this.loadingBar.complete();
       this.router.navigateByUrl('users/login');

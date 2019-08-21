@@ -17,8 +17,8 @@
           <h3 class="main-heading" style="font-size: 18px;">1. Kimlik Doğrulama</h3>
           <div class="row first-row">
             <div class="col-sm-4">
-              <div class="upload-btn">
-                <form class="dropzone nodata-img" *ngIf="statusArray[0].status==='nodata'" id="my-awesome-dropzone">
+              <div class="upload-btn" *ngFor='let data of statusArray'>
+                <form class="dropzone nodata-img" *ngIf="data.status==='nodata' && data.type==='Birth certificate'" id="my-awesome-dropzone">
 
                   <img [src]="birthdayCertificateURl" *ngIf="birthdayCertificateURl" (click)='filebirthdayimg.click()'
                     class="img-preview img-responsive center-block img-circle" alt="">
@@ -33,7 +33,7 @@
                     </div>
                   </div>
                 </form>
-                <form class="dropzone pending-img" *ngIf="statusArray[0].status==='pending'" id="my-awesome-dropzone">
+                <form class="dropzone pending-img" *ngIf="data.status==='pending' && data.type==='Birth certificate'" id="my-awesome-dropzone">
 
                   <img [src]="birthdayCertificateURl" *ngIf="birthdayCertificateURl" (click)='filebirthdayimg.click()'
                     class="img-preview img-responsive center-block img-circle" alt="">
@@ -48,7 +48,7 @@
                     </div>
                   </div>
                 </form>
-                <form class="dropzone uploaded-img" *ngIf="statusArray[0].status==='approved'" id="my-awesome-dropzone">
+                <form class="dropzone uploaded-img" *ngIf="data.status==='approved' && data.type==='Birth certificate'" id="my-awesome-dropzone">
 
                   <img [src]="birthdayCertificateURl" *ngIf="birthdayCertificateURl" (click)='filebirthdayimg.click()'
                     class="img-preview img-responsive center-block img-circle" alt="">
@@ -63,7 +63,7 @@
                     </div>
                   </div>
                 </form>
-                <form class="dropzone fail-upload" *ngIf="statusArray[0].status==='declined'" id="my-awesome-dropzone">
+                <form class="dropzone fail-upload" *ngIf="data.status==='declined' && data.type==='Birth certificate'" id="my-awesome-dropzone">
 
                   <img [src]="birthdayCertificateURl" *ngIf="birthdayCertificateURl" (click)='filebirthdayimg.click()'
                     class="img-preview img-responsive center-block img-circle" alt="">
@@ -85,10 +85,10 @@
                                     {{list.status}}.</span>
                             </div> -->
 
-                <span class="done-msj" *ngIf="birthdayCertificateURl">Upload file successfully.</span>
+                <!-- <span class="done-msj" *ngIf="birthdayCertificateURl">Upload file successfully.</span> -->
               </div>
-              <div class="upload-btn">
-                <form class="dropzone nodata-img" *ngIf="statusArray[1].status==='nodata'" id="my-awesome-dropzone">
+              <div class="upload-btn" *ngFor='let data of statusArray'>
+                <form class="dropzone nodata-img" *ngIf="data.status==='nodata' && data.type==='Driving license'" id="my-awesome-dropzone">
 
                   <img [src]="driverlicensURL" *ngIf="driverlicensURL" (click)='filedriverlicensimg.click()'
                     class="img-preview img-responsive center-block img-circle" alt="">
@@ -103,7 +103,7 @@
                     </div>
                   </div>
                 </form>
-                <form class="dropzone pending-img" *ngIf="statusArray[1].status==='pending'" id="my-awesome-dropzone">
+                <form class="dropzone pending-img" *ngIf="data.status==='pending' && data.type==='Driving license'" id="my-awesome-dropzone">
 
                   <img [src]="driverlicensURL" *ngIf="driverlicensURL" (click)='filedriverlicensimg.click()'
                     class="img-preview img-responsive center-block img-circle" alt="">
@@ -118,7 +118,7 @@
                     </div>
                   </div>
                 </form>
-                <form class="dropzone uploaded-img" *ngIf="statusArray[1].status==='approved'" id="my-awesome-dropzone">
+                <form class="dropzone uploaded-img" *ngIf="data.status==='approved' && data.type==='Driving license'" id="my-awesome-dropzone">
 
                   <img [src]="driverlicensURL" *ngIf="driverlicensURL" (click)='filedriverlicensimg.click()'
                     class="img-preview img-responsive center-block img-circle" alt="">
@@ -133,7 +133,7 @@
                     </div>
                   </div>
                 </form>
-                <form class="dropzone fail-upload" *ngIf="statusArray[1].status==='declined'" id="my-awesome-dropzone">
+                <form class="dropzone fail-upload" *ngIf="data.status==='declined' && data.type==='Driving license'" id="my-awesome-dropzone">
 
                   <img [src]="driverlicensURL" *ngIf="driverlicensURL" (click)='filedriverlicensimg.click()'
                     class="img-preview img-responsive center-block img-circle" alt="">
@@ -149,7 +149,7 @@
                   </div>
                 </form>
 
-                <span class="done-msj" *ngIf="driverlicensURL">Upload file successfully.</span>
+                <!-- <span class="done-msj" *ngIf="driverlicensURL">Upload file successfully.</span> -->
               </div>
 
             </div>
@@ -166,8 +166,8 @@
           <h3 class="main-heading" style="font-size: 18px;">2. Adresinizi Doğrulayın</h3>
           <div class="row second-row">
             <div class="col-sm-4">
-              <div class="upload-btn">
-                <form class="dropzone nodata-img" *ngIf="statusArray[2].status==='nodata'" id="my-awesome-dropzone">
+              <div class="upload-btn" *ngFor='let data of statusArray'>
+                <form class="dropzone nodata-img" *ngIf="data.status==='nodata' && data.type==='Address certificate'" id="my-awesome-dropzone">
 
                   <img [src]="addressURL" *ngIf="addressURL" (click)='fileaddressimg.click()'
                     class="img-preview img-responsive center-block img-circle" alt="">
@@ -182,7 +182,7 @@
                     </div>
                   </div>
                 </form>
-                <form class="dropzone pending-img" *ngIf="statusArray[2].status==='pending'" id="my-awesome-dropzone">
+                <form class="dropzone pending-img" *ngIf="data.status==='pending' && data.type==='Address certificate'" id="my-awesome-dropzone">
 
                   <img [src]="addressURL" *ngIf="addressURL" (click)='fileaddressimg.click()'
                     class="img-preview img-responsive center-block img-circle" alt="">
@@ -197,7 +197,7 @@
                     </div>
                   </div>
                 </form>
-                <form class="dropzone uploaded-img" *ngIf="statusArray[2].status==='approved'" id="my-awesome-dropzone">
+                <form class="dropzone uploaded-img" *ngIf="data.status==='approved' && data.type==='Address certificate'" id="my-awesome-dropzone">
 
                   <img [src]="addressURL" *ngIf="addressURL" (click)='fileaddressimg.click()'
                     class="img-preview img-responsive center-block img-circle" alt="">
@@ -212,7 +212,7 @@
                     </div>
                   </div>
                 </form>
-                <form class="dropzone fail-upload" *ngIf="statusArray[2].status==='declined'" id="my-awesome-dropzone">
+                <form class="dropzone fail-upload" *ngIf="data.status==='declined' && data.type==='Address certificate'" id="my-awesome-dropzone">
 
                   <img [src]="addressURL" *ngIf="addressURL" (click)='fileaddressimg.click()'
                     class="img-preview img-responsive center-block img-circle" alt="">
@@ -228,7 +228,7 @@
                   </div>
                 </form>
                 <!--<span class="error-msj">Error to upload</span>-->
-                <span class="done-msj" *ngIf="addressURL">Upload file successfully.</span>
+                <!-- <span class="done-msj" *ngIf="addressURL">Upload file successfully.</span> -->
               </div>
             </div>
             <div class="col-sm-8">

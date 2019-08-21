@@ -20,9 +20,11 @@ export class LoginComponent implements OnInit {
     private route: Router,
     private apiservce: apiService,
     private spinner: NgxSpinnerService,
-    private loadingBar:LoadingBarService) { }
+    private loadingBar:LoadingBarService,
+    ) { }
 
   ngOnInit() {
+    
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required,
       Validators.email]),
@@ -30,6 +32,10 @@ export class LoginComponent implements OnInit {
       Validators.minLength(8)]),
 
     })
+   let token= localStorage.getItem('token');
+    if(token){
+      this.route.navigate(['users/dashboard']);
+    }
   }
   login(val) {
 

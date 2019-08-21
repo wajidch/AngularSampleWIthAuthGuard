@@ -5,16 +5,19 @@ import { DashboardComponent } from './users/dashboard/dashboard.component';
 import { CreateAccountComponent } from './users/create-account/create-account.component';
 import { ForgotPasswordComponent } from './users/forgot-password/forgot-password.component';
 import { ForgotEmailVerificationComponent } from './users/forgot-email-verification/forgot-email-verification.component';
-
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
        
-    path: 'users/dashboard', component: DashboardComponent
+    path: 'users/dashboard', component: DashboardComponent,
+    canActivate: [AuthGuard]
  },
+
+ {path:'',redirectTo: 'users/login',pathMatch: 'full'},
   {
        
-    path: 'users/login', component:LoginComponent
+    path: 'users/login' ,  component:LoginComponent
  },
  { path: 'users/createaccount', component:CreateAccountComponent
 },
@@ -23,7 +26,7 @@ const routes: Routes = [
 
 
  
-  { path: 'users', loadChildren: './users/users.module#UserModule',}
+  { path: 'users', loadChildren: './users/users.module#UserModule',canActivate: [AuthGuard]}
   
 ];
 

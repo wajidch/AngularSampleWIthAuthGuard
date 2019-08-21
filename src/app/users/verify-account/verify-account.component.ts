@@ -194,7 +194,7 @@ export class VerifyAccountComponent implements OnInit {
       {
         id: 0,
         user_id: 0,
-        type: "",
+        type: "Birth certificate",
         file: "",
         status: "nodata",
         created_at: "",
@@ -203,7 +203,7 @@ export class VerifyAccountComponent implements OnInit {
       {
         id: 0,
         user_id: 0,
-        type: "",
+        type: "Driving license",
         file: "",
         status: "nodata",
         created_at: "",
@@ -212,7 +212,7 @@ export class VerifyAccountComponent implements OnInit {
       {
         id: 0,
         user_id: 0,
-        type: "",
+        type: "Address certificate",
         file: "",
         status: "nodata",
         created_at: "",

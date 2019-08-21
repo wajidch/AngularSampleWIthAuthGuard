@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { apiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private apiservice:apiService) { }
 
   ngOnInit() {
+    
   }
 
+  
 }

@@ -54,14 +54,14 @@ export class RealAccountListComponent implements OnInit {
         catchError(err => {
 
           if (err.status === 404) {
-            this.spinner.hide();
+            this.loadingBar.complete();
             this.NoRecordFound = true;
             this.errormessage = ''
           }
           else {
             this.errormessage = 'Something happend wrong try again!';
 
-            this.spinner.hide();
+            this.loadingBar.complete();
             this.NoRecordFound = false;
           }
           return throwError(err);
