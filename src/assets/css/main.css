@@ -29252,6 +29252,12 @@ form.create-btn button {
 .layout-w app-payment-wizard-withdraw{
   width:100% !important;
 }
+.actionbtn{
+  background-color: #41a184 !important ;
+  border-color: #41a184 !important;
+
+  
+}
 .page-item.active .page-link {
   z-index: 1;
   color: #fff;

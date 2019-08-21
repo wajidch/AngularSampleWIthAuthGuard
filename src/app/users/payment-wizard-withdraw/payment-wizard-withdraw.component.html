@@ -43,7 +43,7 @@
                             <th>Account Group</th>
                             <th>Leverage</th>
                             <th>Currency</th>
-                            <th class="text-center">Status</th>
+                            <th class="text-center">Action</th>
                           </tr>
                         </thead>
                         <tbody *ngIf='!NoRecordFound'>
@@ -55,10 +55,9 @@
                             <td>{{list.lever}}</td>
                             <td>{{list.currency}}</td>
                             <td class="text-center">
-                              <a *ngIf="list.status==='pending'" class="btn btn-warning">{{list.status}}</a>
-                              <a *ngIf="list.status==='approved'" class="btn btn-success">{{list.status}}</a>
-                              <a *ngIf="list.status!='approved' && list.status!='pending'"
-                                class="btn btn-success">{{list.status}}</a>
+                              <a 
+                                class="btn btn-success actionbtn">
+                                Withdraw</a>
                             </td>
 
 

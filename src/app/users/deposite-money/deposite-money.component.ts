@@ -75,7 +75,7 @@ export class DepositeMoneyComponent implements OnInit {
           this.message = '';
           
         }.bind(this), 3000);
-        localStorage.setItem("changeroute",'true');
+        localStorage.setItem("changeroutedeposit",'true');
 
           this.router.navigateByUrl('users/payment-wizard-deposit');
        

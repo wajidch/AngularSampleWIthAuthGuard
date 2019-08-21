@@ -43,7 +43,7 @@ export class PaymentWizardDepositComponent implements OnInit {
     this.route.queryParams.subscribe(x => this.getRealAccountList(x.page || 1));
 
     this.currentUrl = this.router.url;
-let checkroute=localStorage.getItem("changeroute")
+let checkroute=localStorage.getItem("changeroutedeposit")
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.previousUrl = this.currentUrl;
@@ -218,7 +218,7 @@ let checkroute=localStorage.getItem("changeroute")
 
   }
   payNow() {
-    localStorage.removeItem('changeroute');
+    localStorage.removeItem('changeroutedeposit');
     this.router.navigateByUrl('users/depositmoney');
   }
 

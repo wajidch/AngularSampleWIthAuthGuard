@@ -29,6 +29,7 @@ const routes: Routes = [
  
   { path: 'users', loadChildren: './users/users.module#UserModule'
   ,canActivate: [AuthGuard]},
+  
   {path:'**',redirectTo:'users/login',pathMatch:'full'}
   
 ];
