@@ -1,0 +1,384 @@
+<ngx-spinner bdOpacity=0.9 bdColor="rgba(51,51,51,0.55)" size="medium" color="#fff" type="timer" [fullScreen]="true">
+  <p style="color: white">Loading...</p>
+</ngx-spinner>
+
+
+
+
+
+
+<div class="content-w">
+
+  <div class="content-i">
+    <div class="content-box">
+      <div class="element-wrapper">
+
+        <div class="element-box">
+          <form>
+            <div class="steps-w">
+
+              <div class="step-contents">
+
+
+                <!--------------------------step2--------------------->
+
+                <div class="element-wrapper">
+                  <h6 class="element-header">
+                    Recent Transactions
+                  </h6>
+                  <div class="row mb-2 clearfix">
+                    <div class="col-sm-6 col-md-9"></div>
+                    <div class="col-sm-6 col-md-3">
+
+                      <div aria-hidden="true" class="onboarding-modal modal fade animated" id="onboardingFormModal4"
+                        role="dialog" tabindex="-1">
+                        <div class="modal-dialog modal-centered" role="document">
+                          <div class="modal-content text-left">
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+                                class="os-icon os-icon-close"></span></button>
+                            <div class="onboarding-content with-gradient">
+                              <h4 class="onboarding-title">
+                                Create a request
+                              </h4>
+                              <form>
+
+                                <div class="row">
+                                  <div class="col-sm-12">
+                                    <label class="col-form-label" for="">Search</label>
+
+                                    <input class="form-control" placeholder="search with email or name" type="text">
+                                  </div>
+                                </div>
+
+
+
+
+
+                                <div class="row">
+                                  <div class="col-sm-12 text-right">
+                                    <div class="element-box-content ">
+                                      <button class="btn btn-primary mt-2" type="button"> Continue</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="element-box-tp">
+
+                    <div class="table-responsive">
+                      <table class="table table-padded">
+                        <thead>
+                          <tr>
+                            <th>
+                              Status
+                            </th>
+                            <th>
+                              Date
+                            </th>
+                            <th>
+                              Payment Type
+                            </th>
+                            <th class="text-center">
+                              Category
+                            </th>
+                            <th class="text-right">
+                              Amount
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf='!notFound'>
+                          <!-- data-target="#onboardingFormModal10" data-toggle="modal" -->
+                          <tr *ngFor='let list of transcationList'>
+                            <td class="nowrap">
+                              <span *ngIf="list.status==='declined'" class="status-pill smaller red"></span>
+                              <span *ngIf="list.status==='approved'" class="status-pill smaller green"></span>
+                              <span *ngIf="list.status==='pending'" class="status-pill smaller yellow"></span>
+                              <span>
+                                {{list.status}}</span>
+                            </td>
+                            <td>
+                              <span>{{list.updated_at | date:'dd-MMMM'}}</span>
+                              <span class="smaller lighter">{{list.updated_at | date:'hh:mm'}}</span>
+                            </td>
+                            <td class="cell-with-media">
+                              <span class="status-pill smaller green">
+
+                              </span><span>{{list.payment_method}}</span>
+
+                            </td>
+                            <td class="text-center">
+                              <a class="btn btn-success" *ngIf="list.operation_type=='deposit'">
+                                {{list.operation_type}}</a>
+                              <a class="btn btn-danger" *ngIf="list.operation_type=='withdraw'">
+                                {{list.operation_type}}</a>
+                            </td>
+                            <td class="text-right bolder nowrap">
+                              <span class="text-success" *ngIf="list.operation_type=='deposit'">
+                                + {{list.amount}} {{list.currency}}</span>
+                              <span class="text-danger" *ngIf="list.operation_type=='withdraw'">
+                                - {{list.amount}} {{list.currency}}</span>
+                            </td>
+                          </tr>
+
+                        </tbody>
+
+                        <tbody *ngIf='notFound'>
+                          <h3>{{notFound}}</h3>
+                        </tbody>
+                        <div *ngIf='errormessage' class="alert alert-error alert-adj" role="alert">
+                          <strong>{{errormessage}} </strong>.
+                        </div>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <!--------------------------step2--------------------->
+
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="display-type"></div>
+
+
+<div aria-hidden="true" class="onboarding-modal modal fade animated" id="onboardingFormModal11" role="dialog"
+  tabindex="-1">
+  <div class="modal-dialog modal-centered" role="document">
+    <div class="modal-content text-left">
+      <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+          class="os-icon os-icon-close"></span></button>
+
+      <div class="onboarding-content with-gradient">
+        <div class="element-wrapper pb-0">
+          <h6 class="element-header text-left">
+            Manage withdrawal transaction
+          </h6>
+          <div class="">
+            <form>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""><strong>Withdrawal request name</strong></label>
+                <div class="col-sm-6">
+                  John Mark
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""> <strong>Withdrawal request amount in USD and TRY</strong></label>
+                <div class="col-sm-6">
+                  255$
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""><strong>Withdrawal trade account</strong></label>
+                <div class="col-sm-6">
+                  123455
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""><strong>Withdrawal trading group</strong></label>
+                <div class="col-sm-6">
+                  Lorem ipsum
+                </div>
+              </div>
+              <br>
+
+
+              <div class="form-buttons-w">
+
+                <div class="element-box-content text-right">
+                  <button class="btn btn-primary" type="submit">OK</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div aria-hidden="true" class="onboarding-modal modal fade animated" id="onboardingFormModal10" role="dialog"
+  tabindex="-1">
+  <div class="modal-dialog modal-centered" role="document">
+    <div class="modal-content text-left">
+      <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+          class="os-icon os-icon-close"></span></button>
+
+      <div class="onboarding-content with-gradient">
+        <div class="element-wrapper pb-0">
+          <h6 class="element-header text-left">
+            Manage deposit transaction
+          </h6>
+          <div class="">
+            <form>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""><strong>Deposit request name</strong></label>
+                <div class="col-sm-6">
+                  John Mark
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""> <strong>Deposit request amount in USD and TRY</strong></label>
+                <div class="col-sm-6">
+                  255$
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""><strong>Deposit trade account</strong></label>
+                <div class="col-sm-6">
+                  123455
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""><strong>Deposit trading group</strong></label>
+                <div class="col-sm-6">
+                  Lorem ipsum
+                </div>
+              </div>
+              <br>
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <label class="col-form-label" for=""><strong>Upload Receipt</strong></label>
+                  <input class="form-control" placeholder="Bank name" type="File">
+                </div>
+              </div>
+
+
+
+              <div class="form-buttons-w">
+                <div class="element-box-content text-right">
+                  <button class="btn btn-success" type="submit">Approve</button>
+
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div aria-hidden="true" class="onboarding-modal modal fade animated" id="onboardingFormModal6" role="dialog"
+  tabindex="-1">
+  <div class="modal-dialog modal-centered" role="document">
+    <div class="modal-content text-left">
+      <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+          class="os-icon os-icon-close"></span></button>
+
+      <div class="onboarding-content with-gradient">
+        <div class="element-wrapper pb-0">
+          <h6 class="element-header text-left">
+            Manage deposit operation
+          </h6>
+          <div class="">
+            <form>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""><strong>Deposit request name</strong></label>
+                <div class="col-sm-6">
+                  John Mark
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""> <strong>Deposit request amount in USD and TRY</strong></label>
+                <div class="col-sm-6">
+                  255$
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""><strong>Deposit trade account</strong></label>
+                <div class="col-sm-6">
+                  123455
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""><strong>Deposit trading group</strong></label>
+                <div class="col-sm-6">
+                  Lorem ipsum
+                </div>
+              </div>
+              <br>
+              <h5>Please fill the fields to process</h5>
+
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <select class="form-control">
+                    <option value="User1">
+                      Please select an account or fill details
+                    </option>
+                    <option value="User2">
+                      Please select an account or fill details
+                    </option>
+                    <option value="User3">
+                      Please select an account or fill details
+                    </option>
+                    <option value="User4">
+                      Please select an account or fill details
+                    </option>
+                    <option value="User5">
+                      Please select an account or fill details
+                    </option>
+                  </select>
+                </div>
+
+
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <label class="col-form-label" for="">Bank name</label>
+                  <input class="form-control" placeholder="Bank name" type="text">
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <label class="col-form-label" for="">Bank account holder</label>
+                  <input class="form-control" placeholder="Bank account holder" type="text">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <label class="col-form-label" for="">Iban</label>
+                  <input class="form-control" placeholder=" Iban" type="text">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <label class="col-form-label" for="">Transfer Description</label>
+                  <input class="form-control" placeholder=" Transfer Description" type="text">
+                </div>
+              </div>
+
+
+              <div class="form-buttons-w">
+                <div class="element-box-content text-right">
+                  <button class="btn btn-primary" type="button"> Processing</button>
+                  <button class="btn btn-success" type="submit">Approve</button>
+                  <button class="btn btn-danger" type="submit"> Disapprove</button>
+
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
