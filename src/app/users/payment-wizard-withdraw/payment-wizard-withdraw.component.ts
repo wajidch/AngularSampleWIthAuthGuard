@@ -80,7 +80,7 @@ export class PaymentWizardWithdrawComponent implements OnInit {
       //this.spinner.show();
       if(val.search){
       this.loadingBar.start();
-      this.apiservice.get(`searchTransactions/${val.search}`)
+      this.apiservice.get(`searchWithdrawTransactions/${val.search}`)
         .pipe(
           catchError(err => {
 
@@ -88,6 +88,7 @@ export class PaymentWizardWithdrawComponent implements OnInit {
               //this.spinner.hide();
               this.loadingBar.complete();
               this.notFound = 'No Record Found';
+              this.pages = [];
               this.errormessage = ''
             }
             else {

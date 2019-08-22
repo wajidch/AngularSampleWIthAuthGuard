@@ -87,7 +87,7 @@ let checkroute=localStorage.getItem("changeroutedeposit")
       
       if(val.search){
       this.loadingBar.start();
-      this.apiservice.get(`searchTransactions/${val.search}`)
+      this.apiservice.get(`searchDepositTransactions/${val.search}`)
         .pipe(
           catchError(err => {
 
@@ -96,6 +96,7 @@ let checkroute=localStorage.getItem("changeroutedeposit")
               this.loadingBar.complete();
               this.notFound = 'No Record Found';
               this.errormessage = ''
+              this.pages = [];
             }
             else {
               this.errormessage = 'Something happend wrong try again!';

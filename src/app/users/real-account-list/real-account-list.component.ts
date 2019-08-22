@@ -49,7 +49,7 @@ export class RealAccountListComponent implements OnInit {
 
     if(val.search){
     this.loadingBar.start()
-    this.apiservice.get(`searchAccount/${val.search}`)
+    this.apiservice.get(`searchRealAccount/${val.search}`)
 
       .pipe(
         catchError(err => {
@@ -65,7 +65,7 @@ export class RealAccountListComponent implements OnInit {
 
             this.loadingBar.complete();
             this.NoRecordFound = false;
-            
+
           }
           return throwError(err);
         })
@@ -97,7 +97,7 @@ export class RealAccountListComponent implements OnInit {
       })
     }
     else{
-      this.realaccountlist(1);
+      this.getRealAccountList(1);
     }
   }
   loadPage(page) {
