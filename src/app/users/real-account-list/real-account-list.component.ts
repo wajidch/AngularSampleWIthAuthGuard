@@ -20,6 +20,7 @@ export class RealAccountListComponent implements OnInit {
   pager = {
     current_page: 1
   };
+  searchForm:FormGroup
   pages = [];
   constructor(private apiservice: apiService,
     private spinner: NgxSpinnerService,
@@ -36,11 +37,69 @@ export class RealAccountListComponent implements OnInit {
 
 
     })
+    
+    this.searchForm=new FormGroup({
+      search:new FormControl('')
+    })
 
     this.route.queryParams.subscribe(x => this.getRealAccountList(x.page || 1));
 
   }
+  search(val){
 
+    if(val.search){
+    this.loadingBar.start()
+    this.apiservice.get(`searchAccount/${val.search}`)
+
+      .pipe(
+        catchError(err => {
+
+          if (err.status === 404) {
+            this.loadingBar.complete();
+            this.NoRecordFound = true;
+            this.errormessage = '';
+            this.pages = []
+          }
+          else {
+            this.errormessage = 'Something happend wrong try again!';
+
+            this.loadingBar.complete();
+            this.NoRecordFound = false;
+            
+          }
+          return throwError(err);
+        })
+      )
+      .subscribe((res: any) => {
+
+
+        if (res.status === 200) {
+          this.loadingBar.complete();
+          this.pager = res.body.data;
+          this.pages = []
+          for (let i = 1; i <= res.body.data.last_page; i++) {
+            this.pages.push(i)
+          }
+          this.realaccountlist = res.body.data.data;
+          this.errormessage = '';
+          this.NoRecordFound = false;
+          this.spinner.hide();
+
+        }
+
+        if (res.status === 404) {
+          this.realaccountlist = [];
+          this.pages = []
+          this.errormessage = '';
+          this.NoRecordFound = true;
+          this.spinner.hide();
+        }
+      })
+    }
+    else{
+      this.realaccountlist(1);
+    }
+  }
   loadPage(page) {
     this.getRealAccountList(page)
   }

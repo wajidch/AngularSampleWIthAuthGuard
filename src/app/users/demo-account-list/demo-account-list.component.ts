@@ -16,6 +16,7 @@ export class DemoAccountListComponent implements OnInit {
 
   demoaccountlist: any;
   createdemoAccountForm: FormGroup;
+  searchForm:FormGroup;
   NoRecordFound: boolean;
   errormessage: any;
   pager: {
@@ -37,6 +38,9 @@ export class DemoAccountListComponent implements OnInit {
 
 
     })
+    this.searchForm=new FormGroup({
+      search:new FormControl('')
+    })
 
     this.route.queryParams.subscribe(x => this.demoAccountList(x.page || 1));
 
@@ -44,7 +48,59 @@ export class DemoAccountListComponent implements OnInit {
   loadPage(page) {
     this.demoAccountList(page)
   }
+  search(val){
+//this.spinner.show();
+console.log("value",val.search)
+if(val.search){
+this.loadingBar.start();
+this.apiservice.get(`searchAccount/${val.search}`)
+  .pipe(
+    catchError(err => {
 
+      if (err.status === 404) {
+        this.loadingBar.complete();
+        this.NoRecordFound = true;
+        this.errormessage = ''
+        this.pages = []
+      }
+      else {
+        this.errormessage = 'Something happend wrong try again!';
+
+        this.loadingBar.complete();
+        this.NoRecordFound = false;
+      }
+      return throwError(err);
+    })
+  )
+
+  .subscribe((res: any) => {
+
+    if (res.status === 200) {
+
+      this.pager = res.body.data;
+      this.pages = []
+      for (let i = 1; i <= res.body.data.last_page; i++) {
+        this.pages.push(i)
+      }
+      this.demoaccountlist = res.body.data.data;
+      this.errormessage = '';
+      this.NoRecordFound = false;
+      this.loadingBar.complete();
+    }
+    if (res.status === 404) {
+      this.demoaccountlist = []
+      this.pages = []
+      this.NoRecordFound = true;
+      this.errormessage = ''
+      this.loadingBar.complete();
+    }
+
+  })
+}
+else{
+  this.demoAccountList(1)
+}
+  }
   demoAccountList(page) {
 
     //this.spinner.show();

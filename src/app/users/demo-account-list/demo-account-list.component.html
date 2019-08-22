@@ -69,7 +69,15 @@
                         -------------------->
               <div class="controls-above-table" style="margin: 20px 0 0;">
                 <div class="row clearfix">
-                  <div class="col-sm-6 col-md-8"></div>
+                    <div class="col-sm-6 col-md-4">
+                        <form [formGroup]='searchForm'>
+                            <h6>
+                              <input type="text" name='search' formControlName='search'
+                               (keyup)='search(searchForm.value)' placeholder="search here" class="form-control" >
+                            </h6>
+                          </form>
+                    </div>
+                    <div class="col-sm-6 col-md-4"></div>
                   <div class="col-sm-6 col-md-4">
                     <form class="create-btn">
                       <button type="button" class="form-control rounded form-buttonnew" data-toggle="modal"

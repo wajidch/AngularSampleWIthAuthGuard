@@ -5,6 +5,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-payment-wizard-withdraw',
@@ -25,6 +26,8 @@ export class PaymentWizardWithdrawComponent implements OnInit {
   pager: {
     current_page: 1
   };
+  searchForm:FormGroup
+
   pages = [];
   pagesAccount = [];
   private previousUrl: string = undefined;
@@ -37,6 +40,9 @@ export class PaymentWizardWithdrawComponent implements OnInit {
     private loadingBar:LoadingBarService) { }
 
   ngOnInit() {
+    this.searchForm=new FormGroup({
+      search:new FormControl('')
+    })
 
     this.route.queryParams.subscribe(x => this.getTranscationlist(x.page || 1));
     this.route.queryParams.subscribe(x => this.getRealAccountList(x.page || 1));
@@ -66,6 +72,78 @@ export class PaymentWizardWithdrawComponent implements OnInit {
         }
       };
     });
+  }
+  search(val){
+    try {
+      
+      
+      //this.spinner.show();
+      if(val.search){
+      this.loadingBar.start();
+      this.apiservice.get(`searchTransactions/${val.search}`)
+        .pipe(
+          catchError(err => {
+
+            if (err.status === 404) {
+              //this.spinner.hide();
+              this.loadingBar.complete();
+              this.notFound = 'No Record Found';
+              this.errormessage = ''
+            }
+            else {
+              this.errormessage = 'Something happend wrong try again!';
+
+              //this.spinner.hide();
+              this.loadingBar.complete();
+              this.notFound = '';
+            }
+
+            return throwError(err)
+          })
+        )
+        .subscribe((res: any) => {
+          if (res.status === 200) {
+
+            if(res.body.status===404){
+              this.transcationList = [];
+            this.notFound = 'No Record Found';
+            this.pages = [];
+            this.errormessage = '';
+            //this.spinner.hide();
+            this.loadingBar.complete();
+            }
+            else{
+            this.notFound = '';
+            this.errormessage = '';
+            this.pages = [];
+            this.pager = res.body.data;
+            for (let i = 1; i <= res.body.data.last_page; i++) {
+              this.pages.push(i)
+            }
+
+            this.transcationList = res.body.data.data;
+
+            //this.spinner.hide();
+            this.loadingBar.complete();
+          }
+          }
+          else {
+            this.transcationList = [];
+            this.notFound = 'No Record Found';
+            this.errormessage = '';
+            //this.spinner.hide();
+            this.loadingBar.complete();
+          }
+        })
+      }
+      else{
+        this.getTranscationlist(1)
+      }
+    } catch (error) {
+      //this.spinner.hide();
+      this.loadingBar.complete();
+    }
+    
   }
   loadPage(page) {
     this.getTranscationlist(page);

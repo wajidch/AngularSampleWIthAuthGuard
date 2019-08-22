@@ -202,9 +202,19 @@
                   </div>
                   <br>
                   <div class="element-wrapper">
-                    <h6 class="element-header">
-                      Recent Transactions
-                    </h6>
+                      <div class="col-md-3 float-right">
+                          <form [formGroup]='searchForm'>
+                            <h6>
+                              <input type="text" name='search' formControlName='search'
+                               (keyup)='search(searchForm.value)' placeholder="search here" class="form-control" >
+                            </h6>
+                          </form>
+                          </div>
+                      <div class="col-md-6">
+                      <h6 class="element-header">
+                        Recent Transactions
+                      </h6>
+                    </div>
                     <div class="element-box-tp">
                       <div class="table-responsive">
                         <table class="table table-padded">
