@@ -41,8 +41,11 @@ export class MyProfileComponent implements OnInit {
   }
   updateProfile(val) {
     //this.spinner.show();
+    let profileObj:any={
+      name:val.name
+    }
     this.loadingBar.start();
-    this.apiservice.put('updateProfile', val)
+    this.apiservice.put('admin/updateProfile', profileObj)
       .pipe(
         catchError(err => {
 
@@ -64,11 +67,11 @@ export class MyProfileComponent implements OnInit {
         localStorage.setItem('user_name', res.body.data.name);
 
         localStorage.setItem('email', res.body.data.email);
-        localStorage.setItem('post_code', res.body.data.post_code);
-        localStorage.setItem('address', res.body.data.address);
-        localStorage.setItem('city', res.body.data.city);
-        localStorage.setItem('country', res.body.data.country);
-        localStorage.setItem('phone', res.body.data.number);
+        // localStorage.setItem('post_code', res.body.data.post_code);
+        // localStorage.setItem('address', res.body.data.address);
+        // localStorage.setItem('city', res.body.data.city);
+        // localStorage.setItem('country', res.body.data.country);
+        // localStorage.setItem('phone', res.body.data.number);
         this.message = res.body.message;
         //this.spinner.hide();
         this.loadingBar.complete();

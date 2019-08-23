@@ -18,6 +18,7 @@ export class DemoAccountListComponent implements OnInit {
   demoaccountlist: any;
   createdemoAccountForm: FormGroup;
   searchForm:FormGroup;
+  leverGroupForm:FormGroup;
   NoRecordFound: boolean;
   errormessage: any;
   pager: {
@@ -28,6 +29,8 @@ export class DemoAccountListComponent implements OnInit {
   email: any;
   phone: any;
   accountid: any;
+  accountgroup: any;
+  leverages: any;
   constructor(private apiservice: apiService, private router: Router
     , private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
@@ -46,19 +49,29 @@ export class DemoAccountListComponent implements OnInit {
     this.searchForm=new FormGroup({
       search:new FormControl('')
     })
-
+    this.leverGroupForm=new FormGroup({
+      lever:new FormControl(''),
+      account_group:new FormControl('')
+    })
     this.route.queryParams.subscribe(x => this.demoAccountList(x.page || 1));
 
   }
   loadPage(page) {
     this.demoAccountList(page)
   }
-  manage(name,email,phoneNumber,account_id){
+  manage(name,email,phoneNumber
+    ,account_id,lever,account_group){
     console.log("account id",account_id)
     this.name=name;
     this.email=email;
     this.phone=phoneNumber
     this.accountid=account_id
+    this.accountgroup=account_group;
+    this.leverages=lever
+    this.leverGroupForm=new FormGroup({
+      lever:new FormControl(lever),
+      account_group:new FormControl(account_group)
+    })
     
     $("#manageModal").modal()
   }
@@ -115,11 +128,13 @@ export class DemoAccountListComponent implements OnInit {
       this.demoAccountList(1)
     }
       }
-  disapprove(id,status){
+  disapprove(id,status,lever,group){
 
     this.loadingBar.start();
     let statusobj:any={
-      status:status
+      status:status,
+      lever:lever,
+      account_group:group
     }
     this.apiservice.put(`admin/updateDemoAccount/${id}`,statusobj)
     .pipe(
@@ -139,11 +154,13 @@ export class DemoAccountListComponent implements OnInit {
       }
     })
   }
-  approve(id,status){
+  approve(id,status,lever,group){
 
     this.loadingBar.start();
     let statusobj:any={
-      status:status
+      status:status,
+      lever:lever,
+      account_group:group
     }
     this.apiservice.put(`admin/updateDemoAccount/${id}`,statusobj)
     .pipe(

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserTransactionHistoryComponent } from './user-transaction-history.component';
+import { AccountActivitiesHistoryComponent } from './account-activities-history.component';
 
 describe('UserTransactionHistoryComponent', () => {
-  let component: UserTransactionHistoryComponent;
-  let fixture: ComponentFixture<UserTransactionHistoryComponent>;
+  let component: AccountActivitiesHistoryComponent;
+  let fixture: ComponentFixture<AccountActivitiesHistoryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserTransactionHistoryComponent ]
+      declarations: [ AccountActivitiesHistoryComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserTransactionHistoryComponent);
+    fixture = TestBed.createComponent(AccountActivitiesHistoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

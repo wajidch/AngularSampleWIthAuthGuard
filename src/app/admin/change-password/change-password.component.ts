@@ -37,7 +37,7 @@ export class ChangePasswordComponent implements OnInit {
   updatePassword(val) {
     //this.spinner.show();
     this.loadingBar.start();
-    this.apiservice.put('updatePassword', val)
+    this.apiservice.put('admin/updatePassword', val)
       .pipe(
         catchError(err => {
 

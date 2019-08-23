@@ -1,6 +1,4 @@
-<ngx-spinner bdOpacity=0.9 bdColor="rgba(51,51,51,0.55)" size="medium" color="#fff" type="timer" [fullScreen]="true">
-  <p style="color: white">Loading...</p>
-</ngx-spinner>
+<ngx-loading-bar></ngx-loading-bar>
 
 
 
@@ -23,9 +21,19 @@
                 <!--------------------------step2--------------------->
 
                 <div class="element-wrapper">
-                  <h6 class="element-header">
-                    Recent Transactions
-                  </h6>
+                  <div class="col-md-3 float-right">
+                    <form [formGroup]='searchForm'>
+                      <h6>
+                        <input type="text" name='search' formControlName='search'
+                         (keyup)='search(searchForm.value)' placeholder="search here" class="form-control" >
+                      </h6>
+                    </form>
+                    </div>
+                <div class="col-md-6">
+                <h6 class="element-header">
+                  Recent Transactions
+                </h6>
+              </div>
                   <div class="row mb-2 clearfix">
                     <div class="col-sm-6 col-md-9"></div>
                     <div class="col-sm-6 col-md-3">
@@ -103,8 +111,8 @@
                                 {{list.status}}</span>
                             </td>
                             <td>
-                              <span>{{list.updated_at | date:'dd-MMMM'}}</span>
-                              <span class="smaller lighter">{{list.updated_at | date:'hh:mm'}}</span>
+                              <span>{{list.created_at | date:'dd-MMMM'}}</span>
+                              <span class="smaller lighter">{{list.created_at | date:'hh:mm'}}</span>
                             </td>
                             <td class="cell-with-media">
                               <span class="status-pill smaller green">
@@ -135,6 +143,29 @@
                           <strong>{{errormessage}} </strong>.
                         </div>
                       </table>
+                      <div class="card-footer float-right pb-0 pt-3">
+                        <ul class="pagination">
+                          <!-- <li [ngClass]="{disabled:pager.current_page === 1}"
+                                       class="page-item first-item">
+                                          <a routerLink [queryParams]="{ page: 1 }" 
+                                          class="page-link">First</a>
+                                      </li>
+                                      <li [ngClass]="{disabled:pager.current_page === 1}" class="page-item previous-item">
+                                          <a routerLink [queryParams]="{ page: pager.current_page - 1 }" class="page-link">Previous</a>
+                                      </li> -->
+                          <li *ngFor="let page of pages" [ngClass]="{active:pager.current_page === page}"
+                            class="page-item number-item">
+                            <a (click)='loadPage(page)' class="page-link">{{page}}</a>
+                          </li>
+                          <!-- <li [ngClass]="{disabled:pager.current_page === pager.last_page}" class="page-item next-item">
+                                          <a routerLink [queryParams]="{ page: pager.current_page + 1 }" class="page-link">Next</a>
+                                      </li>
+                                      <li [ngClass]="{disabled:pager.current_page === pager.last_page}" class="page-item last-item">
+                                          <a routerLink [queryParams]="{ page: pager.last_page }" class="page-link">Last</a>
+                                      </li> -->
+                        </ul>
+                      </div>
+                      <div class="clearfix"></div>
                     </div>
                   </div>
                 </div>

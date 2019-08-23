@@ -13,9 +13,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MyProfileComponent } from './my-profile/my-profile.component';
 
-import { UserTransactionHistoryComponent } from './user-transaction-history/user-transaction-history.component';
+import { AccountActivitiesHistoryComponent } from './account-activities-history/account-activities-history.component';
 
 import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { DepositRequestComponent } from './deposit-request/deposit-request.component';
+import { WithdrawRequestComponent } from './withdraw-request/withdraw-request.component';
 
 
 
@@ -30,7 +32,11 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
   
   MyProfileComponent,
   
-   UserTransactionHistoryComponent,
+   AccountActivitiesHistoryComponent,
+  
+   DepositRequestComponent,
+  
+   WithdrawRequestComponent,
    ],
   imports: [
     CommonModule,

@@ -29241,7 +29241,7 @@ form.create-btn button {
   width:100% !important;
 }
 
-.layout-w app-user-transaction-history{
+.layout-w app-account-activities-history{
   width:100% !important;
 }
 
@@ -29253,6 +29253,12 @@ form.create-btn button {
   width:100% !important;
 }
 .layout-w app-kyc-request{
+  width:100% !important;
+}
+.layout-w app-withdraw-request{
+  width:100% !important;
+}
+.layout-w app-deposit-request{
   width:100% !important;
 }
 .actionbtn{

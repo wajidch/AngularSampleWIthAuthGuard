@@ -30,6 +30,7 @@ token=localStorage.getItem('admin_token')
       //this.spinner.hide();
       this.loadingBar.complete();
       this.router.navigateByUrl('users/login');
+      this.loadingBar.complete();
     })
 
   }
