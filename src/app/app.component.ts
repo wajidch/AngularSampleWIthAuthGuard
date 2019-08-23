@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   currentUser:any;
   constructor( public router: Router,
     private apiservice:apiService,
-    private loadingBar:LoadingBarService,
+    
     private authenticationService: authService) {
       
      }
