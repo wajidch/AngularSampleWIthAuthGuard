@@ -7,7 +7,7 @@ import { throwError } from 'rxjs';
 import { Router, RoutesRecognized, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { pairwise } from 'rxjs/operators'
 import { LoadingBarService } from '@ngx-loading-bar/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-payment-wizard-deposit',
   templateUrl: './payment-wizard-deposit.component.html',
@@ -23,12 +23,17 @@ export class PaymentWizardDepositComponent implements OnInit {
   realaccountlist: any;
   transcationList: any;
   notFound: string;
-  searchForm:FormGroup
+  searchForm:FormGroup;
+  depositMoneyForm:FormGroup;
+  email = localStorage.getItem('email');
+  userid = localStorage.getItem('id');
   pager: {
     current_page: 1
   };
   pagesAccount = [];
   pages = [];
+  accountlist:any;
+  message:any;
   private previousUrl: string = undefined;
   private currentUrl: string = undefined;
 
@@ -43,35 +48,56 @@ export class PaymentWizardDepositComponent implements OnInit {
     this.searchForm=new FormGroup({
       search:new FormControl('')
     })
+    this.depositMoneyForm = new FormGroup({
+      payment_method: new FormControl('bank transfer', [Validators.required]),
+      operation_type: new FormControl('deposit', [Validators.required]),
+      amount: new FormControl('', [Validators.required]),
+      currency: new FormControl('Dollar ($)', [Validators.required]),
+      account_owner: new FormControl('', [Validators.required]),
+      iban: new FormControl('', [Validators.required]),
+      bank_name: new FormControl('', [Validators.required]),
+      status: new FormControl('pending', [Validators.required]),
+      email: new FormControl(this.email, [Validators.required]),
+      user_id: new FormControl(this.userid, [Validators.required]),
+      swift: new FormControl('', [Validators.required]),
+      account_id: new FormControl(''),
+      bank_id: new FormControl('2345'),
+      bank_reference_id: new FormControl('546'),
+      reference_no: new FormControl('123'),
+      code: new FormControl('324'),
+      transaction_id: new FormControl('789')
 
+
+    })
+    this.getAccountList();
     this.route.queryParams.subscribe(x => this.getTranscationlist(x.page || 1));
     this.route.queryParams.subscribe(x => this.getRealAccountList(x.page || 1));
 
     this.currentUrl = this.router.url;
 let checkroute=localStorage.getItem("changeroutedeposit")
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.previousUrl = this.currentUrl;
-        this.currentUrl = event.url;
-        console.log("change route",checkroute)
-        if (this.previousUrl === '/users/depositmoney' 
-        && checkroute==='true') {
-          var step1 = document.getElementById("stepContent1");
-          step1.classList.remove("active");
-          var step2 = document.getElementById("stepContent2");
-          step2.classList.remove("active");
-          var step3 = document.getElementById("stepContent3");
-          step3.classList.add("active");
-          var step4 = document.getElementById("step1");
-          step4.classList.remove("active");
-          var step5 = document.getElementById("step2");
-          step5.classList.remove("active");
-          var step6 = document.getElementById("step3");
-          step6.classList.add("active");
+    // this.router.events.subscribe(event => {
+    //   if (event instanceof NavigationEnd) {
+    //     this.previousUrl = this.currentUrl;
+    //     this.currentUrl = event.url;
+    //     console.log("change route",checkroute)
+    //     if (this.previousUrl === '/users/depositmoney' 
+    //     && checkroute==='true') {
+    //       var step1 = document.getElementById("stepContent1");
+    //       step1.classList.remove("active");
+    //       var step2 = document.getElementById("stepContent2");
+    //       step2.classList.remove("active");
+    //       var step3 = document.getElementById("stepContent3");
+    //       step3.classList.add("active");
+    //       var step4 = document.getElementById("step1");
+    //       step4.classList.remove("active");
+    //       var step5 = document.getElementById("step2");
+    //       step5.classList.remove("active");
+    //       var step6 = document.getElementById("step3");
+    //       step6.classList.add("active");
           
-        }
-      };
-    });
+    //     }
+    //   };
+    // });
   }
 
   loadPage(page) {
@@ -295,6 +321,56 @@ let checkroute=localStorage.getItem("changeroutedeposit")
     var step6 = document.getElementById("step3");
     step6.classList.remove("active");
 
+  }
+   depositmoney(val) {
+    //this.spinner.show();
+    this.loadingBar.start();
+    this.apiservice.post('depositAmount', val)
+      .pipe(
+        catchError(err => {
+
+          this.errormessage = 'Something happend wrong try again!';
+          this.message = '';
+          //this.spinner.hide();
+          this.loadingBar.complete();
+          setTimeout(function () {
+            this.errormessage = '';
+
+          }.bind(this), 3000);
+          return throwError(err);
+        })
+      )
+      .subscribe((res: any) => {
+
+        this.errormessage = ''
+        this.message = res.body.message;
+        //this.spinner.hide();
+        this.loadingBar.complete();
+        setTimeout(function () {
+          this.message = '';
+          
+        }.bind(this), 3000);
+        var step1 = document.getElementById("stepContent1");
+        step1.classList.remove("active");
+        var step2 = document.getElementById("stepContent2");
+        step2.classList.remove("active");
+        var step3 = document.getElementById("stepContent3");
+        step3.classList.add("active");
+        var step4 = document.getElementById("step1");
+        step4.classList.remove("active");
+        var step5 = document.getElementById("step2");
+        step5.classList.remove("active");
+        var step6 = document.getElementById("step3");
+        step6.classList.add("active");
+        document.getElementById('close').click();
+       
+      })
+  }
+  getAccountList() {
+    this.apiservice.get('getAccount').subscribe((res: any) => {
+
+      this.accountlist = res.body.data;
+    })
   }
   payNow() {
     localStorage.removeItem('changeroutedeposit');

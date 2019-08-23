@@ -166,7 +166,7 @@
           <h3 class="main-heading" style="font-size: 18px;">2. Adresinizi Doğrulayın</h3>
           <div class="row second-row">
             <div class="col-sm-4">
-              <div class="upload-btn" *ngFor='let data of statusArray'>
+              <div  *ngFor='let data of statusArray'>
                 <form class="dropzone nodata-img" *ngIf="data.status==='nodata' && data.type==='Address certificate'" id="my-awesome-dropzone">
 
                   <img [src]="addressURL" *ngIf="addressURL" (click)='fileaddressimg.click()'

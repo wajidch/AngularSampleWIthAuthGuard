@@ -9,7 +9,7 @@
         <h6 class="element-header">
           Account Setting
         </h6>
-        <div class="element-box col-md-8 m-auto">
+        <div class="element-box col-md-8">
           <h5 class="form-header">
             Edit Profile
           </h5>
@@ -31,13 +31,13 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label for=""> Name</label>
-                        <input class="form-control" placeholder="Name" name='name' formControlName='name' type="text">
+                        <input class="form-control" readonly placeholder="Name" name='name' formControlName='name' type="text">
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label for=""> Email</label>
-                        <input class="form-control" placeholder="Email" name='email' formControlName='email'
+                        <input class="form-control" readonly placeholder="Email" name='email' formControlName='email'
                           type="text">
                       </div>
                     </div>
@@ -46,7 +46,7 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label for="">Phone</label>
-                        <input class="form-control" placeholder="Phone" name='number' formControlName='number'
+                        <input class="form-control" readonly placeholder="Phone" name='number' formControlName='number'
                           type="text">
                       </div>
                     </div>
@@ -87,7 +87,7 @@
                     </div>
                   </div>
                   <div class="form-buttons-w text-right">
-                    <button class="btn btn-success" (click)='updateProfile(profileForm.value)'>Save</button>
+                    <button class="btn btn-primary" (click)='updateProfile(profileForm.value)'>Save</button>
                   </div>
 
                 </div>

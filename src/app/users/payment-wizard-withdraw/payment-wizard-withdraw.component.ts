@@ -5,7 +5,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { LoadingBarService } from '@ngx-loading-bar/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-payment-wizard-withdraw',
@@ -26,12 +26,16 @@ export class PaymentWizardWithdrawComponent implements OnInit {
   pager: {
     current_page: 1
   };
-  searchForm:FormGroup
+  searchForm:FormGroup;
+  withdrawMoneyForm:FormGroup;
 
   pages = [];
   pagesAccount = [];
   private previousUrl: string = undefined;
   private currentUrl: string = undefined;
+  message: string;
+  email = localStorage.getItem('email');
+  userid = localStorage.getItem('id');
   constructor(private apiservice: apiService,
     private spinner: NgxSpinnerService,
     private router: Router,
@@ -43,35 +47,50 @@ export class PaymentWizardWithdrawComponent implements OnInit {
     this.searchForm=new FormGroup({
       search:new FormControl('')
     })
+    this.withdrawMoneyForm = new FormGroup({
+      payment_method: new FormControl('bank transfer', [Validators.required]),
+      operation_type: new FormControl('withdraw', [Validators.required]),
+      amount: new FormControl('', [Validators.required]),
+      currency: new FormControl('Dollar ($)', [Validators.required]),
+      account_owner: new FormControl('', [Validators.required]),
+      iban: new FormControl('', [Validators.required]),
+      bank_name: new FormControl('', [Validators.required]),
+      status: new FormControl('pending', [Validators.required]),
+      email: new FormControl(this.email, [Validators.required]),
+      user_id: new FormControl(this.userid, [Validators.required]),
+      swift: new FormControl('', [Validators.required])
+
+
+    })
 
     this.route.queryParams.subscribe(x => this.getTranscationlist(x.page || 1));
     this.route.queryParams.subscribe(x => this.getRealAccountList(x.page || 1));
 
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.previousUrl = this.currentUrl;
-        this.currentUrl = event.url;
-        let checkroute=localStorage.getItem("changeroute")
+    // this.router.events.subscribe(event => {
+    //   if (event instanceof NavigationEnd) {
+    //     this.previousUrl = this.currentUrl;
+    //     this.currentUrl = event.url;
+    //     let checkroute=localStorage.getItem("changeroute")
 
-        console.log("change route",checkroute)
-        if (this.previousUrl === '/users/withdrawmoney'
-        && checkroute==='true') {
-          var step1 = document.getElementById("stepContent1");
-          step1.classList.remove("active");
-          var step2 = document.getElementById("stepContent2");
-          step2.classList.remove("active");
-          var step3 = document.getElementById("stepContent3");
-          step3.classList.add("active");
-          var step4 = document.getElementById("step1");
-          step4.classList.remove("active");
-          var step5 = document.getElementById("step2");
-          step5.classList.remove("active");
-          var step6 = document.getElementById("step3");
-          step6.classList.add("active");
+    //     console.log("change route",checkroute)
+    //     if (this.previousUrl === '/users/withdrawmoney'
+    //     && checkroute==='true') {
+    //       var step1 = document.getElementById("stepContent1");
+    //       step1.classList.remove("active");
+    //       var step2 = document.getElementById("stepContent2");
+    //       step2.classList.remove("active");
+    //       var step3 = document.getElementById("stepContent3");
+    //       step3.classList.add("active");
+    //       var step4 = document.getElementById("step1");
+    //       step4.classList.remove("active");
+    //       var step5 = document.getElementById("step2");
+    //       step5.classList.remove("active");
+    //       var step6 = document.getElementById("step3");
+    //       step6.classList.add("active");
           
-        }
-      };
-    });
+    //     }
+    //   };
+    // });
   }
   search(val){
     try {
@@ -286,6 +305,58 @@ export class PaymentWizardWithdrawComponent implements OnInit {
     step5.classList.add("active");
     var step6 = document.getElementById("step3");
     step6.classList.remove("active");
+
+  }
+
+  withdrawmoney(val) {
+
+    //this.spinner.show();
+
+    this.loadingBar.start();
+
+    this.apiservice.post('withdrawAmount', val)
+      .pipe(
+        catchError(err => {
+          this.errormessage = 'Something happend wrong try again!';
+          this.message = '';
+          //this.spinner.hide();
+          this.loadingBar.complete();
+          setTimeout(function () {
+            this.errormessage = '';
+
+          }.bind(this), 3000);
+          return throwError(err)
+        })
+      )
+      .subscribe((res: any) => {
+
+        
+        this.errormessage = ''
+        this.message = res.body.message;
+        //this.spinner.hide();
+        this.loadingBar.complete();
+        document.getElementById('close').click();
+        var step1 = document.getElementById("stepContent1");
+        step1.classList.remove("active");
+        var step2 = document.getElementById("stepContent2");
+        step2.classList.remove("active");
+        var step3 = document.getElementById("stepContent3");
+        step3.classList.add("active");
+        var step4 = document.getElementById("step1");
+        step4.classList.remove("active");
+        var step5 = document.getElementById("step2");
+        step5.classList.remove("active");
+        var step6 = document.getElementById("step3");
+        step6.classList.add("active");
+        this.getTranscationlist(1);
+        setTimeout(function () {
+          this.message = '';
+         
+        }.bind(this), 3000);
+        //localStorage.setItem("changeroute",'true');
+        //this.router.navigateByUrl('users/payment-wizard-withdraw');
+
+      })
 
   }
   payNow() {
