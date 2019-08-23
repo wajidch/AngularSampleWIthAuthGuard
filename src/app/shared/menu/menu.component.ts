@@ -23,6 +23,7 @@ token=localStorage.getItem('admin_token')
 
     //this.spinner.show();
     this.loadingBar.start();
+    this.loadingBar.complete();
     this.apiservice.post('auth/logout',this.token).subscribe((res:any)=>{
       
       localStorage.clear();

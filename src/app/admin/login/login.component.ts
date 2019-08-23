@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
           console.log('Handling error locally and rethrowing it...', err);
 
           //this.spinner.hide();
+          this.loadingBar.complete();
           if(err.status===401){
             this.loadingBar.complete();
             this.errormessage = 'Invalid Email or Password';
@@ -57,6 +58,7 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         (res: any) => {
+          this.loadingBar.complete();
           if (res.status === 200) {
 
             //this.spinner.hide();
