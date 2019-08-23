@@ -23,14 +23,14 @@ token=localStorage.getItem('admin_token')
 
     //this.spinner.show();
     this.loadingBar.start();
-    this.loadingBar.complete();
-    this.apiservice.post('auth/logout',this.token).subscribe((res:any)=>{
+    
+    this.apiservice.post('admin/logout',this.token).subscribe((res:any)=>{
       
       localStorage.clear();
       localStorage.removeItem('token');
       //this.spinner.hide();
       this.loadingBar.complete();
-      this.router.navigateByUrl('users/login');
+      this.router.navigateByUrl('admin/login');
       this.loadingBar.complete();
     })
 
