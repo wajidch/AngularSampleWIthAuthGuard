@@ -1,15 +1,15 @@
 <div class="content-w">
-          
-    <div class="content-i">
-      <div class="content-box">
-        <div class="element-wrapper">
-          <h6 class="element-header">
+
+  <div class="content-i">
+    <div class="content-box">
+      <div class="element-wrapper">
+        <h6 class="element-header">
           Withdrawal requests
-          </h6>
+        </h6>
         <div class="element-box">
           <form>
             <div class="steps-w">
-              
+
               <div class="step-contents">
 
 
@@ -19,134 +19,134 @@
                   <div class="col-md-3 float-right">
                     <form [formGroup]='searchForm'>
                       <h6>
-                        <input type="text" name='search'
-                         formControlName='search'
-                         (keyup)='search(searchForm.value)'
-                          placeholder="search here" 
-                          class="form-control">
+                        <input type="text" name='search' formControlName='search' (keyup)='search(searchForm.value)'
+                          placeholder="search here" class="form-control">
                       </h6>
                     </form>
-                    </div>
-                <div class="col-md-6">
-                <h6 class="element-header">
-                  Recent Transactions
-                </h6>
-              </div>
-                    <div class="row mb-2 clearfix">
-                      <div class="col-sm-6 col-md-9"></div>
-                      <div class="col-sm-6 col-md-3">
-                        <form class="create-btn">
-                          <button type="button" class="form-control rounded form-buttonnew" data-target="#onboardingFormModal" data-toggle="modal" >   Create a requests</button>
-                        </form>
-                        <div aria-hidden="true" class="onboarding-modal modal fade animated" id="onboardingFormModal" role="dialog" tabindex="-1">
-                          <div class="modal-dialog modal-centered" role="document">
-                            <div class="modal-content text-left">
-                              <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span class="os-icon os-icon-close"></span></button>
-                              <div class="onboarding-content with-gradient">
-                                <h4 class="onboarding-title">
-                                  Create a request
-                                </h4>
-                                <form>
-                                  <div class="row">
-                                    <div class="col-sm-12">
-                                      <label class="col-form-label" for="">Search</label>
+                  </div>
+                  <div class="col-md-6">
+                    <h6 class="element-header">
+                      Recent Transactions
+                    </h6>
+                  </div>
+                  <div class="row mb-2 clearfix">
+                    <div class="col-sm-6 col-md-9"></div>
+                    <div class="col-sm-6 col-md-3">
+                      <form class="create-btn">
+                        <button type="button" class="form-control rounded form-buttonnew"
+                          data-target="#onboardingFormModal" data-toggle="modal"> Create a requests</button>
+                      </form>
+                      <div aria-hidden="true" class="onboarding-modal modal fade animated" id="onboardingFormModal"
+                        role="dialog" tabindex="-1">
+                        <div class="modal-dialog modal-centered" role="document">
+                          <div class="modal-content text-left">
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+                                class="os-icon os-icon-close"></span></button>
+                            <div class="onboarding-content with-gradient">
+                              <h4 class="onboarding-title">
+                                Create a request
+                              </h4>
+                              <form>
+                                <div class="row">
+                                  <div class="col-sm-12">
+                                    <label class="col-form-label" for="">Search</label>
 
-                                      <input class="form-control" placeholder="search with email or name" type="text">
+                                    <input class="form-control" placeholder="search with email or name" type="text">
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-sm-12 text-right">
+                                    <div class="element-box-content ">
+                                      <button class="btn btn-primary mt-2" type="button"> Continue</button>
                                     </div>
                                   </div>
-                                  <div class="row">
-                                    <div class="col-sm-12 text-right">
-                                      <div class="element-box-content ">
-                                        <button class="btn btn-primary mt-2" type="button"> Continue</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </form>
-                              </div>
+                                </div>
+                              </form>
                             </div>
                           </div>
                         </div>
-                        
                       </div>
+
                     </div>
-                    <div class="element-box-tp">
+                  </div>
+                  <div class="element-box-tp">
 
-                      <div class="table-responsive">
-                        <table class="table table-padded">
-                          <thead>
-                            <tr>
-                              <th>
-                                Status
-                              </th>
-                              <th>
-                                Date
-                              </th>
-                              <th>
-                                Payment Type
-                              </th>
-                              <th class="text-center">
-                                Category
-                              </th>
-                              <th class="text-right">
-                                Amount
-                              </th>
-                              <th class="text-right">
-                                Action
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody *ngIf='!notFound'>
-                            <!-- data-target="#onboardingFormModal10" data-toggle="modal" -->
-                            <tr *ngFor='let list of withdrawtranscationList'>
-                              <td class="nowrap">
-                                <span *ngIf="list.status==='declined'" class="status-pill smaller red"></span>
-                                <span *ngIf="list.status==='approved'" class="status-pill smaller green"></span>
-                                <span *ngIf="list.status==='pending'" class="status-pill smaller yellow"></span>
-                                <span>
-                                  {{list.status}}</span>
-                              </td>
-                              <td>
-                                <span>{{list.created_at | date:'dd-MMMM'}}</span>
-                                <span class="smaller lighter">{{list.created_at | date:'hh:mm'}}</span>
-                              </td>
-                              <td class="cell-with-media">
-                                <span class="status-pill smaller green">
-  
-                                </span><span>{{list.payment_method}}</span>
-  
-                              </td>
-                              <td class="text-center">
-                                <a class="btn btn-success" *ngIf="list.operation_type=='deposit'">
-                                  {{list.operation_type}}</a>
-                                <a class="btn btn-danger" *ngIf="list.operation_type=='withdraw'">
-                                  {{list.operation_type}}</a>
-                              </td>
+                    <div class="table-responsive">
+                      <table class="table table-padded">
+                        <thead>
+                          <tr>
+                            <th>
+                              Status
+                            </th>
+                            <th>
+                              Date
+                            </th>
+                            <th>
+                              Payment Type
+                            </th>
+                            <th class="text-center">
+                              Category
+                            </th>
+                            <th class="text-right">
+                              Amount
+                            </th>
+                            <th class="text-right">
+                              Action
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf='!notFound'>
+                          <!-- data-target="#onboardingFormModal10" data-toggle="modal" -->
+                          <tr *ngFor='let list of withdrawtranscationList'>
+                            <td class="nowrap">
+                              <span *ngIf="list.status==='declined'" class="status-pill smaller red"></span>
+                              <span *ngIf="list.status==='approved'" class="status-pill smaller green"></span>
+                              <span *ngIf="list.status==='pending'" class="status-pill smaller yellow"></span>
+                              <span>
+                                {{list.status}}</span>
+                            </td>
+                            <td>
+                              <span>{{list.created_at | date:'dd-MMMM'}}</span>
+                              <span class="smaller lighter">{{list.created_at | date:'hh:mm'}}</span>
+                            </td>
+                            <td class="cell-with-media">
+                              <span class="status-pill smaller green">
 
-                              <td class="text-right bolder nowrap">
-                                <span class="text-success" *ngIf="list.operation_type=='deposit'">
-                                  + {{list.amount}} {{list.currency}}</span>
-                                <span class="text-danger" *ngIf="list.operation_type=='withdraw'">
-                                  - {{list.amount}} {{list.currency}}</span>
-                              </td>
+                              </span><span>{{list.payment_method}}</span>
 
-                              <td class="text-right bolder nowrap">
-                                <button class="mr-2 mb-2 btn btn-primary" type="button" 
-                  data-target="#onboardingFormModal6" data-toggle="modal">Manage</button>
-                              </td>
-                            </tr>
-  
-                          </tbody>
-  
-                          <tbody *ngIf='notFound'>
-                            <h3>{{notFound}}</h3>
-                          </tbody>
-                          <div *ngIf='errormessage' class="alert alert-error alert-adj" role="alert">
-                            <strong>{{errormessage}} </strong>.
-                          </div>
-                        </table>
-                        <div class="card-footer float-right pb-0 pt-3">
-                          <ul class="pagination">
-                            <!-- <li [ngClass]="{disabled:pager.current_page === 1}"
+                            </td>
+                            <td class="text-center">
+                              <a class="btn btn-success" *ngIf="list.operation_type=='deposit'">
+                                {{list.operation_type}}</a>
+                              <a class="btn btn-danger" *ngIf="list.operation_type=='withdraw'">
+                                {{list.operation_type}}</a>
+                            </td>
+
+                            <td class="text-right bolder nowrap">
+                              <span class="text-success" *ngIf="list.operation_type=='deposit'">
+                                + {{list.amount}} {{list.currency}}</span>
+                              <span class="text-danger" *ngIf="list.operation_type=='withdraw'">
+                                - {{list.amount}} {{list.currency}}</span>
+                            </td>
+
+                            <td class="text-right bolder nowrap">
+                              <button class="mr-2 mb-2 btn btn-primary" type="button"
+                                data-target="#onboardingFormModal6" data-toggle="modal">Manage</button>
+                            </td>
+                          </tr>
+
+                        </tbody>
+
+                        <tbody *ngIf='notFound'>
+                          <h3>{{notFound}}</h3>
+                        </tbody>
+                        <div *ngIf='errormessage' class="alert alert-error alert-adj" role="alert">
+                          <strong>{{errormessage}} </strong>.
+                        </div>
+                      </table>
+                      <div class="card-footer float-right pb-0 pt-3">
+                        <ul class="pagination">
+                          <!-- <li [ngClass]="{disabled:pager.current_page === 1}"
                                          class="page-item first-item">
                                             <a routerLink [queryParams]="{ page: 1 }" 
                                             class="page-link">First</a>
@@ -154,103 +154,105 @@
                                         <li [ngClass]="{disabled:pager.current_page === 1}" class="page-item previous-item">
                                             <a routerLink [queryParams]="{ page: pager.current_page - 1 }" class="page-link">Previous</a>
                                         </li> -->
-                            <li *ngFor="let page of pages" [ngClass]="{active:pager.current_page === page}"
-                              class="page-item number-item">
-                              <a (click)='loadPage(page)' class="page-link">{{page}}</a>
-                            </li>
-                            <!-- <li [ngClass]="{disabled:pager.current_page === pager.last_page}" class="page-item next-item">
+                          <li *ngFor="let page of pages" [ngClass]="{active:pager.current_page === page}"
+                            class="page-item number-item">
+                            <a (click)='loadPage(page)' class="page-link">{{page}}</a>
+                          </li>
+                          <!-- <li [ngClass]="{disabled:pager.current_page === pager.last_page}" class="page-item next-item">
                                             <a routerLink [queryParams]="{ page: pager.current_page + 1 }" class="page-link">Next</a>
                                         </li>
                                         <li [ngClass]="{disabled:pager.current_page === pager.last_page}" class="page-item last-item">
                                             <a routerLink [queryParams]="{ page: pager.last_page }" class="page-link">Last</a>
                                         </li> -->
-                          </ul>
-                        </div>
-                        <div class="clearfix"></div>
+                        </ul>
                       </div>
+                      <div class="clearfix"></div>
                     </div>
-        </div>
+                  </div>
+                </div>
 
                 <!--------------------------step2--------------------->
 
-               
+
               </div>
             </div>
           </form>
         </div>
       </div>
-      </div>
-
-
     </div>
+
+
   </div>
+</div>
 
-  <div aria-hidden="true" class="onboarding-modal modal fade animated" id="onboardingFormModal9" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-centered" role="document">
-      <div class="modal-content text-left">
-        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span class="os-icon os-icon-close"></span></button>
+<div aria-hidden="true" class="onboarding-modal modal fade animated" id="onboardingFormModal9" role="dialog"
+  tabindex="-1">
+  <div class="modal-dialog modal-centered" role="document">
+    <div class="modal-content text-left">
+      <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+          class="os-icon os-icon-close"></span></button>
 
-        <div class="onboarding-content with-gradient">
-          <div class="element-wrapper pb-0">
-            <h6 class="element-header text-left">
-              Manage withdrawal operation
-            </h6>
-            <div class="">
-              <form>
-                <div class="form-group row">
-                  <label class="col-sm-6" for=""><strong>Withdrawal request name</strong></label>
-                  <div class="col-sm-6">
-                    John Mark
-                  </div>
+      <div class="onboarding-content with-gradient">
+        <div class="element-wrapper pb-0">
+          <h6 class="element-header text-left">
+            Manage withdrawal operation
+          </h6>
+          <div class="">
+            <form>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""><strong>Withdrawal request name</strong></label>
+                <div class="col-sm-6">
+                  John Mark
                 </div>
-                <div class="form-group row">
-                  <label class="col-sm-6" for=""> <strong>Withdrawal request amount in USD and TRY</strong></label>
-                  <div class="col-sm-6">
-                    255$
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""> <strong>Withdrawal request amount in USD and TRY</strong></label>
+                <div class="col-sm-6">
+                  255$
                 </div>
-                <div class="form-group row">
-                  <label class="col-sm-6" for=""><strong>Withdrawal trade account</strong></label>
-                  <div class="col-sm-6">
-                    123455
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""><strong>Withdrawal trade account</strong></label>
+                <div class="col-sm-6">
+                  123455
                 </div>
-                <div class="form-group row">
-                  <label class="col-sm-6" for=""><strong>Withdrawal trading group</strong></label>
-                  <div class="col-sm-6">
-                    Lorem ipsum
-                  </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-6" for=""><strong>Withdrawal trading group</strong></label>
+                <div class="col-sm-6">
+                  Lorem ipsum
                 </div>
-                <br>
-<!--                  <h5>Please fill the fields to process</h5>-->
-                <!--                                            <div class="form-group row">-->
-                <!--                                              <label class="col-sm-6"><strong>Recipt:</strong></label>-->
-                <!--                                              <div class="col-sm-6">-->
-                <!--                                              <img src="img/onboarding1.jpg" width="100%" > -->
-                <!--                                              </div>-->
-                <!--                                            </div>-->
+              </div>
+              <br>
+              <!--                  <h5>Please fill the fields to process</h5>-->
+              <!--                                            <div class="form-group row">-->
+              <!--                                              <label class="col-sm-6"><strong>Recipt:</strong></label>-->
+              <!--                                              <div class="col-sm-6">-->
+              <!--                                              <img src="img/onboarding1.jpg" width="100%" > -->
+              <!--                                              </div>-->
+              <!--                                            </div>-->
 
-                <div class="row">
-                  <div class="col-sm-12">
-                    <label class="col-form-label" for=""><strong>Upload Receipt</strong></label>
-                    <input class="form-control" placeholder="Bank name" type="File">
-                  </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <label class="col-form-label" for=""><strong>Upload Receipt</strong></label>
+                  <input class="form-control" placeholder="Bank name" type="File">
                 </div>
+              </div>
 
 
 
-                <div class="form-buttons-w">
-                  <div class="element-box-content text-right">
-                    <button class="btn btn-primary"type="button"> Processing</button>
-                    <button class="btn btn-success" type="submit">Approve</button>
-                    <button class="btn btn-danger" type="submit"> Disapprove</button>
+              <div class="form-buttons-w">
+                <div class="element-box-content text-right">
+                  <button class="btn btn-primary" type="button"> Processing</button>
+                  <button class="btn btn-success" type="submit">Approve</button>
+                  <button class="btn btn-danger" type="submit"> Disapprove</button>
 
-                  </div>
                 </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

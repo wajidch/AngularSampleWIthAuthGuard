@@ -43,7 +43,7 @@ export class ChangePasswordComponent implements OnInit {
 
           this.errormessage = 'Something wrong happend try again!';
           this.message = '';
-          
+
           //this.spinner.hide();
           this.loadingBar.complete();
           setTimeout(function () {

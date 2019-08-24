@@ -10,19 +10,18 @@ import { Router } from '@angular/router';
  */
 @Injectable()
 export class authService implements OnInit {
-    constructor(private route:Router){}
+    constructor(private route: Router) { }
     ngOnInit(): void {
         throw new Error("Method not implemented.");
     }
-    
 
-    isLoggedIn()
-    {
-        let token= localStorage.getItem('admin_token');
-        if(token){
-         return true;
+
+    isLoggedIn() {
+        let token = localStorage.getItem('admin_token');
+        if (token) {
+            return true;
         }
-        else{
+        else {
             return false
         }
     }

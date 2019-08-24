@@ -1,9 +1,6 @@
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
-
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
-
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { KycRequestComponent } from './kyc-request/kyc-request.component';
 import { DemoAccountListComponent } from './demo-account-list/demo-account-list.component';
@@ -16,26 +13,15 @@ import { DepositRequestComponent } from './deposit-request/deposit-request.compo
 
 const routes: Routes = [
 
-
-
-
   { path: 'changepassword', component: ChangePasswordComponent, },
-
   { path: 'demoaccountlist', component: DemoAccountListComponent, },
-
   { path: 'myprofile', component: MyProfileComponent, },
   { path: 'transcationhistory', component: AccountActivitiesHistoryComponent, },
-
-
-
   { path: 'accountactivitieshistory', component: AccountActivitiesHistoryComponent },
   { path: 'realaccountlist', component: RealAccountListComponent, },
   { path: 'kycrequest', component: KycRequestComponent, },
   { path: 'withdrawrequest', component: WithdrawRequestComponent },
   { path: 'depositrequest', component: DepositRequestComponent }
-
-
-
 
 ];
 

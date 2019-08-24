@@ -489,15 +489,14 @@ type = "timer"
                     <h4 class="onboarding-title">
                       Real Account Request
                     </h4>
-                    <form >
-
+                    <form>
                       <div class="row">
                         <div class="col-sm-12">
                           <div class="form-group">
                             <label for="user">Search
                             </label>
                             <ng-multiselect-dropdown class="form-control"
-                            [placeholder]="'Select User'" [data]="dropdownList"
+                            [placeholder]="'Search User'" [data]="dropdownList"
                                [settings]="dropdownSettings"
                               (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                             </ng-multiselect-dropdown>

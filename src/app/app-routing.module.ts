@@ -7,30 +7,22 @@ import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
-       
-    path: 'admin/dashboard', component: DashboardComponent,
-    canActivate: [AuthGuard]
- },
+    path: 'admin/dashboard',
+    component: DashboardComponent, canActivate: [AuthGuard]
+  },
 
- {path:'',redirectTo: 'admin/login',pathMatch: 'full'},
- 
+  { path: '', redirectTo: 'admin/login', pathMatch: 'full' },
+  { path: 'admin/login', component: LoginComponent },
   {
-       
-    path: 'admin/login' ,  component:LoginComponent
- },
- 
+    path: 'admin', loadChildren: './admin/admin.module#AdminModule'
+    , canActivate: [AuthGuard]
+  },
+  { path: '**', redirectTo: 'admin/login', pathMatch: 'full' }
 
-
- 
-  { path: 'admin', loadChildren: './admin/admin.module#AdminModule'
-  ,canActivate: [AuthGuard]},
-  
-  {path:'**',redirectTo:'admin/login',pathMatch:'full'}
-  
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
