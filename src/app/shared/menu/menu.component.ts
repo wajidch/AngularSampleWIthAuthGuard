@@ -3,6 +3,8 @@ import { apiService } from 'src/app/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -24,7 +26,22 @@ token=localStorage.getItem('admin_token')
     //this.spinner.show();
     this.loadingBar.start();
     
-    this.apiservice.post('admin/logout',this.token).subscribe((res:any)=>{
+    this.apiservice.post('admin/logout',this.token)
+    .pipe(
+      catchError(err => {
+        console.log('Handling error locally and rethrowing it...', err);
+
+        //this.spinner.hide();
+        this.loadingBar.complete();
+        if(err.status===401){
+          this.loadingBar.complete();
+          //this.errormessage = 'Invalid Email or Password';
+        }
+        
+        return throwError(err);
+      })
+    )
+    .subscribe((res:any)=>{
       
       localStorage.clear();
       localStorage.removeItem('token');

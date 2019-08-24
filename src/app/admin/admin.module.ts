@@ -18,6 +18,7 @@ import { AccountActivitiesHistoryComponent } from './account-activities-history/
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { DepositRequestComponent } from './deposit-request/deposit-request.component';
 import { WithdrawRequestComponent } from './withdraw-request/withdraw-request.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 
@@ -25,19 +26,19 @@ import { WithdrawRequestComponent } from './withdraw-request/withdraw-request.co
 
 @NgModule({
   declarations: [ChangePasswordComponent,
-   
+
     KycRequestComponent,
     DemoAccountListComponent,
-  RealAccountListComponent,
-  
-  MyProfileComponent,
-  
-   AccountActivitiesHistoryComponent,
-  
-   DepositRequestComponent,
-  
-   WithdrawRequestComponent,
-   ],
+    RealAccountListComponent,
+
+    MyProfileComponent,
+
+    AccountActivitiesHistoryComponent,
+
+    DepositRequestComponent,
+
+    WithdrawRequestComponent,
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -45,6 +46,7 @@ import { WithdrawRequestComponent } from './withdraw-request/withdraw-request.co
     LoadingBarModule,
     ReactiveFormsModule,
     FormsModule,
+    NgMultiSelectDropDownModule
   ]
 })
 export class AdminModule { }

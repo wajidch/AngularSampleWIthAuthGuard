@@ -69,16 +69,16 @@
                         -------------------->
               <div class="controls-above-table" style="margin: 20px 0 0;">
                 <div class="row clearfix">
-                    <div class="col-sm-6 col-md-4">
-                        <form [formGroup]='searchForm'>
-                            <h6>
-                              <input type="text" name='search' formControlName='search'
-                               (keyup)='search(searchForm.value)' placeholder="search here" class="form-control" >
-                            </h6>
-                          </form>
-                    </div>
-                    <div class="col-sm-6 col-md-4"></div>
-                    <div class="col-sm-6 col-md-4">
+                  <div class="col-sm-6 col-md-4">
+                    <form [formGroup]='searchForm'>
+                      <h6>
+                        <input type="text" name='search' formControlName='search' (keyup)='search(searchForm.value)'
+                          placeholder="search here" class="form-control">
+                      </h6>
+                    </form>
+                  </div>
+                  <div class="col-sm-6 col-md-4"></div>
+                  <div class="col-sm-6 col-md-4">
                     <form class="create-btn">
                       <button type="button" class="form-control rounded form-buttonnew" data-toggle="modal"
                         data-target="#createdemo" style="margin-bottom: 15px">Create Request</button>
@@ -117,13 +117,10 @@
                       <a *ngIf="list.status!='approved' && list.status!='pending'"
                         class="btn btn-success">{{list.status}}</a>
                     </td>
-                    <td class="text-center"> 
-                        <button class="btn btn-success"
-                        (click)='manage(list.name,
+                    <td class="text-center">
+                      <button class="btn btn-success" (click)='manage(list.name,
                         list.email,list.number,list.account_id,
-                        list.lever,list.account_group)'
-                        
-                          type="submit">Manage</button></td>
+                        list.lever,list.account_group)' type="submit">Manage</button></td>
                   </tr>
 
                 </tbody>
@@ -171,123 +168,36 @@
             <!---------------------- create account model ------------------------------>
 
             <!-- Modal -->
-            <div aria-hidden="true"
-             class="onboarding-modal modal fade animated" id="createdemo" role="dialog" >
-                <div class="modal-dialog modal-centered" role="document">
-                  <div class="modal-content text-left">
-                    <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span class="os-icon os-icon-close"></span></button>
-                    <div class="onboarding-content with-gradient">
-                      <h4 class="onboarding-title">
+            <div aria-hidden="true" class="onboarding-modal modal fade animated" id="createdemo" role="dialog">
+              <div class="modal-dialog modal-centered" role="document">
+                <div class="modal-content text-left">
+                  <button aria-label="Close" id='close' class="close" data-dismiss="modal" type="button"><span
+                      class="os-icon os-icon-close"></span></button>
+                  <div class="onboarding-content with-gradient">
+                    <h4 class="onboarding-title">
                       Demo Account Request
-                      </h4>
-                      <form>
+                    </h4>
+                    <form >
 
-                        <div class="row">
-                          <div class="col-sm-12">
-                            <div class="form-group">
-                              <label for="user">Search
-                              </label><select id="user" class="custom-select" >
-                              <option value="" selected hidden>Search user </option>
-                              <option></option>
-                            </select>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <label for="user">Search
+                            </label>
+                            <ng-multiselect-dropdown class="form-control"
+                            [placeholder]="'Select User'" [data]="dropdownList"
+                               [settings]="dropdownSettings"
+                              (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                            </ng-multiselect-dropdown>
                           </div>
                         </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-sm-6">
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
 
-                            <div class="form-group">
-                              <label for="" > Select Leverage</label><select class="form-control">
-                              <option value="User1">
-                                Leverage1
-                              </option>
-                              <option value="User2">
-                                Leverage2
-                              </option>
-                              <option value="User3">
-                                Leverage3
-                              </option>
-                              <option value="User4">
-                                Leverage4
-                              </option>
-                              <option value="User5">
-                                Leverage5
-                              </option>
-                            </select>
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for=""  > Select Group</label><select class="form-control">
-                              <option value="User1">
-                               Group1
-                              </option>
-                              <option value="User2">
-                                Group2
-                              </option>
-                              <option value="User3">
-                                Group3
-                              </option>
-                              <option value="User4">
-                                Group4
-                              </option>
-                              <option value="User5">
-                                Group5
-                              </option>
-                            </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-sm-12 text-right">
-                            <div class="element-box-content ">
-                              <button class="btn btn-success"  type="submit">Approve</button>
-                              <button class="btn btn-danger" type="submit"> Disapprove</button>
-
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-         
-
-            <div aria-hidden="true" class="onboarding-modal modal fade animated" id="manageModal" role="dialog" tabindex="-1">
-                <div class="modal-dialog modal-centered" role="document">
-                  <div class="modal-content text-left">
-                    <button aria-label="Close" id='closemain' class="close" data-dismiss="modal" type="button"><span class="os-icon os-icon-close"></span></button>
-                    <div class="onboarding-content with-gradient">
-                      <h4 class="onboarding-title">
-                  Demo Account Request
-                      </h4>
-                      <form>
-
-                        <div class="form-group row">
-                          <label class="col-sm-6" for=""> <strong>Name</strong></label>
-                          <div class="col-sm-6">
-                            {{name}}
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label class="col-sm-6" for=""><strong>Email</strong></label>
-                          <div class="col-sm-6">
-                            {{email}}
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label class="col-sm-6" for=""><strong>Phone</strong></label>
-                          <div class="col-sm-6">
-                            {{phone}}
-                          </div>
-                        </div>
-                        <div class="row" [formGroup]='leverGroupForm'>
-
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="" > Select Leverage</label>
-                              <select name='lever' formControlName='lever' class="form-control">
+                          <div class="form-group">
+                            <label for=""> Select Leverage</label>
+                            <select [(ngModel)]='demoModal.lever' name=lever class="form-control" >
                               <option value="Leverage1">
                                 Leverage1
                               </option>
@@ -304,13 +214,13 @@
                                 Leverage5
                               </option>
                             </select>
-                            </div>
                           </div>
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for=""  > Select Group</label>
-                              <select name='account_group' 
-                              formControlName='account_group' class="form-control">
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for=""> Select Group</label>
+                            <select [(ngModel)]='demoModal.account_group' name='account_group' class="form-control"
+                             >
                               <option value="Group1">
                                 Group1
                               </option>
@@ -327,96 +237,189 @@
                                 Group5
                               </option>
                             </select>
-                            </div>
                           </div>
                         </div>
-
-                        <br>
-
-                        <div class="form-buttons-w">
-                          <div class="element-box-content text-right">
-                            <button class="btn btn-success"
-                            data-toggle="modal" data-target="#Approve" type="submit">Approve</button>
-                            <button class="btn btn-danger"
-                            data-toggle="modal" data-target="#disapprove"
-                             type="submit"> Disapprove</button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          
-          </div>
-          <div aria-hidden="true" class="onboarding-modal modal fade animated" id="Approve" role="dialog" tabindex="-1">
-              <div class="modal-dialog modal-centered" role="document">
-                <div class="modal-content text-left">
-                  <button aria-label="Close" id='closeapprove' class="close" data-dismiss="modal" type="button"><span class="os-icon os-icon-close"></span></button>
-                  <div class="onboarding-content with-gradient">
-                    <div class="element-wrapper pb-0">
-                      <h6 class="element-header text-left">
-                        Approve Request
-                      </h6>
-                      <div class="">
-                        
-
-                         <p>Are you sure want to approve this request?</p>
-                          <br>
-
-                          <div class="form-buttons-w">
-                            <div class="element-box-content text-right">
-                              <button class="btn btn-success"
-                               type="submit" 
-                               (click)="approve(accountid,'approved'
-                               ,accountgroup,leverages)">Yes</button>
-                              <button class="btn btn-danger" data-dismiss="modal" type="submit"> No</button>
-                            </div>
-                          </div>
-                        
                       </div>
-                    </div>
+                      <div class="row">
+                        <div class="col-sm-12 text-right">
+                          <div class="element-box-content ">
+                            <button (click)='demoaccount()' class="btn btn-success"
+                             type="submit">Submit</button>
+                            
+
+                          </div>
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
-              <!----------------------end account modal-------------------->
-
-              <!-- end account botton  -->
             </div>
 
-            <div aria-hidden="true" class="onboarding-modal modal fade animated" id="disapprove" role="dialog" tabindex="-1">
-                <div class="modal-dialog modal-centered" role="document">
-                  <div class="modal-content text-left">
-                    <button aria-label="Close" id='closedisapprove' class="close" data-dismiss="modal" type="button"><span class="os-icon os-icon-close"></span></button>
-                    <div class="onboarding-content with-gradient">
-                      <div class="element-wrapper pb-0">
-                        <h6 class="element-header text-left">
-                          Disapprove Request
-                        </h6>
-                        <div class="">
-                          
 
-                           <p>Are you sure want to disapprove this request?</p>
-                            <br>
+            <div aria-hidden="true" class="onboarding-modal modal fade animated" id="manageModal" role="dialog"
+              tabindex="-1">
+              <div class="modal-dialog modal-centered" role="document">
+                <div class="modal-content text-left">
+                  <button aria-label="Close" id='closemain' class="close" data-dismiss="modal" type="button"><span
+                      class="os-icon os-icon-close"></span></button>
+                  <div class="onboarding-content with-gradient">
+                    <h4 class="onboarding-title">
+                      Demo Account Request
+                    </h4>
+                    <form>
 
-                            <div class="form-buttons-w">
-                              <div class="element-box-content text-right">
-                                <button class="btn btn-success"
-                                 (click)="disapprove(accountid,'declined'
-                                 ,accountgroup,leverages)"  type="submit">Yes</button>
-                                <button class="btn btn-danger" data-dismiss="modal" type="submit"> No</button>
-                              </div>
-                            </div>
-                          
+                      <div class="form-group row">
+                        <label class="col-sm-6" for=""> <strong>Name</strong></label>
+                        <div class="col-sm-6">
+                          {{name}}
                         </div>
                       </div>
+                      <div class="form-group row">
+                        <label class="col-sm-6" for=""><strong>Email</strong></label>
+                        <div class="col-sm-6">
+                          {{email}}
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-6" for=""><strong>Phone</strong></label>
+                        <div class="col-sm-6">
+                          {{phone}}
+                        </div>
+                      </div>
+                      <div class="row" [formGroup]='leverGroupForm'>
+
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for=""> Select Leverage</label>
+                            <select name='lever' formControlName='lever' class="form-control">
+                              <option value="Leverage1">
+                                Leverage1
+                              </option>
+                              <option value="Leverage2">
+                                Leverage2
+                              </option>
+                              <option value="Leverage3">
+                                Leverage3
+                              </option>
+                              <option value="Leverage4">
+                                Leverage4
+                              </option>
+                              <option value="Leverage5">
+                                Leverage5
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for=""> Select Group</label>
+                            <select name='account_group' formControlName='account_group' class="form-control">
+                              <option value="Group1">
+                                Group1
+                              </option>
+                              <option value="Group2">
+                                Group2
+                              </option>
+                              <option value="Group3">
+                                Group3
+                              </option>
+                              <option value="Group4">
+                                Group4
+                              </option>
+                              <option value="Group5">
+                                Group5
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <br>
+
+                      <div class="form-buttons-w">
+                        <div class="element-box-content text-right">
+                          <button class="btn btn-success" data-toggle="modal" data-target="#Approve"
+                            type="submit">Approve</button>
+                          <button class="btn btn-danger" data-toggle="modal" data-target="#disapprove" type="submit">
+                            Disapprove</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div aria-hidden="true" class="onboarding-modal modal fade animated" id="Approve" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-centered" role="document">
+              <div class="modal-content text-left">
+                <button aria-label="Close" id='closeapprove' class="close" data-dismiss="modal" type="button"><span
+                    class="os-icon os-icon-close"></span></button>
+                <div class="onboarding-content with-gradient">
+                  <div class="element-wrapper pb-0">
+                    <h6 class="element-header text-left">
+                      Approve Request
+                    </h6>
+                    <div class="">
+
+
+                      <p>Are you sure want to approve this request?</p>
+                      <br>
+
+                      <div class="form-buttons-w">
+                        <div class="element-box-content text-right">
+                          <button class="btn btn-success" type="submit" (click)="approve(accountid,'approved'
+                               ,accountgroup,leverages)">Yes</button>
+                          <button class="btn btn-danger" data-dismiss="modal" type="submit"> No</button>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                 </div>
-                <!----------------------end account modal-------------------->
-
-                <!-- end account botton  -->
               </div>
+            </div>
+            <!----------------------end account modal-------------------->
+
+            <!-- end account botton  -->
+          </div>
+
+          <div aria-hidden="true" class="onboarding-modal modal fade animated" id="disapprove" role="dialog"
+            tabindex="-1">
+            <div class="modal-dialog modal-centered" role="document">
+              <div class="modal-content text-left">
+                <button aria-label="Close" id='closedisapprove' class="close" data-dismiss="modal" type="button"><span
+                    class="os-icon os-icon-close"></span></button>
+                <div class="onboarding-content with-gradient">
+                  <div class="element-wrapper pb-0">
+                    <h6 class="element-header text-left">
+                      Disapprove Request
+                    </h6>
+                    <div class="">
+
+
+                      <p>Are you sure want to disapprove this request?</p>
+                      <br>
+
+                      <div class="form-buttons-w">
+                        <div class="element-box-content text-right">
+                          <button class="btn btn-success" (click)="disapprove(accountid,'declined'
+                                 ,accountgroup,leverages)" type="submit">Yes</button>
+                          <button class="btn btn-danger" data-dismiss="modal" type="submit"> No</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!----------------------end account modal-------------------->
+
+            <!-- end account botton  -->
+          </div>
           <!----------------------end account modal-------------------->
 
           <!-- end account botton  -->

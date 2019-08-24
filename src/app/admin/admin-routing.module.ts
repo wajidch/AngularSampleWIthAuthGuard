@@ -17,6 +17,8 @@ import { DepositRequestComponent } from './deposit-request/deposit-request.compo
 const routes: Routes = [
 
 
+
+
   { path: 'changepassword', component: ChangePasswordComponent, },
 
   { path: 'demoaccountlist', component: DemoAccountListComponent, },
@@ -29,8 +31,8 @@ const routes: Routes = [
   { path: 'accountactivitieshistory', component: AccountActivitiesHistoryComponent },
   { path: 'realaccountlist', component: RealAccountListComponent, },
   { path: 'kycrequest', component: KycRequestComponent, },
-  {path:'withdrawrequest',component:WithdrawRequestComponent},
-  {path:'depositrequest',component:DepositRequestComponent}
+  { path: 'withdrawrequest', component: WithdrawRequestComponent },
+  { path: 'depositrequest', component: DepositRequestComponent }
 
 
 

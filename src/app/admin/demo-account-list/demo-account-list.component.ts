@@ -16,7 +16,7 @@ declare var $ :any;
 export class DemoAccountListComponent implements OnInit {
 
   demoaccountlist: any;
-  createdemoAccountForm: FormGroup;
+  demoForm: FormGroup;
   searchForm:FormGroup;
   leverGroupForm:FormGroup;
   NoRecordFound: boolean;
@@ -31,21 +31,44 @@ export class DemoAccountListComponent implements OnInit {
   accountid: any;
   accountgroup: any;
   leverages: any;
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
+  demoModal={lever:'Leverage1',
+  account_group:'Group1',
+  account_type:'demo',
+  platform_type:'meta trader 4',
+  currency:'USD',
+  user_id:0};
   constructor(private apiservice: apiService, private router: Router
     , private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
     private loadingBar: LoadingBarService) { }
 
   ngOnInit() {
-    this.createdemoAccountForm = new FormGroup({
+  this.getAlluser();
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true,
+      closeDropDownOnSelection:true
+    };
+    this.demoForm = new FormGroup({
       lever: new FormControl(''),
       account_group: new FormControl(''),
       account_type: new FormControl('demo'),
       platform_type: new FormControl('meta trader 4'),
       currency: new FormControl('USD'),
+      user_id:new FormControl('')
 
 
     })
+    
+
     this.searchForm=new FormGroup({
       search:new FormControl('')
     })
@@ -55,6 +78,68 @@ export class DemoAccountListComponent implements OnInit {
     })
     this.route.queryParams.subscribe(x => this.demoAccountList(x.page || 1));
 
+  }
+
+  getAlluser(){
+   // this.loadingBar.start();
+    this.apiservice.get(`admin/getAllUser`)
+      .pipe(
+        catchError(err => {
+
+          if (err.status === 404) {
+            //this.loadingBar.complete();
+            //this.NoRecordFound = true;
+            this.errormessage = ''
+          }
+          else {
+            this.errormessage = 'Something happend wrong try again!';
+
+            ///this.loadingBar.complete();
+            //this.NoRecordFound = false;
+          }
+          return throwError(err);
+        })
+      )
+
+      .subscribe((res: any) => {
+
+        if (res.status === 200) {
+
+         
+          this.dropdownList = res.body.data;
+          this.errormessage = '';
+          //this.NoRecordFound = false;
+          //this.loadingBar.complete();
+        }
+        if (res.status === 404) {
+          this.dropdownList = []
+          //this.NoRecordFound = true;
+          this.errormessage = ''
+          //this.loadingBar.complete();
+        }
+
+      })
+  }
+
+  onItemSelect(item: any) {
+    console.log(item);
+    this.demoModal.user_id=item.id
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+
+  demoaccount()
+  {
+console.log("vall",this.demoModal)
+this.loadingBar.start();
+    this.apiservice.post('admin/createAccount', this.demoModal).subscribe((res => {
+
+      document.getElementById('close').click();
+      this.demoAccountList(1);
+      //this.spinner.hide();
+      this.loadingBar.complete();
+    }))
   }
   loadPage(page) {
     this.demoAccountList(page)

@@ -32,12 +32,32 @@ export class RealAccountListComponent implements OnInit {
   accountid: any;
   accountgroup: any;
   leverages: any;
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
+  realModal={lever:'Leverage1',
+  account_group:'Group1',
+  account_type:'real',
+  platform_type:'meta trader 4',
+  currency:'USD',
+  user_id:0};
   constructor(private apiservice: apiService,
     private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
     private loadingBar: LoadingBarService) { }
 
   ngOnInit() {
+    this.getAlluser();
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true,
+      closeDropDownOnSelection:true
+    };
     this.createrealAccountForm = new FormGroup({
       lever: new FormControl(''),
       account_group: new FormControl(''),
@@ -58,7 +78,67 @@ export class RealAccountListComponent implements OnInit {
     this.route.queryParams.subscribe(x => this.getRealAccountList(x.page || 1));
 
   }
-
+  getAlluser(){
+    // this.loadingBar.start();
+     this.apiservice.get(`admin/getAllUser`)
+       .pipe(
+         catchError(err => {
+ 
+           if (err.status === 404) {
+             //this.loadingBar.complete();
+             //this.NoRecordFound = true;
+             this.errormessage = ''
+           }
+           else {
+             this.errormessage = 'Something happend wrong try again!';
+ 
+             ///this.loadingBar.complete();
+             //this.NoRecordFound = false;
+           }
+           return throwError(err);
+         })
+       )
+ 
+       .subscribe((res: any) => {
+ 
+         if (res.status === 200) {
+ 
+          
+           this.dropdownList = res.body.data;
+           this.errormessage = '';
+           //this.NoRecordFound = false;
+           //this.loadingBar.complete();
+         }
+         if (res.status === 404) {
+           this.dropdownList = []
+           //this.NoRecordFound = true;
+           this.errormessage = ''
+           //this.loadingBar.complete();
+         }
+ 
+       })
+   }
+ 
+   onItemSelect(item: any) {
+     console.log(item);
+     this.realModal.user_id=item.id
+   }
+   onSelectAll(items: any) {
+     console.log(items);
+   }
+ 
+   realaccount()
+   {
+ console.log("vall",this.realModal)
+ this.loadingBar.start();
+     this.apiservice.post('admin/createAccount', this.realModal).subscribe((res => {
+ 
+       document.getElementById('closerealaccountmodel').click();
+       this.getRealAccountList(1);
+       //this.spinner.hide();
+       this.loadingBar.complete();
+     }))
+   }
   loadPage(page) {
     this.getRealAccountList(page)
   }

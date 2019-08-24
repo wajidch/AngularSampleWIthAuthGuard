@@ -480,87 +480,93 @@ type = "timer"
 
               <!-- end account botton  -->
             </div>
-            <div aria-hidden="true"
-            class="onboarding-modal modal fade animated" id="createdemo" role="dialog" >
-               <div class="modal-dialog modal-centered" role="document">
-                 <div class="modal-content text-left">
-                   <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span class="os-icon os-icon-close"></span></button>
-                   <div class="onboarding-content with-gradient">
-                     <h4 class="onboarding-title">
-                     Demo Account Request
-                     </h4>
-                     <form>
+            <div aria-hidden="true" class="onboarding-modal modal fade animated" id="createdemo" role="dialog">
+              <div class="modal-dialog modal-centered" role="document">
+                <div class="modal-content text-left">
+                  <button aria-label="Close" id='closerealaccountmodel' class="close" data-dismiss="modal" type="button"><span
+                      class="os-icon os-icon-close"></span></button>
+                  <div class="onboarding-content with-gradient">
+                    <h4 class="onboarding-title">
+                      Real Account Request
+                    </h4>
+                    <form >
 
-                       <div class="row">
-                         <div class="col-sm-12">
-                           <div class="form-group">
-                             <label for="user">Search
-                             </label><select id="user" class="custom-select" >
-                             <option value="" selected hidden>Search user </option>
-                             <option></option>
-                           </select>
-                         </div>
-                       </div>
-                       </div>
-                       <div class="row">
-                         <div class="col-sm-6">
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <label for="user">Search
+                            </label>
+                            <ng-multiselect-dropdown class="form-control"
+                            [placeholder]="'Select User'" [data]="dropdownList"
+                               [settings]="dropdownSettings"
+                              (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                            </ng-multiselect-dropdown>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
 
-                           <div class="form-group">
-                             <label for="" > Select Leverage</label><select class="form-control">
-                             <option value="User1">
-                               Leverage1
-                             </option>
-                             <option value="User2">
-                               Leverage2
-                             </option>
-                             <option value="User3">
-                               Leverage3
-                             </option>
-                             <option value="User4">
-                               Leverage4
-                             </option>
-                             <option value="User5">
-                               Leverage5
-                             </option>
-                           </select>
-                           </div>
-                         </div>
-                         <div class="col-sm-6">
-                           <div class="form-group">
-                             <label for=""  > Select Group</label><select class="form-control">
-                             <option value="User1">
-                              Group1
-                             </option>
-                             <option value="User2">
-                               Group2
-                             </option>
-                             <option value="User3">
-                               Group3
-                             </option>
-                             <option value="User4">
-                               Group4
-                             </option>
-                             <option value="User5">
-                               Group5
-                             </option>
-                           </select>
-                           </div>
-                         </div>
-                       </div>
-                       <div class="row">
-                         <div class="col-sm-12 text-right">
-                           <div class="element-box-content ">
-                             <button class="btn btn-success"  type="submit">Approve</button>
-                             <button class="btn btn-danger" type="submit"> Disapprove</button>
+                          <div class="form-group">
+                            <label for=""> Select Leverage</label>
+                            <select [(ngModel)]='realModal.lever' name=lever class="form-control" >
+                              <option value="Leverage1">
+                                Leverage1
+                              </option>
+                              <option value="Leverage2">
+                                Leverage2
+                              </option>
+                              <option value="Leverage3">
+                                Leverage3
+                              </option>
+                              <option value="Leverage4">
+                                Leverage4
+                              </option>
+                              <option value="Leverage5">
+                                Leverage5
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for=""> Select Group</label>
+                            <select [(ngModel)]='realModal.account_group' name='account_group' class="form-control"
+                             >
+                              <option value="Group1">
+                                Group1
+                              </option>
+                              <option value="Group2">
+                                Group2
+                              </option>
+                              <option value="Group3">
+                                Group3
+                              </option>
+                              <option value="Group4">
+                                Group4
+                              </option>
+                              <option value="Group5">
+                                Group5
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12 text-right">
+                          <div class="element-box-content ">
+                            <button (click)='realaccount()' class="btn btn-success"
+                             type="submit">Submit</button>
+                            
 
-                           </div>
-                         </div>
-                       </div>
-                     </form>
-                   </div>
-                 </div>
-               </div>
-             </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
         
             <div aria-hidden="true" class="onboarding-modal modal fade animated" id="disapprove" role="dialog" tabindex="-1">
                 <div class="modal-dialog modal-centered" role="document">

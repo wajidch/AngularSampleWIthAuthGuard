@@ -9,6 +9,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { apiService } from './services/api.service'
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { NgxSpinnerModule } from "ngx-spinner";
 import { LoadingBarModule } from '@ngx-loading-bar/core';
@@ -34,7 +35,8 @@ import { authService } from './services/auth.service';
     FormsModule,
     HttpClientModule,
     NgxSpinnerModule,
-    LoadingBarModule
+    LoadingBarModule,
+    NgMultiSelectDropDownModule
     
   ],
   providers: [apiService,
