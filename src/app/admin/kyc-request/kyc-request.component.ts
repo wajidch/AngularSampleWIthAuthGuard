@@ -158,7 +158,8 @@ this.kycid=kyc_id
       console.log("res",res);
       if(res.status===200){
         this.loadingBar.complete();
-        document.getElementById('close').click();
+        document.getElementById('closedisapprove').click();
+        document.getElementById('closemain').click();
         this.getKyclist(1);
       }
     })
@@ -182,7 +183,8 @@ this.kycid=kyc_id
       if(res.status===200){
         
         this.loadingBar.complete();
-        document.getElementById('close').click();
+        document.getElementById('closeapprove').click();
+        document.getElementById('closemain').click();
         this.getKyclist(1);
       }
     })
