@@ -324,6 +324,7 @@ let checkroute=localStorage.getItem("changeroutedeposit")
   }
    depositmoney(val) {
     //this.spinner.show();
+    console.log("value",val)
     this.loadingBar.start();
     this.apiservice.post('depositAmount', val)
       .pipe(

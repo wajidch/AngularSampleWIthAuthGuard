@@ -36,6 +36,7 @@ export class PaymentWizardWithdrawComponent implements OnInit {
   message: string;
   email = localStorage.getItem('email');
   userid = localStorage.getItem('id');
+  accountlist: any;
   constructor(private apiservice: apiService,
     private spinner: NgxSpinnerService,
     private router: Router,
@@ -44,6 +45,7 @@ export class PaymentWizardWithdrawComponent implements OnInit {
     private loadingBar:LoadingBarService) { }
 
   ngOnInit() {
+    this.getAccountList();
     this.searchForm=new FormGroup({
       search:new FormControl('')
     })
@@ -58,7 +60,8 @@ export class PaymentWizardWithdrawComponent implements OnInit {
       status: new FormControl('pending', [Validators.required]),
       email: new FormControl(this.email, [Validators.required]),
       user_id: new FormControl(this.userid, [Validators.required]),
-      swift: new FormControl('', [Validators.required])
+      swift: new FormControl('', [Validators.required]),
+      account_id: new FormControl(''),
 
 
     })
@@ -307,11 +310,16 @@ export class PaymentWizardWithdrawComponent implements OnInit {
     step6.classList.remove("active");
 
   }
+  getAccountList() {
+    this.apiservice.get('getAccount').subscribe((res: any) => {
 
+      this.accountlist = res.body.data;
+    })
+  }
   withdrawmoney(val) {
 
     //this.spinner.show();
-
+console.log("value",val)
     this.loadingBar.start();
 
     this.apiservice.post('withdrawAmount', val)
