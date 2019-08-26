@@ -176,31 +176,7 @@ export class WithdrawRequestComponent implements OnInit {
       this.file = event.target.files[0];
       console.log(this.file);
       
-      // if (filesize <= 5 && (type === 'image/jpeg' || type === 'image/png')) {
-        
-      //   console.log('true');
-      //   const formData = new FormData();
-      //   formData.append('file', file, file.name);
-      //   formData.append('type', 'Birth certificate');
-      //   if (id != undefined) {
-      //     formData.append('id', id);
-      //   }
-
-
-      //   const reader = new FileReader();
-      //   reader.onload = (value: any) => {
-         
-      //   }
-      //   reader.readAsDataURL(event.target.files[0]);
-
-       
-       
-
-       
-
-
-
-      // }
+      
     }
 
   }
