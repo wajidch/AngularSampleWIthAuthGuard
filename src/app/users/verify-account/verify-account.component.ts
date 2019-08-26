@@ -242,10 +242,19 @@ export class VerifyAccountComponent implements OnInit {
 
 
           res.body.data.kycs.forEach(function (data, index) {
-            statusobarray[index] = data;
+            if(data.type==='Birth certificate'){
+            statusobarray[0] = data;
+            }
+            if(data.type==='Driving license'){
+              statusobarray[1] = data;
+              }
+              if(data.type==='Address certificate'){
+                statusobarray[2] = data;
+                }
           })
 
           this.statusArray = statusobarray
+          console.log("array",this.statusArray)
           //this.spinner.hide();
           this.loadingBar.complete();
         }

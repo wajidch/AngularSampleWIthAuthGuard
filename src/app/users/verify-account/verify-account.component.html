@@ -197,7 +197,8 @@
                     </div>
                   </div>
                 </form>
-                <form class="dropzone uploaded-img" *ngIf="data.status==='approved' && data.type==='Address certificate'" id="my-awesome-dropzone">
+                <form class="dropzone uploaded-img" *ngIf="data.status==='approved' &&
+                 data.type==='Address certificate'" id="my-awesome-dropzone">
 
                   <img [src]="addressURL" *ngIf="addressURL" (click)='fileaddressimg.click()'
                     class="img-preview img-responsive center-block img-circle" alt="">
@@ -212,7 +213,8 @@
                     </div>
                   </div>
                 </form>
-                <form class="dropzone fail-upload" *ngIf="data.status==='declined' && data.type==='Address certificate'" id="my-awesome-dropzone">
+                <form class="dropzone fail-upload" *ngIf="data.status==='declined' && 
+                data.type==='Address certificate'" id="my-awesome-dropzone">
 
                   <img [src]="addressURL" *ngIf="addressURL" (click)='fileaddressimg.click()'
                     class="img-preview img-responsive center-block img-circle" alt="">
