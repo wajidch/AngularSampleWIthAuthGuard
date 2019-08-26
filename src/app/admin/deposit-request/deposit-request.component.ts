@@ -3,7 +3,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { apiService } from 'src/app/services/api.service';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs'
+import { throwError } from 'rxjs';
+declare var jquery:any;
+declare var $ :any;
 @Component({
   selector: 'app-deposit-request',
   templateUrl: './deposit-request.component.html',
@@ -16,6 +18,24 @@ export class DepositRequestComponent implements OnInit {
   pager: any;
   pages: any[];
   searchForm:FormGroup;
+  name: any;
+  email: any;
+  phone: any;
+  accountid: any;
+  accountgroup: any;
+  amount: any;
+  currency: any;
+
+  
+
+  depositDetailModel={
+bankname:'',
+accountonwer:'',
+iban:'',
+message:'',
+paymentmethod:''
+  }
+  transactionsid: any;
   constructor(private loadingBar:LoadingBarService,
     private apiservice:apiService) { }
 
@@ -34,7 +54,7 @@ export class DepositRequestComponent implements OnInit {
 
       if(val.search){
       this.loadingBar.start();
-      this.apiservice.get(`admin/searchDepositTransactionHistory/${val.search}`)
+      this.apiservice.get(`admin/searchDepositRequest/${val.search}`)
         .pipe(
           catchError(err => {
 
@@ -84,12 +104,39 @@ export class DepositRequestComponent implements OnInit {
       this.loadingBar.complete();
     }
 }
+
+manage(name,email,phoneNumber
+  ,account_id,amount,currency,
+  account_group,bankname,accountonwer,
+  iban,message,paymentmethod,transactions_id){
+  
+    console.log("ss",currency)
+  this.name=name;
+  this.email=email;
+  this.phone=phoneNumber
+  this.accountid=account_id;
+  this.accountgroup=account_group;
+  this.amount=amount;
+  this.currency=currency;
+  this.transactionsid=transactions_id;
+
+  this.depositDetailModel={
+    bankname:bankname,
+    accountonwer:accountonwer,
+    iban:iban,
+    message:message,
+    paymentmethod:paymentmethod
+  }
+  
+  
+  $("#manageModal").modal()
+}
   getDepositTranscationlist(page) {
 
     try {
-      //this.spinner.show();
+      //this.spinner.show();getDepositRequest
       this.loadingBar.start();
-      this.apiservice.get(`admin/getDepositTransactionHistory?page=${page}`)
+      this.apiservice.get(`admin/getDepositRequest?page=${page}`)
         .pipe(
           catchError(err => {
 
@@ -135,5 +182,58 @@ export class DepositRequestComponent implements OnInit {
       this.loadingBar.complete();
     }
 
+  }
+
+  disapprove(transactionid,status){
+
+    this.loadingBar.start();
+    let statusobj:any={
+      status:status,
+   
+    }
+    this.apiservice.put(`admin/updateDepositRequest/${transactionid}`,statusobj)
+    .pipe(
+      catchError(err =>{
+
+       this.loadingBar.complete();
+        return throwError(err)
+      })
+    )
+    .subscribe((res:any)=>{
+      console.log("res",res);
+      if(res.status===200){
+        this.loadingBar.complete();
+        document.getElementById('closedisapprove').click();
+        document.getElementById('closemain').click();
+        this.getDepositTranscationlist(1);
+      }
+    })
+  }
+  approve(transactionid,status){
+
+   
+    this.loadingBar.start();
+    let statusobj:any={
+      status:status,
+     
+    }
+    this.apiservice.put(`admin/updateDepositRequest/${transactionid}`,statusobj)
+    .pipe(
+      catchError(err =>{
+
+       this.loadingBar.complete();
+        return throwError(err)
+      })
+    )
+    .subscribe((res:any)=>{
+      console.log("res",res);
+      if(res.status===200){
+        
+        this.loadingBar.complete();
+        document.getElementById('closeapprove').click();
+        document.getElementById('closemain').click();
+        this.getDepositTranscationlist(1);
+      }
+    })
   }
 }

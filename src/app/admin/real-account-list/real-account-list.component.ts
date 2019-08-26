@@ -276,7 +276,7 @@ export class RealAccountListComponent implements OnInit {
       this.spinner.hide();
     }))
   }
-  disapprove(id,status,group,lever){
+  disapprove(accountid,status,group,lever){
 
     this.loadingBar.start();
     let statusobj:any={
@@ -284,7 +284,7 @@ export class RealAccountListComponent implements OnInit {
       account_group:group,
       lever:lever
     }
-    this.apiservice.put(`admin/updateRealAccount/${id}`,statusobj)
+    this.apiservice.put(`admin/updateRealAccount/${accountid}`,statusobj)
     .pipe(
       catchError(err =>{
 
@@ -302,7 +302,7 @@ export class RealAccountListComponent implements OnInit {
       }
     })
   }
-  approve(id,status,group,lever){
+  approve(accountid,status,group,lever){
 
     console.log("group",group,lever)
     this.loadingBar.start();
@@ -311,7 +311,7 @@ export class RealAccountListComponent implements OnInit {
       account_group:group,
       lever:lever
     }
-    this.apiservice.put(`admin/updateRealAccount/${id}`,statusobj)
+    this.apiservice.put(`admin/updateRealAccount/${accountid}`,statusobj)
     .pipe(
       catchError(err =>{
 

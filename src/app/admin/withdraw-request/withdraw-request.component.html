@@ -131,7 +131,13 @@
 
                             <td class="text-right bolder nowrap">
                               <button class="mr-2 mb-2 btn btn-primary" type="button"
-                                data-target="#onboardingFormModal6" data-toggle="modal">Manage</button>
+                              (click)='manage(list.name,
+                              list.email,list.number,
+                              list.accountID,list.amount,
+                              list.currency,
+                              list.account_group,
+                              list.transactions_id
+                              )' data-toggle="modal">Manage</button>
                             </td>
                           </tr>
 
@@ -185,11 +191,11 @@
   </div>
 </div>
 
-<div aria-hidden="true" class="onboarding-modal modal fade animated" id="onboardingFormModal9" role="dialog"
+<div aria-hidden="true" class="onboarding-modal modal fade animated" id="manageModal" role="dialog"
   tabindex="-1">
   <div class="modal-dialog modal-centered" role="document">
     <div class="modal-content text-left">
-      <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+      <button aria-label="Close" id='closemain' class="close" data-dismiss="modal" type="button"><span
           class="os-icon os-icon-close"></span></button>
 
       <div class="onboarding-content with-gradient">
@@ -202,25 +208,25 @@
               <div class="form-group row">
                 <label class="col-sm-6" for=""><strong>Withdrawal request name</strong></label>
                 <div class="col-sm-6">
-                  John Mark
+                  {{name}}
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-6" for=""> <strong>Withdrawal request amount in USD and TRY</strong></label>
                 <div class="col-sm-6">
-                  255$
+                  {{amount}} {{currency}}
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-6" for=""><strong>Withdrawal trade account</strong></label>
                 <div class="col-sm-6">
-                  123455
+                  {{accountid}}
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-6" for=""><strong>Withdrawal trading group</strong></label>
                 <div class="col-sm-6">
-                  Lorem ipsum
+                  {{accountgroup}}
                 </div>
               </div>
               <br>
@@ -234,8 +240,10 @@
 
               <div class="row">
                 <div class="col-sm-12">
-                  <label class="col-form-label" for=""><strong>Upload Receipt</strong></label>
-                  <input class="form-control" placeholder="Bank name" type="File">
+                  <label class="col-form-label" for="">
+                    <strong>Upload Receipt</strong></label>
+                  <input (change)='uploadWithdrawRecipt($event)' class="form-control"
+                   placeholder="Bank name" type="File">
                 </div>
               </div>
 
@@ -243,9 +251,12 @@
 
               <div class="form-buttons-w">
                 <div class="element-box-content text-right">
-                  <button class="btn btn-primary" type="button"> Processing</button>
-                  <button class="btn btn-success" type="submit">Approve</button>
-                  <button class="btn btn-danger" type="submit"> Disapprove</button>
+                  <!-- <button class="btn btn-primary" type="button"> Processing</button> -->
+                  
+                  <button class="btn btn-success"
+                  data-toggle="modal" data-target="#Approve" type="submit">Approve</button>
+                  <button class="btn btn-danger" 
+                  data-toggle="modal" data-target="#disapprove" type="submit"> Disapprove</button>
 
                 </div>
               </div>
@@ -256,3 +267,73 @@
     </div>
   </div>
 </div>
+
+
+<!-- Approve -->
+<div aria-hidden="true" class="onboarding-modal modal fade animated" id="Approve" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-centered" role="document">
+      <div class="modal-content text-left">
+        <button aria-label="Close" id='closeapprove' class="close" data-dismiss="modal" type="button"><span class="os-icon os-icon-close"></span></button>
+        <div class="onboarding-content with-gradient">
+          <div class="element-wrapper pb-0">
+            <h6 class="element-header text-left">
+              Approve Request
+            </h6>
+            <div class="">
+              
+
+               <p>Are you sure want to approve this request?</p>
+                <br>
+
+                <div class="form-buttons-w">
+                  <div class="element-box-content text-right">
+                    <button class="btn btn-success"
+                     type="submit" 
+                     (click)="approve(transactionsid,'approved')">Yes</button>
+                    <button class="btn btn-danger" data-dismiss="modal" type="submit"> No</button>
+                  </div>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!----------------------end account modal-------------------->
+
+    <!-- end account botton  -->
+  </div>
+
+<!-- Disapprove -->
+  <div aria-hidden="true" class="onboarding-modal modal fade animated" id="disapprove" role="dialog" tabindex="-1">
+      <div class="modal-dialog modal-centered" role="document">
+        <div class="modal-content text-left">
+          <button aria-label="Close" id='closedisapprove' class="close" data-dismiss="modal" type="button"><span class="os-icon os-icon-close"></span></button>
+          <div class="onboarding-content with-gradient">
+            <div class="element-wrapper pb-0">
+              <h6 class="element-header text-left">
+                Disapprove Request
+              </h6>
+              <div class="">
+                
+
+                 <p>Are you sure want to disapprove this request?</p>
+                  <br>
+
+                  <div class="form-buttons-w">
+                    <div class="element-box-content text-right">
+                      <button class="btn btn-success"
+                       (click)="disapprove(transactionsid,'declined')"  type="submit">Yes</button>
+                      <button class="btn btn-danger" data-dismiss="modal" type="submit"> No</button>
+                    </div>
+                  </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!----------------------end account modal-------------------->
+
+      <!-- end account botton  -->
+    </div>

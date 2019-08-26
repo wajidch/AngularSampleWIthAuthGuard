@@ -3,7 +3,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { apiService } from 'src/app/services/api.service';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs'
+import { throwError } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
+declare var jquery:any;
+declare var $ :any;
 @Component({
   selector: 'app-withdraw-request',
   templateUrl: './withdraw-request.component.html',
@@ -17,6 +20,15 @@ export class WithdrawRequestComponent implements OnInit {
   pager: any;
   pages: any[];
   searchForm: FormGroup;
+  name: any;
+  email: any;
+  phone: any;
+  accountid: any;
+  accountgroup: any;
+  amount: any;
+  currency: any;
+  transactionsid: any;
+  file: any;
   constructor(private loadingBar: LoadingBarService,
     private apiservice: apiService) { }
 
@@ -32,7 +44,7 @@ export class WithdrawRequestComponent implements OnInit {
       //this.spinner.show();
       if (val.search) {
         this.loadingBar.start();
-        this.apiservice.get(`admin/searchWithdrawTransactionHistory/${val.search}`)
+        this.apiservice.get(`admin/searchWithdrawRequest/${val.search}`)
           .pipe(
             catchError(err => {
 
@@ -86,12 +98,31 @@ export class WithdrawRequestComponent implements OnInit {
   loadPage(page) {
     this.getWithdrawTranscationlist(page)
   }
+  manage(name,email,phoneNumber
+    ,account_id,amount,currency,
+    account_group,transactionid){
+    
+      console.log("ss",account_id,account_group)
+    this.name=name;
+    this.email=email;
+    this.phone=phoneNumber
+    this.accountid=account_id;
+    this.accountgroup=account_group;
+    this.amount=amount;
+    this.currency=currency;
+    this.transactionsid=transactionid;
+  
+    
+    
+    
+    $("#manageModal").modal();
+  }
   getWithdrawTranscationlist(page) {
 
     try {
       //this.spinner.show();
       this.loadingBar.start();
-      this.apiservice.get(`admin/getWithdrawTransactionHistory?page=${page}`)
+      this.apiservice.get(`admin/getWithdrawRequest?page=${page}`)
         .pipe(
           catchError(err => {
 
@@ -138,4 +169,101 @@ export class WithdrawRequestComponent implements OnInit {
     }
 
   }
+  uploadWithdrawRecipt(event: any) {
+    if (event && event.target.files.length > 0) {
+      const headers = new HttpHeaders();
+      headers.append('Content-Type', 'multipart/*');
+      this.file = event.target.files[0];
+      console.log(this.file);
+      
+      // if (filesize <= 5 && (type === 'image/jpeg' || type === 'image/png')) {
+        
+      //   console.log('true');
+      //   const formData = new FormData();
+      //   formData.append('file', file, file.name);
+      //   formData.append('type', 'Birth certificate');
+      //   if (id != undefined) {
+      //     formData.append('id', id);
+      //   }
+
+
+      //   const reader = new FileReader();
+      //   reader.onload = (value: any) => {
+         
+      //   }
+      //   reader.readAsDataURL(event.target.files[0]);
+
+       
+       
+
+       
+
+
+
+      // }
+    }
+
+  }
+  disapprove(transactionid,status){
+
+    this.loadingBar.start();
+      const formData:any = new FormData();
+        formData.append('file', this.file, this.file.name);
+        formData.append('status', status);
+    let statusobj:any={
+      status:status,
+      file:this.file
+   
+    }
+
+    
+    this.apiservice.post(`admin/updateWithdrawRequest/${transactionid}`,formData)
+    .pipe(
+      catchError(err =>{
+
+       this.loadingBar.complete();
+        return throwError(err)
+      })
+    )
+    .subscribe((res:any)=>{
+      console.log("res",res);
+      if(res.status===200){
+        this.loadingBar.complete();
+        document.getElementById('closedisapprove').click();
+        document.getElementById('closemain').click();
+        this.getWithdrawTranscationlist(1);
+      }
+    })
+  }
+  approve(transactionid,status){
+
+   
+    this.loadingBar.start();
+    const formData:any = new FormData();
+    formData.append('file', this.file, this.file.name);
+    formData.append('status', status);
+    let statusobj:any={
+      status:status,
+     
+    }
+    this.apiservice.post(`admin/updateWithdrawRequest/${transactionid}`,formData)
+    .pipe(
+      catchError(err =>{
+
+       this.loadingBar.complete();
+        return throwError(err)
+      })
+    )
+    .subscribe((res:any)=>{
+      console.log("res",res);
+      if(res.status===200){
+        
+        this.loadingBar.complete();
+        document.getElementById('closeapprove').click();
+        document.getElementById('closemain').click();
+        this.getWithdrawTranscationlist(1);
+      }
+    })
+  }
+
 }
