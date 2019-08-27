@@ -244,7 +244,7 @@
                      !withdrawForm.controls['file'].valid">
                         <span class="help-block" style="color:red" 
                         *ngIf="withdrawForm.controls['file'].hasError('required')">
-                          File is required for approval</span>
+                          File is required</span>
                       </div>
                   <label class="col-form-label" for="">
                     <strong>Upload Receipt</strong></label>
@@ -263,7 +263,7 @@
                   <button class="btn btn-success"
                   data-toggle="modal" [disabled]='!withdrawForm.valid' data-target="#Approve" type="submit">Approve</button>
                   <button class="btn btn-danger" 
-                  data-toggle="modal" data-target="#disapprove" type="submit"> Disapprove</button>
+                  data-toggle="modal" data-target="#disapprove" [disabled]='!withdrawForm.valid' type="submit"> Disapprove</button>
 
                 </div>
               </div>
