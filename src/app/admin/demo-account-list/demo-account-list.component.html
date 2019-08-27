@@ -115,7 +115,7 @@
                       <a *ngIf="list.status==='pending'" class="btn btn-warning">{{list.status}}</a>
                       <a *ngIf="list.status==='approved'" class="btn btn-success">{{list.status}}</a>
                       <a *ngIf="list.status!='approved' && list.status!='pending'"
-                        class="btn btn-success">{{list.status}}</a>
+                        class="btn btn-danger">{{list.status}}</a>
                     </td>
                     <td class="text-center">
                       <button class="btn btn-success" (click)='manage(list.name,
@@ -177,8 +177,7 @@
                     <h4 class="onboarding-title">
                       Demo Account Request
                     </h4>
-                    <form >
-
+                    <form>
                       <div class="row">
                         <div class="col-sm-12">
                           <div class="form-group">
@@ -187,7 +186,8 @@
                             <ng-multiselect-dropdown class="form-control"
                             [placeholder]="'Search User'" [data]="dropdownList"
                                [settings]="dropdownSettings"
-                              (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                              (onSelect)="onItemSelect($event)" 
+                              (onSelectAll)="onSelectAll($event)">
                             </ng-multiselect-dropdown>
                           </div>
                         </div>

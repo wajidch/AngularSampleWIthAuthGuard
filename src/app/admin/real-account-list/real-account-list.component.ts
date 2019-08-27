@@ -35,7 +35,8 @@ export class RealAccountListComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
-  realModal={lever:'Leverage1',
+  realModal={
+    lever:'Leverage1',
   account_group:'Group1',
   account_type:'real',
   platform_type:'meta trader 4',
@@ -129,7 +130,7 @@ export class RealAccountListComponent implements OnInit {
  
    realaccount()
    {
- console.log("vall",this.realModal)
+ console.log("vall",this.realModal);
  this.loadingBar.start();
      this.apiservice.post('admin/createAccount', this.realModal).subscribe((res => {
  
@@ -304,7 +305,7 @@ export class RealAccountListComponent implements OnInit {
   }
   approve(accountid,status,group,lever){
 
-    console.log("group",group,lever)
+    console.log("group",this.realModal)
     this.loadingBar.start();
     let statusobj:any={
       status:status,
