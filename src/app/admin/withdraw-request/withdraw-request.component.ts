@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { apiService } from 'src/app/services/api.service';
 import { catchError } from 'rxjs/operators';
@@ -20,6 +20,7 @@ export class WithdrawRequestComponent implements OnInit {
   pager: any;
   pages: any[];
   searchForm: FormGroup;
+  withdrawForm:FormGroup;
   name: any;
   email: any;
   phone: any;
@@ -36,6 +37,9 @@ export class WithdrawRequestComponent implements OnInit {
     this.getWithdrawTranscationlist(1);
     this.searchForm = new FormGroup({
       search: new FormControl('')
+    })
+    this.withdrawForm=new FormGroup({
+      file:new FormControl('',[Validators.required])
     })
   }
 

@@ -204,7 +204,7 @@
             Manage withdrawal operation
           </h6>
           <div class="">
-            <form>
+            <form [formGroup]='withdrawForm'>
               <div class="form-group row">
                 <label class="col-sm-6" for=""><strong>Withdrawal request name</strong></label>
                 <div class="col-sm-6">
@@ -240,9 +240,16 @@
 
               <div class="row">
                 <div class="col-sm-12">
+                    <div *ngIf="withdrawForm.controls['file'].touched &&
+                     !withdrawForm.controls['file'].valid">
+                        <span class="help-block" style="color:red" 
+                        *ngIf="withdrawForm.controls['file'].hasError('required')">
+                          File is required for approval</span>
+                      </div>
                   <label class="col-form-label" for="">
                     <strong>Upload Receipt</strong></label>
-                  <input (change)='uploadWithdrawRecipt($event)' class="form-control"
+                  <input (change)='uploadWithdrawRecipt($event)'
+                  formControlName='file' name='file' class="form-control"
                    placeholder="Bank name" type="File">
                 </div>
               </div>
@@ -254,7 +261,7 @@
                   <!-- <button class="btn btn-primary" type="button"> Processing</button> -->
                   
                   <button class="btn btn-success"
-                  data-toggle="modal" data-target="#Approve" type="submit">Approve</button>
+                  data-toggle="modal" [disabled]='!withdrawForm.valid' data-target="#Approve" type="submit">Approve</button>
                   <button class="btn btn-danger" 
                   data-toggle="modal" data-target="#disapprove" type="submit"> Disapprove</button>
 
