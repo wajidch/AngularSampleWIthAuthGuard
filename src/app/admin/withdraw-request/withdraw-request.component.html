@@ -267,12 +267,14 @@
 
               <div class="form-buttons-w">
                 <div class="element-box-content text-right">
-                  <!-- <button class="btn btn-primary" type="button"> Processing</button> -->
+                  <!-- data-target="#Approve" data-toggle="modal" data-target="#disapprove" <button class="btn btn-primary" type="button"> Processing</button> -->
                   
                   <button class="btn btn-success"
-                  data-toggle="modal" [disabled]='!withdrawForm.valid' data-target="#Approve" type="submit">Approve</button>
-                  <button class="btn btn-danger" 
-                  data-toggle="modal" data-target="#disapprove" [disabled]='!withdrawForm.valid' type="submit"> Disapprove</button>
+                  data-toggle="modal" [disabled]='!withdrawForm.valid'
+                   (click)="OpenApprovealert(transactionsid,'approved')" type="submit">Approve</button>
+                  <button class="btn btn-danger"
+                   (click)="OpendisApprovealert(transactionsid,'declined')"
+                   [disabled]='!withdrawForm.valid' type="submit"> Disapprove</button>
 
                 </div>
               </div>

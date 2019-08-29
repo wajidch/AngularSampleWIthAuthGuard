@@ -6,6 +6,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import Swal from 'sweetalert2';
 declare var jquery:any;
 declare var $ :any;
 @Component({
@@ -159,6 +160,59 @@ export class RealAccountListComponent implements OnInit {
     
     $("#manageModal").modal()
   }
+
+  OpenApprovealert(accountid,status,group,lever){
+    Swal.fire({
+      title: 'Are you sure want to approve?',
+
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+
+        this.approve(accountid,status,group,lever);
+        Swal.fire(
+          'Approved!',
+          'Your Request has been approved.',
+          'success'
+        )
+        
+      // For more information about handling dismissals please visit
+      // https://sweetalert2.github.io/#handling-dismissals
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.close();
+      }
+    })
+  }
+
+  OpendisApprovealert(accountid,status,group,lever){
+    Swal.fire({
+      title: 'Are you sure want to disapprove?',
+
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+
+        this.disapprove(accountid,status,group,lever);
+        Swal.fire(
+          'Diapproved!',
+          'Your Request has been disapproved.',
+          'success'
+        )
+        
+      // For more information about handling dismissals please visit
+      // https://sweetalert2.github.io/#handling-dismissals
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.close();
+      }
+    })
+  }
+  
   search(val){
      //this.spinner.show();
      this.loadingBar.start();

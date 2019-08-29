@@ -23,6 +23,7 @@
     "ng-multiselect-dropdown": "^0.2.3",
     "ngx-spinner": "^8.0.3",
     "rxjs": "~6.4.0",
+    "sweetalert2": "^8.16.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

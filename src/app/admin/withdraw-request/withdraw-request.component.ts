@@ -7,6 +7,7 @@ import { throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 declare var jquery:any;
 declare var $ :any;
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-withdraw-request',
   templateUrl: './withdraw-request.component.html',
@@ -42,7 +43,58 @@ export class WithdrawRequestComponent implements OnInit {
       file:new FormControl('',[Validators.required])
     })
   }
+  OpenApprovealert(transactionid,status){
+    Swal.fire({
+      title: 'Are you sure want to approve?',
 
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+
+        this.approve(transactionid,status);
+        Swal.fire(
+          'Approved!',
+          'Your Request has been approved.',
+          'success'
+        )
+        
+      // For more information about handling dismissals please visit
+      // https://sweetalert2.github.io/#handling-dismissals
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.close();
+      }
+    })
+  }
+
+  OpendisApprovealert(transactionid,status){
+    Swal.fire({
+      title: 'Are you sure want to disapprove?',
+
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+
+        this.disapprove(transactionid,status);
+        Swal.fire(
+          'Diapproved!',
+          'Your Request has been disapproved.',
+          'success'
+        )
+        
+      // For more information about handling dismissals please visit
+      // https://sweetalert2.github.io/#handling-dismissals
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.close();
+      }
+    })
+  }
+  
   search(val) {
     try {
       //this.spinner.show();

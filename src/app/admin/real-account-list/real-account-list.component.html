@@ -345,9 +345,9 @@ type = "timer"
                       <div class="form-buttons-w">
                         <div class="element-box-content text-right">
                           <button class="btn btn-success"
-                          data-toggle="modal" data-target="#Approve" type="submit">Approve</button>
+                          (click)="OpenApprovealert(accountid,'approved',accountgroup,leverages)" type="submit">Approve</button>
                           <button class="btn btn-danger"
-                          data-toggle="modal" data-target="#disapprove"
+                          (click)="OpendisApprovealert(accountid,'declined',accountgroup,leverages)"
                            type="submit"> Disapprove</button>
                         </div>
                       </div>

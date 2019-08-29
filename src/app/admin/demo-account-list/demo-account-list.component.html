@@ -341,9 +341,11 @@
 
                       <div class="form-buttons-w">
                         <div class="element-box-content text-right">
-                          <button class="btn btn-success" data-toggle="modal" data-target="#Approve"
+                          <button class="btn btn-success"
+                          (click)="OpenApprovealert(accountid,'approved',accountgroup,leverages)"
                             type="submit">Approve</button>
-                          <button class="btn btn-danger" data-toggle="modal" data-target="#disapprove" type="submit">
+                          <button class="btn btn-danger"
+                          (click)="OpendisApprovealert(accountid,'declined',accountgroup,leverages)" type="submit">
                             Disapprove</button>
                         </div>
                       </div>
