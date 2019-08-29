@@ -29337,6 +29337,10 @@ form.create-btn button {
   background-color: #41a184 !important;
   border-color: #41a184 !important;
 }
+.manageModal{
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
 
 .animation-ctn{
   text-align:center;

@@ -69,10 +69,10 @@
 
                     </div>
                   </div>
-                  <div class="element-box-tp">
+                  <!-- <div class="element-box-tp"> -->
 
                     <div class="table-responsive">
-                      <table class="table table-padded">
+                      <table class="table table-lightborder">
                         <thead>
                           <tr>
                             <th>
@@ -130,14 +130,23 @@
                             </td>
 
                             <td class="text-right bolder nowrap">
-                              <button class="mr-2 mb-2 btn btn-primary" type="button"
+                                <button class="btn btn-success" (click)='manage(list.name,
+                                list.email,list.number,
+                                list.accountID,list.amount,
+                                list.currency,
+                                list.account_group,
+                                list.transactions_id
+                                )' type="submit">Manage</button>
+                              <!-- <button 
+                              class="mr-2 mb-2 btn btn-primary"
+                               type="button"
                               (click)='manage(list.name,
                               list.email,list.number,
                               list.accountID,list.amount,
                               list.currency,
                               list.account_group,
                               list.transactions_id
-                              )' data-toggle="modal">Manage</button>
+                              )'>Manage</button> -->
                             </td>
                           </tr>
 
@@ -174,7 +183,7 @@
                       </div>
                       <div class="clearfix"></div>
                     </div>
-                  </div>
+                  <!-- </div> -->
                 </div>
 
                 <!--------------------------step2--------------------->
@@ -191,7 +200,7 @@
   </div>
 </div>
 
-<div aria-hidden="true" class="onboarding-modal modal fade animated" id="manageModal" role="dialog"
+<div aria-hidden="true" class="onboarding-modal modal fade animated manageModal" id="manageModal" role="dialog"
   tabindex="-1">
   <div class="modal-dialog modal-centered" role="document">
     <div class="modal-content text-left">
