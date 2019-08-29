@@ -240,7 +240,7 @@ export class RealAccountListComponent implements OnInit {
       )
       .subscribe((res: any) => {
 
-
+        this.loadingBar.complete();
         if (res.status === 200) {
           this.loadingBar.complete();
           this.pager = res.body.data;

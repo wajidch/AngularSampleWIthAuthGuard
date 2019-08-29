@@ -20,8 +20,8 @@ const routes: Routes = [
   { path: 'accountactivitieshistory', component: AccountActivitiesHistoryComponent },
   { path: 'realaccountlist', component: RealAccountListComponent, },
   { path: 'kycrequest', component: KycRequestComponent, },
-  { path: 'withdrawrequest', component: WithdrawRequestComponent },
-  { path: 'depositrequest', component: DepositRequestComponent }
+  // { path: 'withdrawrequest', component: WithdrawRequestComponent },
+  // { path: 'depositrequest', component: DepositRequestComponent }
 
 ];
 

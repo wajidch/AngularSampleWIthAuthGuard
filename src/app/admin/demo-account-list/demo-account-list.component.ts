@@ -290,7 +290,7 @@ this.loadingBar.start();
       )
 
       .subscribe((res: any) => {
-
+        this.loadingBar.complete();
         if (res.status === 200) {
 
           this.pager = res.body.data;
