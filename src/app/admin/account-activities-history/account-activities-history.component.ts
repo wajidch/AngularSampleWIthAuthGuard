@@ -121,6 +121,7 @@ export class AccountActivitiesHistoryComponent implements OnInit {
           })
         )
         .subscribe((res: any) => {
+          this.loadingBar.complete();
           if (res.status === 200) {
 
             this.notFound = '';
