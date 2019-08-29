@@ -29241,7 +29241,7 @@ form.create-btn button {
   width:100% !important;
 }
 
-.layout-w app-user-transaction-history{
+.layout-w app-account-activities-history{
   width:100% !important;
 }
 
@@ -29251,6 +29251,79 @@ form.create-btn button {
 
 .layout-w app-payment-wizard-withdraw{
   width:100% !important;
+}
+.layout-w app-kyc-request{
+  width:100% !important;
+}
+.layout-w app-withdraw-request{
+  width:100% !important;
+}
+.layout-w app-deposit-request{
+  width:100% !important;
+}
+.multiselect-dropdown .dropdown-btn {
+    display: inline-block !important;
+    border: 0px  !important; 
+    width: 100% !important;
+    padding: 1px 0px !important;
+    margin-bottom: 0 !important;
+    font-weight: 400 !important;
+    line-height: 1.52857143 !important;
+    text-align: left !important;
+    vertical-align: middle !important;
+    cursor: pointer !important;
+    background-image: none !important;
+    border-radius: 4px !important;
+}
+
+.multiselect-dropdown .dropdown-btn .dropdown-down {
+    display: inline-block;
+    top: 10px !important;
+    width: 0 !important;
+    height: 0 !important;
+    border-top: 8px solid #495057 !important;
+    border-left: 4px solid transparent !important;
+    border-right: 4px solid transparent !important;
+}
+.multiselect-dropdown .dropdown-btn
+ .dropdown-up {
+  display: inline-block;
+  width: 0;
+  height: 0 !important;
+  top: 10px !important;
+  border-bottom: 8px solid black !important;
+  border-left: 4px solid transparent !important;
+  border-right: 4px solid transparent !important;
+}
+.multiselect-item-checkbox input[type=checkbox] + div:before {
+  box-sizing: content-box !important;
+  content: '' !important;
+  color: #337ab7 !important;
+  position: absolute !important;
+  top: 50%;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  margin-top: -9px;
+  border: 2px solid #064a5f !important;
+  text-align: center;
+  transition: all .4s ease;
+}
+
+.multiselect-dropdown .dropdown-btn .selected-item {
+  border: 1px solid  ;
+  margin-right: 4px;
+  background: #064a5f !important;
+  padding: 0 5px;
+  color: #fff;
+  border-radius: 2px;
+  float: left;
+}
+
+.multiselect-item-checkbox input[type=checkbox]:checked + div:before {
+  -webkit-animation: .2s ease-in borderscale;
+  animation: .2s ease-in borderscale;
+  background: #064a5f !important;
 }
 .actionbtn{
   background-color: #41a184 !important ;
