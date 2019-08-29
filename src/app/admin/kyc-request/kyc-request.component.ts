@@ -6,6 +6,7 @@ import { throwError } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import {environment} from '../../../environments/environment'
 import { FormGroup, FormControl } from '@angular/forms';
+import Swal from 'sweetalert2';
 declare var jquery:any;
 declare var $ :any;
 @Component({
@@ -139,14 +140,64 @@ this.kycid=kyc_id
     }
     
   }
+  OpenApprovealert(kycid,status){
+    Swal.fire({
+      title: 'Are you sure want to approve?',
 
-  disapprove(id,status){
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+
+        this.approve(kycid,status);
+        Swal.fire(
+          'Approved!',
+          'Your Request has been approved.',
+          'success'
+        )
+        
+      // For more information about handling dismissals please visit
+      // https://sweetalert2.github.io/#handling-dismissals
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.close();
+      }
+    })
+  }
+
+  OpendisApprovealert(kycid,status){
+    Swal.fire({
+      title: 'Are you sure want to disapprove?',
+
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+
+        this.disapprove(kycid,status);
+        Swal.fire(
+          'Diapproved!',
+          'Your Request has been disapproved.',
+          'success'
+        )
+        
+      // For more information about handling dismissals please visit
+      // https://sweetalert2.github.io/#handling-dismissals
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.close();
+      }
+    })
+  }
+  disapprove(kycid,status){
 
     this.loadingBar.start();
     let statusobj:any={
       status:status
     }
-    this.apiservice.put(`admin/updateKyc/${id}`,statusobj)
+    this.apiservice.put(`admin/updateKyc/${kycid}`,statusobj)
     .pipe(
       catchError(err =>{
 
@@ -164,13 +215,13 @@ this.kycid=kyc_id
       }
     })
   }
-  approve(id,status){
+  approve(kycid,status){
 
     this.loadingBar.start();
     let statusobj:any={
       status:status
     }
-    this.apiservice.put(`admin/updateKyc/${id}`,statusobj)
+    this.apiservice.put(`admin/updateKyc/${kycid}`,statusobj)
     .pipe(
       catchError(err =>{
 
