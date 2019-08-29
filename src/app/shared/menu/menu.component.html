@@ -157,7 +157,7 @@
                         {{userName}}
                     </div>
                     <div class="logged-user-role">
-                      User
+                      Admin
                     </div>
                   </div>
                 </div>
@@ -166,61 +166,63 @@
                 -------------------->
                 <ul class="main-menu responsive-menu">
                   <li class="has-sub-menu">
-                    <a routerLink='users/myprofile'>
+                    <a routerLink='admin/myprofile'>
                       <div class="icon-w">
                         <div class="os-icon os-icon-layout"></div>
                       </div>
                       <span>Kişisel Bilgiler</span></a>
                   </li>
                   <li class="has-sub-menu">
-                    <a routerLink='users/verifyaccount'>
+                    <a routerLink='admin/kycrequest'>
                       <div class="icon-w">
                         <div class="os-icon os-icon-layers"></div>
                       </div>
-                      <span>Kimlik Doğrulama</span></a>
+                      <span>KYC İsteği</span></a>
                   </li>
                   <li class="has-sub-menu">
-                    <a routerLink='users/changepassword'>
+                    <a routerLink='admin/changepassword'>
                       <div class="icon-w">
                         <div class="os-icon os-icon-life-buoy"></div>
                       </div>
                       <span>Şifre Yenileme</span></a>
                   </li>
                   <li class="has-sub-menu">
-                    <a routerLink='users/realaccountlist'>
+                    <a routerLink='admin/realaccountlist'>
                       <div class="icon-w">
                         <div class="os-icon os-icon-package"></div>
                       </div>
                       <span>Gerçek Hesaplar</span></a>
                   </li>
                   <li class="has-sub-menu">
-                    <a routerLink='users/demoaccountlist'>
+                    <a routerLink='admin/demoaccountlist'>
                       <div class="icon-w">
                         <div class="os-icon os-icon-file-text"></div>
                       </div>
                       <span>Demo Hesap Istekleri</span></a>
                   </li>
                   <li class="has-sub-menu">
-                    <a routerLink='users/payment-wizard-withdraw'>
+                      <!-- routerLink='admin/withdrawrequest' -->
+                    <a >
                       <div class="icon-w">
                         <div class="os-icon os-icon-mail"></div>
                       </div>
-                      <span>Para çekme talepleri</span></a>
+                      <span>Para Yatırma</span></a>
                   </li>
                   <li class="has-sub-menu">
-                    <a routerLink="users/payment-wizard-deposit">
+                      <!-- routerLink="admin/depositrequest" -->
+                    <a >
                       <div class="icon-w">
                         <div class="os-icon os-icon-users"></div>
                       </div>
-                      <span>Para yatırma talepleri</span></a>
+                      <span>Para Çekme</span></a>
                   </li>
-                  <!-- <li class="has-sub-menu">
-                      <a routerLink='users/transcationhistory'>
+                  <li class="has-sub-menu">
+                      <a routerLink='admin/accountactivitieshistory'>
                         <div class="icon-w">
                           <div class="os-icon os-icon-edit-32"></div>
                         </div>
-                        <span>Işlem geçmişi</span></a>
-                    </li> -->
+                        <span>Hesap Hareketleri</span></a>
+                    </li>
 
                     <li class="has-sub-menu">
                         <a (click)='logout()'>
@@ -255,7 +257,7 @@
                       {{userName}}
                     </div>
                     <div class="logged-user-role">
-                      User
+                      Admin
                     </div>
                   </div>
                 </div>
@@ -268,7 +270,7 @@
                   <span>Profile</span>
                 </li>
                 <li class="has-sub-menu selected">
-                  <a routerLink='users/myprofile'>
+                  <a routerLink='admin/myprofile'>
                     <div class="icon-w">
                       <div class="os-icon os-icon-layout"></div>
                     </div>
@@ -276,14 +278,14 @@
     
                 </li>
                 <li class="has-sub-menu">
-                  <a routerLink='users/verifyaccount'>
+                  <a routerLink='admin/kycrequest'>
                     <div class="icon-w">
                       <div class="os-icon os-icon-layers"></div>
                     </div>
-                    <span>Kimlik Doğrulama</span></a>
+                    <span>KYC İsteği</span></a>
                 </li>
                 <li class="has-sub-menu">
-                  <a routerLink='users/changepassword'>
+                  <a routerLink='admin/changepassword'>
                     <div class="icon-w">
                       <div class="os-icon os-icon-life-buoy"></div>
                     </div>
@@ -293,14 +295,14 @@
                   <span>Yatırım Hesapları</span>
                 </li>
                 <li class="has-sub-menu">
-                  <a routerLink='users/realaccountlist'>
+                  <a routerLink='admin/realaccountlist'>
                     <div class="icon-w">
                       <div class="os-icon os-icon-package"></div>
                     </div>
                     <span>Gerçek Hesaplar</span></a>
                 </li>
                 <li class="has-sub-menu">
-                  <a routerLink="users/demoaccountlist">
+                  <a routerLink="admin/demoaccountlist">
                     <div class="icon-w">
                       <div class="os-icon os-icon-file-text"></div>
                     </div>
@@ -311,26 +313,28 @@
                   <span>Finans İşlemleri</span>
                 </li>
                 <li class="has-sub-menu">
-                  <a routerLink='users/payment-wizard-withdraw'>
+                    <!-- routerLink='admin/withdrawrequest' -->
+                  <a >
                     <div class="icon-w">
                       <div class="os-icon os-icon-mail"></div>
                     </div>
-                    <span>Para çekme talepleri</span></a>
+                    <span>Para Yatırma</span></a>
                 </li>
                 <li class="has-sub-menu">
-                  <a routerLink="users/payment-wizard-deposit">
+                    <!-- routerLink="admin/depositrequest" -->
+                  <a >
                     <div class="icon-w">
                       <div class="os-icon os-icon-users"></div>
                     </div>
-                    <span>Para yatırma talepleri</span></a>
+                    <span>Para Çekme</span></a>
                 </li>
-                <!-- <li class="has-sub-menu">
-                  <a routerLink='users/transcationhistory'>
+                <li class="has-sub-menu">
+                  <a routerLink='admin/accountactivitieshistory'>
                     <div class="icon-w">
                       <div class="os-icon os-icon-edit-32"></div>
                     </div>
-                    <span>Işlem geçmişi</span></a>
-                </li> -->
+                    <span>Hesap Hareketleri</span></a>
+                </li>
                 <li class="has-sub-menu">
                     <a (click)='logout()' style="cursor: pointer;">
                       <div class="icon-w">

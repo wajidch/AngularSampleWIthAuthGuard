@@ -15,14 +15,14 @@ export class AppComponent implements OnInit {
   currentUser:any;
   constructor( public router: Router,
     private apiservice:apiService,
-    private loadingBar:LoadingBarService,
+    
     private authenticationService: authService) {
       
      }
 
   ngOnInit() {
    
-    this.currentUser=localStorage.getItem('token');
+    this.currentUser=localStorage.getItem('admin_token');
   }
   
 }

@@ -11,7 +11,7 @@ import { throwError } from 'rxjs';
 @Injectable()
 export class apiService implements OnInit {
     jsonHeaders = new HttpHeaders();
-    token=localStorage.getItem('token');
+    token=localStorage.getItem('admin_token');
     
     
     private apiUrl = environment.apiUrl;
@@ -30,6 +30,7 @@ export class apiService implements OnInit {
 
     get(url: string) {
         
+        console.log(this.token)
         const headers = new HttpHeaders()
         .set("Authorization", 'Bearer '+ this.token);
      

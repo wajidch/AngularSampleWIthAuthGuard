@@ -1,0 +1,284 @@
+<ngx-loading-bar></ngx-loading-bar>
+
+<div class="all-wrapper with-side-panel solid-bg-all">
+
+  <div class="layout-w">
+
+    <div class="content-w">
+
+      <div class="content-i">
+        <div class="content-box ">
+          <div class="element-wrapper content-info">
+            <h6 class="element-header">
+              KYC Request
+            </h6>
+            <div class="element-box">
+
+              <!--------------------------alerts messages------------->
+
+              <div class="col-md-12">
+                <div class="element-box-content">
+
+                  <!-- weldone --------------------->
+                  <!-- <div class="alert alert-success" role="alert">
+                            <strong>Well done! </strong>You successfully read this important alert message.
+                          </div> -->
+
+                  <!-- weldone --------------------->
+
+                  <!-- heads up alert --------------------->
+
+                  <!--<div class="alert alert-info" role="alert">-->
+                  <!--<strong>Heads up! </strong>This alert needs your attention, but it's not super important.-->
+                  <!--</div>-->
+                  <!-- heads up alert--------------------->
+
+                  <!-- warnning--------------------->
+                  <!--<div class="alert alert-warning" role="alert">-->
+                  <!--<strong>Warning! </strong>Better check yourself, you're not looking too good.-->
+                  <!--</div>-->
+
+                  <!-- warnning--------------------->
+
+                  <!-- dangerous-------------------->
+                  <!--<div class="alert alert-danger" role="alert">-->
+                  <!--<strong>Oh snap! </strong>Change a few things up and try submitting again.-->
+                  <!--</div>-->
+                  <!--</div>-->
+                  <!-- warnning--------------------->
+
+                  <!--------------------------alerts messages end------------->
+
+                </div>
+              </div>
+              <!--------------------
+                      START - Controls Above Table
+                      -------------------->
+              <!--------------------
+                      END - Controls Above Table
+                      -------------------->
+              <div class="table-responsive">
+                <!--------------------
+                        START - Basic Table
+                        -------------------->
+                <div class="controls-above-table" style="margin: 20px 0 0;">
+                  <div class="row clearfix">
+                    <div class="col-sm-6 col-md-4">
+                      <form [formGroup]='searchForm'>
+                        <h6>
+                          <input type="text" name='search' formControlName='search' (keyup)='search(searchForm.value)'
+                            placeholder="search here" class="form-control">
+                        </h6>
+                      </form>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                    </div>
+                  </div>
+                </div>
+
+
+                <table class="table table-lightborder">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+
+                      <th>Type</th>
+                      <th>Status</th>
+
+                      <th class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf='!NoRecordFound'>
+                    <tr *ngFor='let list of kyclist'>
+                      <td>{{list.name}}</td>
+                      <td>{{list.email}}</td>
+
+                      <td>{{list.type}}</td>
+                      <td>
+                        <a *ngIf="list.status==='pending'" class="btn btn-warning">{{list.status}}</a>
+                        <a *ngIf="list.status==='approved'" class="btn btn-success">{{list.status}}</a>
+                        <a *ngIf="list.status!='approved' && list.status!='pending'"
+                          class="btn btn-success">{{list.status}}</a>
+                      </td>
+                      <!-- data-toggle="modal" data-target="#myModal2"  -->
+                      <td class="text-center">
+                        <button class="btn btn-success" (click)='manage(list.name,list.email
+                                 ,list.url,list.type,list.kyc_id)' type="submit">Manage</button></td>
+                    </tr>
+
+                  </tbody>
+                  <tbody *ngIf='NoRecordFound'>
+
+                    <h3>New Request Not Found</h3>
+
+                  </tbody>
+                  <div *ngIf='errormessage' class="alert alert-error alert-adj" role="alert">
+                    <strong>{{errormessage}} </strong>.
+                  </div>
+                </table>
+                <div class="card-footer float-right pb-0 pt-3">
+                  <ul class="pagination">
+                    <!-- <li [ngClass]="{disabled:pager.current_page === 1}"
+                                         class="page-item first-item">
+                                            <a routerLink [queryParams]="{ page: 1 }" 
+                                            class="page-link">First</a>
+                                        </li>
+                                        <li [ngClass]="{disabled:pager.current_page === 1}" class="page-item previous-item">
+                                            <a routerLink [queryParams]="{ page: pager.current_page - 1 }" class="page-link">Previous</a>
+                                        </li> -->
+                    <li *ngFor="let page of pages" [ngClass]="{active:pager.current_page === page}"
+                      class="page-item number-item">
+                      <a (click)='loadPage(page)' class="page-link">{{page}}</a>
+                    </li>
+                    <!-- <li [ngClass]="{disabled:pager.current_page === pager.last_page}" class="page-item next-item">
+                                            <a routerLink [queryParams]="{ page: pager.current_page + 1 }" class="page-link">Next</a>
+                                        </li>
+                                        <li [ngClass]="{disabled:pager.current_page === pager.last_page}" class="page-item last-item">
+                                            <a routerLink [queryParams]="{ page: pager.last_page }" class="page-link">Last</a>
+                                        </li> -->
+                  </ul>
+                </div>
+                <div class="clearfix"></div>
+                <!--------------------
+                        END - Basic Table
+                        -------------------->
+              </div>
+              <!--_________________new account button___________ -->
+
+
+
+              <!---------------------- create account model ------------------------------>
+
+              <!-- Modal -->
+
+              <div aria-hidden="true" class="onboarding-modal modal fade animated" id="myModal2" role="dialog"
+                tabindex="-1">
+                <div class="modal-dialog modal-centered" role="document">
+                  <div class="modal-content text-left">
+                    <button aria-label="Close" id='closemain' class="close" data-dismiss="modal" type="button"><span
+                        class="os-icon os-icon-close"></span></button>
+                    <div class="onboarding-content with-gradient">
+                      <div class="element-wrapper pb-0">
+                        <h6 class="element-header text-left">
+                          KYC Request
+                        </h6>
+                        <div class="">
+                          <form>
+
+                            <div class="form-group row">
+                              <label class="col-sm-6" for=""> <strong>User Name</strong></label>
+                              <div class="col-sm-6">
+                                {{name}}
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-6" for=""><strong>User Email</strong></label>
+                              <div class="col-sm-6">
+                                {{email}}
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-12" for=""><strong>{{type}}</strong></label>
+                              <div class="col-sm-12">
+                                <img [src]="url" alt="/" width="100%">
+                              </div>
+                            </div>
+                            <br>
+
+                            <div class="form-buttons-w">
+                              <div class="element-box-content text-right">
+                                <button class="btn btn-success" data-toggle="modal" data-target="#Approve"
+                                  type="submit">Approve</button>
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#disapprove"
+                                  type="submit"> Disapprove</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!----------------------end account modal-------------------->
+
+                <!-- end account botton  -->
+              </div>
+
+              <div aria-hidden="true" class="onboarding-modal modal fade animated" id="Approve" role="dialog"
+                tabindex="-1">
+                <div class="modal-dialog modal-centered" role="document">
+                  <div class="modal-content text-left">
+                    <button aria-label="Close" id='closeapprove' class="close" data-dismiss="modal" type="button"><span
+                        class="os-icon os-icon-close"></span></button>
+                    <div class="onboarding-content with-gradient">
+                      <div class="element-wrapper pb-0">
+                        <h6 class="element-header text-left">
+                          Approve Request
+                        </h6>
+                        <div class="">
+
+
+                          <p>Are you sure want to approve this request?</p>
+                          <br>
+
+                          <div class="form-buttons-w">
+                            <div class="element-box-content text-right">
+                              <button class="btn btn-success" type="submit"
+                                (click)="approve(kycid,'approved')">Yes</button>
+                              <button class="btn btn-danger" data-dismiss="modal" type="submit"> No</button>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!----------------------end account modal-------------------->
+
+                <!-- end account botton  -->
+              </div>
+
+              <div aria-hidden="true" class="onboarding-modal modal fade animated" id="disapprove" role="dialog"
+                tabindex="-1">
+                <div class="modal-dialog modal-centered" role="document">
+                  <div class="modal-content text-left">
+                    <button aria-label="Close" id='closedisapprove' class="close" data-dismiss="modal" type="button"><span
+                        class="os-icon os-icon-close"></span></button>
+                    <div class="onboarding-content with-gradient">
+                      <div class="element-wrapper pb-0">
+                        <h6 class="element-header text-left">
+                          Disapprove Request
+                        </h6>
+                        <div class="">
+
+
+                          <p>Are you sure want to disapprove this request?</p>
+                          <br>
+
+                          <div class="form-buttons-w">
+                            <div class="element-box-content text-right">
+                              <button class="btn btn-success" (click)="disapprove(kycid,'declined')"
+                                type="submit">Yes</button>
+                              <button class="btn btn-danger" data-dismiss="modal" type="submit"> No</button>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!----------------------end account modal-------------------->
+
+                <!-- end account botton  -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="display-type"></div>
+    </div>
+  </div>
+</div>

@@ -3,8 +3,8 @@ import { apiService } from 'src/app/services/api.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { LoadingBarService } from '@ngx-loading-bar/core';
-import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -13,7 +13,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class MenuComponent implements OnInit {
 userName=localStorage.getItem('user_name');
-token=localStorage.getItem('token')
+token=localStorage.getItem('admin_token')
   constructor(private apiservice:apiService,
     private spinner:NgxSpinnerService,
     private router:Router,
@@ -25,8 +25,8 @@ token=localStorage.getItem('token')
 
     //this.spinner.show();
     this.loadingBar.start();
-    this.apiservice.post('auth/logout',this.token)
     
+    this.apiservice.post('admin/logout',this.token)
     .pipe(
       catchError(err => {
         console.log('Handling error locally and rethrowing it...', err);
@@ -47,7 +47,8 @@ token=localStorage.getItem('token')
       localStorage.removeItem('token');
       //this.spinner.hide();
       this.loadingBar.complete();
-      this.router.navigateByUrl('users/login');
+      this.router.navigateByUrl('admin/login');
+      this.loadingBar.complete();
     })
 
   }

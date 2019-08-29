@@ -15,7 +15,8 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 export class JwtInterceptor implements HttpInterceptor {
   constructor(private router:Router,private spinner:NgxSpinnerService) {}
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(request: HttpRequest<any>, next: HttpHandler):
+   Observable<HttpEvent<any>> {
     
     
     return next.handle(request).pipe(tap((event: HttpEvent<any>) => {
@@ -30,7 +31,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
             this.spinner.hide();
             localStorage.clear();
-            this.router.navigateByUrl('users/login');
+            this.router.navigateByUrl('admin/login');
 
 
         

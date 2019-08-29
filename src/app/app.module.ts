@@ -4,18 +4,18 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './shared/menu/menu.component';
-import { DashboardComponent } from './users/dashboard/dashboard.component';
-import { CreateAccountComponent } from './users/create-account/create-account.component';
-import { ForgotPasswordComponent } from './users/forgot-password/forgot-password.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { apiService } from './services/api.service'
-import { ForgotEmailVerificationComponent } from './users/forgot-email-verification/forgot-email-verification.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 import { NgxSpinnerModule } from "ngx-spinner";
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { TokenInterceptor } from './services/token.interceptor';
 import { JwtInterceptor } from './services/jwt.interceptor';
-import { LoginComponent } from './users/login/login.component';
+import { LoginComponent } from './admin/login/login.component';
 import { authService } from './services/auth.service';
 
 @NgModule({
@@ -24,9 +24,7 @@ import { authService } from './services/auth.service';
     MenuComponent,
     LoginComponent,
     DashboardComponent,
-    CreateAccountComponent,
-    ForgotPasswordComponent,
-    ForgotEmailVerificationComponent,
+   
     
   
   ],
@@ -37,7 +35,8 @@ import { authService } from './services/auth.service';
     FormsModule,
     HttpClientModule,
     NgxSpinnerModule,
-    LoadingBarModule
+    LoadingBarModule,
+    NgMultiSelectDropDownModule
     
   ],
   providers: [apiService,

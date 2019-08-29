@@ -1,41 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './users/login/login.component';
-import { DashboardComponent } from './users/dashboard/dashboard.component';
-import { CreateAccountComponent } from './users/create-account/create-account.component';
-import { ForgotPasswordComponent } from './users/forgot-password/forgot-password.component';
-import { ForgotEmailVerificationComponent } from './users/forgot-email-verification/forgot-email-verification.component';
+import { LoginComponent } from './admin/login/login.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+
 import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
-       
-    path: 'users/dashboard', component: DashboardComponent,
-    canActivate: [AuthGuard]
- },
+    path: 'admin/dashboard',
+    component: DashboardComponent, canActivate: [AuthGuard]
+  },
 
- {path:'',redirectTo: 'users/login',pathMatch: 'full'},
- 
+  { path: '', redirectTo: 'admin/login', pathMatch: 'full' },
+  { path: 'admin/login', component: LoginComponent },
   {
-       
-    path: 'users/login' ,  component:LoginComponent
- },
- { path: 'users/createaccount', component:CreateAccountComponent
-},
-{ path:'users/forgotpassword',component:ForgotPasswordComponent,},
-{ path:'users/forgot',component:ForgotEmailVerificationComponent,},
+    path: 'admin', loadChildren: './admin/admin.module#AdminModule'
+    , canActivate: [AuthGuard]
+  },
+  { path: '**', redirectTo: 'admin/login', pathMatch: 'full' }
 
-
- 
-  { path: 'users', loadChildren: './users/users.module#UserModule'
-  ,canActivate: [AuthGuard]},
-  
-  {path:'**',redirectTo:'users/login',pathMatch:'full'}
-  
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
