@@ -18,6 +18,7 @@ export class CreateAccountComponent implements OnInit {
   registeruserForm: FormGroup;
   message: string;
   errormessage: any;
+  submitted:boolean;
   constructor(
     private apiservice: apiService,
     private router: Router,
@@ -48,6 +49,10 @@ export class CreateAccountComponent implements OnInit {
 
   register(val) {
     //this.spinner.show();
+    this.submitted=true;
+    if(this.registeruserForm.valid){
+this.submitted=false;
+    
     this.loadingBar.start();
     this.apiservice.postwithouttoken('auth/register', val)
       .pipe(
@@ -79,5 +84,8 @@ export class CreateAccountComponent implements OnInit {
       })
 
   }
-
+  else{
+    return;
+  }
+  }
 }

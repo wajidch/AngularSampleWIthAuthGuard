@@ -307,7 +307,7 @@ let checkroute=localStorage.getItem("changeroutedeposit")
     step6.classList.remove("active");
 
   }
-  paymentmethodtab() {
+  deposit(){
     var step1 = document.getElementById("stepContent1");
     step1.classList.remove("active");
     var step2 = document.getElementById("stepContent2");
@@ -320,8 +320,22 @@ let checkroute=localStorage.getItem("changeroutedeposit")
     step5.classList.add("active");
     var step6 = document.getElementById("step3");
     step6.classList.remove("active");
-
   }
+  // paymentmethodtab() {
+  //   var step1 = document.getElementById("stepContent1");
+  //   step1.classList.remove("active");
+  //   var step2 = document.getElementById("stepContent2");
+  //   step2.classList.add("active");
+  //   var step3 = document.getElementById("stepContent3");
+  //   step3.classList.remove("active");
+  //   var step4 = document.getElementById("step1");
+  //   step4.classList.remove("active");
+  //   var step5 = document.getElementById("step2");
+  //   step5.classList.add("active");
+  //   var step6 = document.getElementById("step3");
+  //   step6.classList.remove("active");
+
+  // }
    depositmoney(val) {
     //this.spinner.show();
     console.log("value",val)

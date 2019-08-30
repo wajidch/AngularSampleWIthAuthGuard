@@ -29,8 +29,8 @@ export class RealAccountListComponent implements OnInit {
 
   ngOnInit() {
     this.createrealAccountForm = new FormGroup({
-      lever: new FormControl(''),
-      account_group: new FormControl(''),
+      lever: new FormControl('Leverage1'),
+      account_group: new FormControl('Group1'),
       account_type: new FormControl('real'),
       platform_type: new FormControl('meta trader 4'),
       currency: new FormControl('USD'),

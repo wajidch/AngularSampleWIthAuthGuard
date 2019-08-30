@@ -56,7 +56,7 @@
                             <td>{{list.lever}}</td>
                             <td>{{list.currency}}</td>
                             <td class="text-center">
-                              <a 
+                              <a (click)='deposit()'
                                 class="btn btn-success actionbtn">Deposit</a>
                             </td>
 
@@ -296,7 +296,7 @@
 
 
                       <div class="col-sm-4 col-xxxl-4">
-                        <a class="element-box el-tablo" href="payment-method.html">
+                        <a class="element-box el-tablo">
                           <div class="label" style="font-size: 16px">
                             Credit Card
                           </div>

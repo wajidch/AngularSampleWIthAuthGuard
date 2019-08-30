@@ -48,9 +48,10 @@
         </div>
         <div class="form-group pt-2">
           <label for="">Name</label>
-          <div *ngIf="registeruserForm.controls['name'].touched &&
+          <div *ngIf="submitted &&
              !registeruserForm.controls['name'].valid">
-            <span class="help-block" style="color:red" *ngIf="registeruserForm.controls['name'].hasError('required')">
+            <span class="help-block" style="color:red" 
+            *ngIf="submitted && registeruserForm.controls['name'].hasError('required')">
               Name is required</span>
           </div>
           <input class="form-control" name='name' formControlName='name' placeholder="Enter your name" type="text">
@@ -59,9 +60,10 @@
         </div>
         <div class="form-group">
           <label for="">Phone</label>
-          <div *ngIf="registeruserForm.controls['number'].touched &&
+          <div *ngIf="submitted &&
              !registeruserForm.controls['number'].valid">
-            <span class="help-block" style="color:red" *ngIf="registeruserForm.controls['number'].hasError('required')">
+            <span class="help-block" style="color:red" 
+            *ngIf="submitted && registeruserForm.controls['number'].hasError('required')">
               Phone is required</span>
           </div>
           <input class="form-control" name='number' formControlName='number' placeholder="Enter your phone" type="text">
@@ -69,14 +71,16 @@
         </div>
         <div class="form-group">
           <label for=""> Email address</label>
-          <div *ngIf="registeruserForm.controls['email'].touched &&
+          <div *ngIf="submitted &&
              !registeruserForm.controls['email'].valid">
-            <span class="help-block" style="color:red" *ngIf="registeruserForm.controls['email'].hasError('required')">
+            <span class="help-block" style="color:red" 
+            *ngIf="submitted && registeruserForm.controls['email'].hasError('required')">
               Email is required</span>
           </div>
-          <div *ngIf="registeruserForm.controls['email'].touched &&
+          <div *ngIf="submitted &&
              !registeruserForm.controls['email'].valid">
-            <span class="help-block" style="color:red" *ngIf="registeruserForm.controls['email'].hasError('email')">
+            <span class="help-block" style="color:red" 
+            *ngIf="submitted && registeruserForm.controls['email'].hasError('email')">
               Email format not valid</span>
           </div>
           <input class="form-control" name="email" formControlName='email' placeholder="Enter email" type="email">
@@ -86,16 +90,16 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for=""> Password</label>
-              <div *ngIf="registeruserForm.controls['password'].touched &&
+              <div *ngIf="submitted &&
                 !registeruserForm.controls['password'].valid">
                 <span class="help-block" style="color:red"
-                  *ngIf="registeruserForm.controls['password'].hasError('required')">
+                  *ngIf="submitted && registeruserForm.controls['password'].hasError('required')">
                   Password is required</span>
               </div>
-              <div *ngIf="registeruserForm.controls['password'].touched &&
+              <div *ngIf="submitted &&
                 !registeruserForm.controls['password'].valid">
                 <span class="help-block" style="color:red"
-                  *ngIf="registeruserForm.controls['password'].hasError('minlength')">
+                  *ngIf="submitted && registeruserForm.controls['password'].hasError('minlength')">
                   min length of password is 8 characters</span>
               </div>
               <input class="form-control" name='password' formControlName='password' placeholder="Password"
@@ -106,16 +110,16 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="">Confirm Password</label>
-              <div *ngIf="registeruserForm.controls['password_confirmation'].touched &&
+              <div *ngIf="submitted &&
                 !registeruserForm.controls['password_confirmation'].valid">
                 <span class="help-block" style="color:red"
-                  *ngIf="registeruserForm.controls['password_confirmation'].hasError('required')">
+                  *ngIf="submitted && registeruserForm.controls['password_confirmation'].hasError('required')">
                   Confirm Password is required</span>
               </div>
-              <div *ngIf="registeruserForm.controls['password_confirmation'].touched &&
+              <div *ngIf="submitted &&
                 !registeruserForm.controls['password_confirmation'].valid">
                 <span class="help-block" style="color:red"
-                  *ngIf="registeruserForm.controls['password_confirmation'].hasError('mustMatch')">
+                  *ngIf="submitted && registeruserForm.controls['password_confirmation'].hasError('mustMatch')">
                   Confirm password not matched</span>
               </div>
               <input class="form-control" name="password_confirmation" formControlName='password_confirmation'
@@ -153,7 +157,7 @@
         </div>
         <div class="buttons-w">
           <button class="btn btn-primary" (click)='register(registeruserForm.value)'
-            [disabled]='!registeruserForm.valid'>Register Now</button>
+            >Register Now</button>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <label class="form-check-label">
             <a routerLink="users/login">Login</a></label>

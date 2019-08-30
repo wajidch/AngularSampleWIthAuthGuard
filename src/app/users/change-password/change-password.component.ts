@@ -17,6 +17,7 @@ export class ChangePasswordComponent implements OnInit {
   token = localStorage.getItem('token')
   changepasswordForm: FormGroup
   errormessage: any;
+  submitted: boolean;
   constructor(private apiservice: apiService,
     private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder,
@@ -36,32 +37,40 @@ export class ChangePasswordComponent implements OnInit {
 
   updatePassword(val) {
     //this.spinner.show();
-    this.loadingBar.start();
-    this.apiservice.put('updatePassword', val)
-      .pipe(
-        catchError(err => {
+    this.submitted = true
+    if (this.changepasswordForm.valid) {
+      this.submitted = false;
 
-          this.errormessage = 'Something wrong happend try again!';
-          this.message = '';
-          
+      this.loadingBar.start();
+      this.apiservice.put('updatePassword', val)
+        .pipe(
+          catchError(err => {
+
+            this.errormessage = 'Something wrong happend try again!';
+            this.message = '';
+
+            //this.spinner.hide();
+            this.loadingBar.complete();
+            setTimeout(function () {
+              this.errormessage = '';
+
+            }.bind(this), 3000);
+            return throwError(err)
+          })
+        )
+        .subscribe((res: any) => {
+          this.errormessage = ''
+          this.message = res.body.message;
           //this.spinner.hide();
           this.loadingBar.complete();
           setTimeout(function () {
-            this.errormessage = '';
+            this.message = '';
 
           }.bind(this), 3000);
-          return throwError(err)
         })
-      )
-      .subscribe((res: any) => {
-        this.errormessage = ''
-        this.message = res.body.message;
-        //this.spinner.hide();
-        this.loadingBar.complete();
-        setTimeout(function () {
-          this.message = '';
-
-        }.bind(this), 3000);
-      })
+    }
+    else {
+      return;
+    }
   }
 }
