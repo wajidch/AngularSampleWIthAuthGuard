@@ -40,7 +40,6 @@ export class PaymentWizardWithdrawComponent implements OnInit {
   constructor(private apiservice: apiService,
     private spinner: NgxSpinnerService,
     private router: Router,
-
     private route: ActivatedRoute,
     private loadingBar:LoadingBarService) { }
 
@@ -53,7 +52,7 @@ export class PaymentWizardWithdrawComponent implements OnInit {
       payment_method: new FormControl('bank transfer', [Validators.required]),
       operation_type: new FormControl('withdraw', [Validators.required]),
       amount: new FormControl('', [Validators.required]),
-      currency: new FormControl('Dollar ($)', [Validators.required]),
+      currency: new FormControl('usd', [Validators.required]),
       account_owner: new FormControl('', [Validators.required]),
       iban: new FormControl('', [Validators.required]),
       bank_name: new FormControl('', [Validators.required]),

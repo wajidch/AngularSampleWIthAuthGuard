@@ -18,13 +18,13 @@ export class CreateAccountComponent implements OnInit {
   registeruserForm: FormGroup;
   message: string;
   errormessage: any;
-  submitted:boolean;
+  submitted: boolean;
   constructor(
     private apiservice: apiService,
     private router: Router,
     private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder,
-    private loadingBar:LoadingBarService) { }
+    private loadingBar: LoadingBarService) { }
 
   ngOnInit() {
     this.registeruserForm = this.formBuilder.group({
@@ -49,43 +49,43 @@ export class CreateAccountComponent implements OnInit {
 
   register(val) {
     //this.spinner.show();
-    this.submitted=true;
-    if(this.registeruserForm.valid){
-this.submitted=false;
-    
-    this.loadingBar.start();
-    this.apiservice.postwithouttoken('auth/register', val)
-      .pipe(
-        catchError(err => {
+    this.submitted = true;
+    if (this.registeruserForm.valid) {
+      this.submitted = false;
 
+      this.loadingBar.start();
+      this.apiservice.postwithouttoken('auth/register', val)
+        .pipe(
+          catchError(err => {
+
+            //this.spinner.hide();
+            this.loadingBar.complete();
+            this.message = '';
+            this.errormessage = err.error.errors.email[0];
+            setTimeout(function () {
+              this.errormessage = '';
+
+            }.bind(this), 3000);
+            return throwError(err);
+          })
+        )
+        .subscribe((res: any) => {
+
+
+          this.errormessage = '';
           //this.spinner.hide();
           this.loadingBar.complete();
-          this.message = '';
-          this.errormessage = err.error.errors.email[0];
+          this.message = res.body.message
           setTimeout(function () {
-            this.errormessage = '';
+            this.message = '';
 
           }.bind(this), 3000);
-          return throwError(err);
+
         })
-      )
-      .subscribe((res: any) => {
 
-
-        this.errormessage = '';
-        //this.spinner.hide();
-        this.loadingBar.complete();
-        this.message = res.body.message
-        setTimeout(function () {
-          this.message = '';
-
-        }.bind(this), 3000);
-
-      })
-
-  }
-  else{
-    return;
-  }
+    }
+    else {
+      return;
+    }
   }
 }
