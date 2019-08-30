@@ -15,7 +15,7 @@
             <div class="steps-w">
               <div class="step-triggers">
                 <a class="step-trigger active" id='step1' (click)='realaccounttab()'>Real Account to Withdraw</a>
-                <a class="step-trigger" id='step2' (click)='paymentmethodtab()'>Payment Method</a>
+                <a class="step-trigger" id='step2' >Payment Method</a>
                 <a class="step-trigger" id='step3'>Finalize the Operation</a>
               </div>
               <div class="step-contents">
@@ -260,15 +260,16 @@
                                               <div class="col-sm-6">
                                                 <div class="form-group">
                                                   <label for="">Hesap Seç</label>
-                                                  <select class="form-control" name='account_id' formControlName='account_id'>
+                                                  <select class="form-control" name='account_id'
+                                                    formControlName='account_id'>
                                                     <option *ngFor='let list of accountlist' value="{{list.id}}">
                                                       {{list.account_group}}
                                                     </option>
-                              
+
                                                   </select>
                                                 </div>
                                               </div>
-                              
+
                                             </div>
                                             <div class="form-buttons-w text-right">
                                               <button class="btn btn-primary" type="submit"
@@ -298,7 +299,7 @@
 
 
                       <div class="col-sm-4 col-xxxl-4">
-                        <a class="element-box el-tablo" href="payment-method.html">
+                        <a class="element-box el-tablo" data-toggle="modal" data-target="#papara">
                           <div class="label" style="font-size: 16px">
                             Papara
                           </div>
@@ -310,8 +311,94 @@
                           </div>
                         </a>
                       </div>
+
+                      <div class="modal fade" id="papara" role="dialog">
+                        <div class="modal-dialog modal-sm bank-modal" style="max-width: 480px">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 class="modal-title" style="font-size: 20px">Papara</h4>
+                              <button type="button" id='close' class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                              <ngx-loading-bar></ngx-loading-bar>
+                              <div class="layout-w">
+
+                                <div class="content-w">
+                                  <div class="content-i">
+
+                                    <div>
+
+                                      <div class="element-wrapper p-0">
+
+                                        <div class="element-box col-md-12 m-auto">
+                                          <div class="form-buttons float-right">
+                                          </div>
+                                          <form [formGroup]='withdrawMoneyForm'>
+                                            <h5 class="form-header">
+                                              Havale/EFT Ile papara isteği
+                                            </h5>
+                                            <div *ngIf='message' class="alert alert-success" role="alert">
+                                              <strong>{{message}} </strong>.
+                                            </div>
+                                            <div *ngIf='errormessage' class="alert alert-error" role="alert">
+                                              <strong>{{errormessage}} </strong>.
+                                            </div>
+                                            <div class="row">
+
+
+                                              <div class="col-sm-12">
+                                                <div class="form-group">
+                                                  <label for=""> Transfer Miktarı (USD)</label>
+                                                  <input class="form-control" placeholder="Transfer Miktarı (USD)"
+                                                    name='amount' formControlName='amount' type="text">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-12">
+                                                <div class="form-group">
+                                                  <label for=""> Transfer Miktarı (TL)</label>
+                                                  <input class="form-control" placeholder="Transfer Miktarı (TL)"
+                                                    name='amount' formControlName='amount' type="text">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-sm-12">
+                                                <div class="form-group">
+                                                  <label for="">papara numarası</label>
+                                                  <input class="form-control" placeholder="papara numarası"
+                                                    name='amount' formControlName='amount' type="text">
+                                                </div>
+                                              </div>
+
+                                            </div>
+
+
+                                            <div class="form-buttons-w text-right">
+                                              <button class="btn btn-primary" type="submit"
+                                                (click)='withdrawmoney(withdrawMoneyForm.value)'
+                                                disabled>Gönder</button>
+                                            </div>
+
+                                          </form>
+
+                                        </div>
+                                      </div>
+
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                            <!-- <div class="modal-footer">
+                              <button class="btn btn-primary" type="button" data-dismiss="modal">Close</button>
+                            </div> -->
+                          </div>
+                        </div>
+                      </div>
                       <div class="col-sm-4 col-xxxl-4">
-                        <a class="element-box el-tablo" href="#" data-toggle="modal" data-target="#myModal2">
+                        <a class="element-box el-tablo" data-toggle="modal" data-target="#bitcoin">
                           <div class="label" style="font-size: 16px">
                             Bitcoin
                           </div>
@@ -325,24 +412,93 @@
                       </div>
 
                       <!-- -------------------------- bitcoin model ---------------->
-                      <div class="modal fade" id="myModal2" role="dialog">
+                      <div class="modal fade" id="bitcoin" role="dialog">
                         <div class="modal-dialog modal-sm bank-modal" style="max-width: 480px">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h4 class="modal-title" style="font-size: 20px">Bitcoin</h4>
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title" style="font-size: 20px">BTC</h4>
+                              <button type="button" id='close' class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
-                              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                              <ngx-loading-bar></ngx-loading-bar>
+                              <div class="layout-w">
+
+                                <div class="content-w">
+                                  <div class="content-i">
+
+                                    <div>
+
+                                      <div class="element-wrapper p-0">
+
+                                        <div class="element-box col-md-12 m-auto">
+                                          <div class="form-buttons float-right">
+                                          </div>
+                                          <form [formGroup]='withdrawMoneyForm'>
+                                            <h5 class="form-header">
+                                              Havale/EFT Ile btc isteği
+                                            </h5>
+                                            <div *ngIf='message' class="alert alert-success" role="alert">
+                                              <strong>{{message}} </strong>.
+                                            </div>
+                                            <div *ngIf='errormessage' class="alert alert-error" role="alert">
+                                              <strong>{{errormessage}} </strong>.
+                                            </div>
+                                            <div class="row">
+
+
+                                              <div class="col-sm-12">
+                                                <div class="form-group">
+                                                  <label for=""> Transfer Miktarı (USD)</label>
+                                                  <input class="form-control" placeholder="Transfer Miktarı (USD)"
+                                                    name='amount' formControlName='amount' type="text">
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-12">
+                                                <div class="form-group">
+                                                  <label for=""> Transfer Miktarı (BTC)</label>
+                                                  <input class="form-control" placeholder="Transfer Miktarı (TL)"
+                                                    name='amount' formControlName='amount' type="text">
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-sm-12">
+                                                <div class="form-group">
+                                                  <label for="">btc cüzdan adresi</label>
+                                                  <input class="form-control" placeholder="btc cüzdan adresi"
+                                                    name='amount' formControlName='amount' type="text">
+                                                </div>
+                                              </div>
+
+                                            </div>
+
+
+                                            <div class="form-buttons-w text-right">
+                                              <button class="btn btn-primary" type="submit"
+                                                (click)='withdrawmoney(withdrawMoneyForm.value)'
+                                                disabled>Gönder</button>
+                                            </div>
+
+                                          </form>
+
+                                        </div>
+                                      </div>
+
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+
                             </div>
-                            <div class="modal-footer">
+                            <!-- <div class="modal-footer">
                               <button class="btn btn-primary" type="button" data-dismiss="modal">Close</button>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </div>
                       <!-- -------------------------- bitcoin model ---------------->
+
                     </div>
 
                   </div>
