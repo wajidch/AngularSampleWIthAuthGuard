@@ -7,8 +7,8 @@ import { throwError } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import Swal from 'sweetalert2';
-declare var jquery:any;
-declare var $ :any;
+declare var jquery: any;
+declare var $: any;
 @Component({
   selector: 'app-real-account-list',
   templateUrl: './real-account-list.component.html',
@@ -18,15 +18,15 @@ export class RealAccountListComponent implements OnInit {
 
   realaccountlist: any;
   createrealAccountForm: FormGroup;
-  searchForm:FormGroup;
-  leverGroupForm:FormGroup;
+  searchForm: FormGroup;
+  leverGroupForm: FormGroup;
   NoRecordFound: boolean;
   errormessage: string;
   pager = {
     current_page: 1
   };
   pages = [];
-  
+
   name: any;
   email: any;
   phone: any;
@@ -36,13 +36,14 @@ export class RealAccountListComponent implements OnInit {
   dropdownList = [];
   selectedItems = [];
   dropdownSettings = {};
-  realModal={
-    lever:'Leverage1',
-  account_group:'Group1',
-  account_type:'real',
-  platform_type:'meta trader 4',
-  currency:'USD',
-  user_id:0};
+  realModal = {
+    lever: 'Leverage1',
+    account_group: 'Group1',
+    account_type: 'real',
+    platform_type: 'meta trader 4',
+    currency: 'USD',
+    user_id: 0
+  };
   constructor(private apiservice: apiService,
     private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
@@ -58,7 +59,7 @@ export class RealAccountListComponent implements OnInit {
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 3,
       allowSearchFilter: true,
-      closeDropDownOnSelection:true
+      closeDropDownOnSelection: true
     };
     this.createrealAccountForm = new FormGroup({
       lever: new FormControl(''),
@@ -69,104 +70,113 @@ export class RealAccountListComponent implements OnInit {
 
 
     })
-    this.searchForm=new FormGroup({
-      search:new FormControl('')
+    this.searchForm = new FormGroup({
+      search: new FormControl('')
     })
-    this.leverGroupForm=new FormGroup({
-      lever:new FormControl(''),
-      account_group:new FormControl('')
+    this.leverGroupForm = new FormGroup({
+      lever: new FormControl(''),
+      account_group: new FormControl('')
     })
 
     this.route.queryParams.subscribe(x => this.getRealAccountList(x.page || 1));
 
   }
-  getAlluser(){
+  getAlluser() {
     // this.loadingBar.start();
-     this.apiservice.get(`admin/getAllUser`)
-       .pipe(
-         catchError(err => {
- 
-           if (err.status === 404) {
-             //this.loadingBar.complete();
-             //this.NoRecordFound = true;
-             this.errormessage = ''
-           }
-           else {
+    this.apiservice.get(`admin/getAllUser`)
+      .pipe(
+        catchError(err => {
+
+          if (err.status === 404) {
+            //this.loadingBar.complete();
+            //this.NoRecordFound = true;
+            this.errormessage = ''
+          }
+          else {
             Swal.fire({
               type: 'error',
               title: 'Oops...',
               text: 'Something went wrong!',
-             
+
             })
- 
-             ///this.loadingBar.complete();
-             //this.NoRecordFound = false;
-           }
-           return throwError(err);
-         })
-       )
- 
-       .subscribe((res: any) => {
- 
-         if (res.status === 200) {
- 
-          
-           this.dropdownList = res.body.data;
-           this.errormessage = '';
-           //this.NoRecordFound = false;
-           //this.loadingBar.complete();
-         }
-         if (res.status === 404) {
-           this.dropdownList = []
-           //this.NoRecordFound = true;
-           this.errormessage = ''
-           //this.loadingBar.complete();
-         }
- 
-       })
-   }
- 
-   onItemSelect(item: any) {
-     console.log(item);
-     this.realModal.user_id=item.id
-   }
-   onSelectAll(items: any) {
-     console.log(items);
-   }
- 
-   realaccount()
-   {
- console.log("vall",this.realModal);
- this.loadingBar.start();
-     this.apiservice.post('admin/createAccount', this.realModal).subscribe((res => {
- 
-       document.getElementById('closerealaccountmodel').click();
-       this.getRealAccountList(1);
-       //this.spinner.hide();
-       this.loadingBar.complete();
-     }))
-   }
+
+            ///this.loadingBar.complete();
+            //this.NoRecordFound = false;
+          }
+          return throwError(err);
+        })
+      )
+
+      .subscribe((res: any) => {
+
+        if (res.status === 200) {
+
+
+          this.dropdownList = res.body.data;
+          this.errormessage = '';
+          //this.NoRecordFound = false;
+          //this.loadingBar.complete();
+        }
+        if (res.status === 404) {
+          this.dropdownList = []
+          //this.NoRecordFound = true;
+          this.errormessage = ''
+          //this.loadingBar.complete();
+        }
+
+      })
+  }
+
+  onItemSelect(item: any) {
+    console.log(item);
+    this.realModal.user_id = item.id
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+
+  realaccount() {
+    console.log("vall", this.realModal);
+    this.loadingBar.start();
+    this.apiservice.post('admin/createAccount', this.realModal).subscribe((res => {
+
+      document.getElementById('closerealaccountmodel').click();
+      this.getRealAccountList(1);
+      //this.spinner.hide();
+      this.loadingBar.complete();
+    }))
+  }
   loadPage(page) {
     this.getRealAccountList(page)
   }
-  manage(name,email,phoneNumber
-    ,account_id,lever,account_group){
-    console.log("account id",account_group)
-    this.name=name;
-    this.email=email;
-    this.phone=phoneNumber
-    this.accountid=account_id;
-    this.accountgroup=account_group;
-    this.leverages=lever
-    this.leverGroupForm=new FormGroup({
-      lever:new FormControl(lever),
-      account_group:new FormControl(account_group)
+  manage(name, email, phoneNumber
+    , account_id, lever, account_group) {
+    console.log("account id", account_group)
+    let group;
+    let leverage;
+    if (lever && account_group) {
+      group = account_group;
+      leverage = lever
+    }
+    else {
+      group = 'Group1';
+      leverage = 'Leverage1'
+    }
+    this.name = name;
+    this.email = email;
+    this.phone = phoneNumber
+    this.accountid = account_id;
+    this.accountgroup = group;
+    this.leverages = leverage;
+    this.leverGroupForm = new FormGroup({
+      lever: new FormControl(lever),
+      account_group: new FormControl(account_group)
     })
-    
+
     $("#manageModal").modal()
   }
 
-  OpenApprovealert(accountid,status,group,lever){
+  OpenApprovealert(accountid, status, group, lever) {
     Swal.fire({
       title: 'Are you sure want to approve?',
 
@@ -177,22 +187,22 @@ export class RealAccountListComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
 
-        this.approve(accountid,status,group,lever);
+        this.approve(accountid, status, group, lever);
         Swal.fire(
           'Approved!',
           'Your Request has been approved.',
           'success'
         )
-        
-      // For more information about handling dismissals please visit
-      // https://sweetalert2.github.io/#handling-dismissals
+
+        // For more information about handling dismissals please visit
+        // https://sweetalert2.github.io/#handling-dismissals
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.close();
       }
     })
   }
 
-  OpendisApprovealert(accountid,status,group,lever){
+  OpendisApprovealert(accountid, status, group, lever) {
     Swal.fire({
       title: 'Are you sure want to disapprove?',
 
@@ -203,80 +213,80 @@ export class RealAccountListComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
 
-        this.disapprove(accountid,status,group,lever);
+        this.disapprove(accountid, status, group, lever);
         Swal.fire(
           'Diapproved!',
           'Your Request has been disapproved.',
           'success'
         )
-        
-      // For more information about handling dismissals please visit
-      // https://sweetalert2.github.io/#handling-dismissals
+
+        // For more information about handling dismissals please visit
+        // https://sweetalert2.github.io/#handling-dismissals
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.close();
       }
     })
   }
-  
-  search(val){
-     //this.spinner.show();
-     this.loadingBar.start();
-     if(val.search){
-     this.apiservice.get(`admin/searchRealAccount/${val.search}`)
- 
-       .pipe(
-         catchError(err => {
- 
-           if (err.status === 404) {
-             this.loadingBar.complete();
-             this.NoRecordFound = true;
-             this.errormessage = '';
-             this.pages = [];
-           }
-           else {
-            Swal.fire({
-              type: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
-             
-            })
- 
-             this.loadingBar.complete();
-             this.NoRecordFound = false;
-             this.pages = [];
-           }
-           return throwError(err);
-         })
-       )
-       .subscribe((res: any) => {
- 
- 
-         if (res.status === 200) {
-           this.loadingBar.complete();
-           this.pager = res.body.data;
-           this.pages = []
-           for (let i = 1; i <= res.body.data.last_page; i++) {
-             this.pages.push(i)
-           }
-           this.realaccountlist = res.body.data.data;
-           this.errormessage = '';
-           this.NoRecordFound = false;
-           //this.spinner.hide();
- 
-         }
- 
-         if (res.status === 404) {
-           this.realaccountlist = []
-           this.loadingBar.complete();
-           this.errormessage = '';
-           this.NoRecordFound = true;
-           //this.spinner.hide();
-         }
-       })
-      }
-      else{
-        this.getRealAccountList(1);
-      }
+
+  search(val) {
+    //this.spinner.show();
+    this.loadingBar.start();
+    if (val.search) {
+      this.apiservice.get(`admin/searchRealAccount/${val.search}`)
+
+        .pipe(
+          catchError(err => {
+
+            if (err.status === 404) {
+              this.loadingBar.complete();
+              this.NoRecordFound = true;
+              this.errormessage = '';
+              this.pages = [];
+            }
+            else {
+              Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+
+              })
+
+              this.loadingBar.complete();
+              this.NoRecordFound = false;
+              this.pages = [];
+            }
+            return throwError(err);
+          })
+        )
+        .subscribe((res: any) => {
+
+
+          if (res.status === 200) {
+            this.loadingBar.complete();
+            this.pager = res.body.data;
+            this.pages = []
+            for (let i = 1; i <= res.body.data.last_page; i++) {
+              this.pages.push(i)
+            }
+            this.realaccountlist = res.body.data.data;
+            this.errormessage = '';
+            this.NoRecordFound = false;
+            //this.spinner.hide();
+
+          }
+
+          if (res.status === 404) {
+            this.realaccountlist = []
+            this.loadingBar.complete();
+            this.errormessage = '';
+            this.NoRecordFound = true;
+            //this.spinner.hide();
+          }
+        })
+    }
+    else {
+      this.getRealAccountList(1);
+    }
   }
   getRealAccountList(page) {
 
@@ -298,7 +308,7 @@ export class RealAccountListComponent implements OnInit {
               type: 'error',
               title: 'Oops...',
               text: 'Something went wrong!',
-             
+
             })
             this.pages = [];
             this.loadingBar.complete();
@@ -318,7 +328,7 @@ export class RealAccountListComponent implements OnInit {
             this.pages.push(i)
           }
           this.realaccountlist = res.body.data.data;
-         
+
           this.errormessage = '';
           this.NoRecordFound = false;
           //this.spinner.hide();
@@ -346,58 +356,58 @@ export class RealAccountListComponent implements OnInit {
       this.spinner.hide();
     }))
   }
-  disapprove(accountid,status,group,lever){
+  disapprove(accountid, status, group, lever) {
 
     this.loadingBar.start();
-    let statusobj:any={
-      status:status,
-      account_group:group,
-      lever:lever
+    let statusobj: any = {
+      status: status,
+      account_group: group,
+      lever: lever
     }
-    this.apiservice.put(`admin/updateRealAccount/${accountid}`,statusobj)
-    .pipe(
-      catchError(err =>{
+    this.apiservice.put(`admin/updateRealAccount/${accountid}`, statusobj)
+      .pipe(
+        catchError(err => {
 
-       this.loadingBar.complete();
-        return throwError(err)
+          this.loadingBar.complete();
+          return throwError(err)
+        })
+      )
+      .subscribe((res: any) => {
+        console.log("res", res);
+        if (res.status === 200) {
+          this.loadingBar.complete();
+          document.getElementById('closedisapprove').click();
+          document.getElementById('closemain').click();
+          this.getRealAccountList(1);
+        }
       })
-    )
-    .subscribe((res:any)=>{
-      console.log("res",res);
-      if(res.status===200){
-        this.loadingBar.complete();
-        document.getElementById('closedisapprove').click();
-        document.getElementById('closemain').click();
-        this.getRealAccountList(1);
-      }
-    })
   }
-  approve(accountid,status,group,lever){
+  approve(accountid, status, group, lever) {
 
-    console.log("group",this.realModal)
+    console.log("group", this.realModal)
     this.loadingBar.start();
-    let statusobj:any={
-      status:status,
-      account_group:group,
-      lever:lever
+    let statusobj: any = {
+      status: status,
+      account_group: group,
+      lever: lever
     }
-    this.apiservice.put(`admin/updateRealAccount/${accountid}`,statusobj)
-    .pipe(
-      catchError(err =>{
+    this.apiservice.put(`admin/updateRealAccount/${accountid}`, statusobj)
+      .pipe(
+        catchError(err => {
 
-       this.loadingBar.complete();
-        return throwError(err)
+          this.loadingBar.complete();
+          return throwError(err)
+        })
+      )
+      .subscribe((res: any) => {
+        console.log("res", res);
+        if (res.status === 200) {
+
+          this.loadingBar.complete();
+          document.getElementById('closeapprove').click();
+          document.getElementById('closemain').click();
+          this.getRealAccountList(1);
+        }
       })
-    )
-    .subscribe((res:any)=>{
-      console.log("res",res);
-      if(res.status===200){
-        
-        this.loadingBar.complete();
-        document.getElementById('closeapprove').click();
-        document.getElementById('closemain').click();
-        this.getRealAccountList(1);
-      }
-    })
   }
 }
