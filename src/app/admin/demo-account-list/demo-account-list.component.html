@@ -80,9 +80,10 @@
                   <div class="col-sm-6 col-md-4"></div>
                   <div class="col-sm-6 col-md-4">
                     <form class="create-btn">
-                        <!-- data-toggle="modal"
+                      <!-- data-toggle="modal"
                         data-target="#createdemo" -->
-                      <button type="button" class="form-control rounded form-buttonnew"  style="margin-bottom: 15px">Create Request</button>
+                      <button type="button" class="form-control rounded form-buttonnew"
+                        style="margin-bottom: 15px">Create Request</button>
                     </form>
                   </div>
                 </div>
@@ -122,7 +123,7 @@
                       <button class="btn btn-success" (click)='manage(list.name,
                         list.email,list.number,list.account_id,
                         list.lever,list.account_group)' type="submit">Manage</button>
-                      </td>
+                    </td>
                   </tr>
 
                 </tbody>
@@ -170,7 +171,7 @@
             <!---------------------- create account model ------------------------------>
 
             <!-- Modal -->
-          <div aria-hidden="true" class="onboarding-modal modal fade animated" id="createdemo" role="dialog">
+            <div aria-hidden="true" class="onboarding-modal modal fade animated" id="createdemo" role="dialog">
               <div class="modal-dialog modal-centered" role="document">
                 <div class="modal-content text-left">
                   <button aria-label="Close" id='close' class="close" data-dismiss="modal" type="button"><span
@@ -185,10 +186,8 @@
                           <div class="form-group">
                             <label for="user">Search
                             </label>
-                            <ng-multiselect-dropdown class="form-control"
-                            [placeholder]="'Search User'" [data]="dropdownList"
-                               [settings]="dropdownSettings"
-                              (onSelect)="onItemSelect($event)" 
+                            <ng-multiselect-dropdown class="form-control" [placeholder]="'Search User'"
+                              [data]="dropdownList" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
                               (onSelectAll)="onSelectAll($event)">
                             </ng-multiselect-dropdown>
                           </div>
@@ -199,7 +198,7 @@
 
                           <div class="form-group">
                             <label for=""> Select Leverage</label>
-                            <select [(ngModel)]='demoModal.lever' name=lever class="form-control" >
+                            <select [(ngModel)]='demoModal.lever' name=lever class="form-control">
                               <option value="Leverage1">
                                 Leverage1
                               </option>
@@ -221,8 +220,7 @@
                         <div class="col-sm-6">
                           <div class="form-group">
                             <label for=""> Select Group</label>
-                            <select [(ngModel)]='demoModal.account_group' name='account_group' class="form-control"
-                             >
+                            <select [(ngModel)]='demoModal.account_group' name='account_group' class="form-control">
                               <option value="Group1">
                                 Group1
                               </option>
@@ -245,9 +243,8 @@
                       <div class="row">
                         <div class="col-sm-12 text-right">
                           <div class="element-box-content ">
-                            <button (click)='demoaccount()' class="btn btn-success"
-                             type="submit">Submit</button>
-                            
+                            <button (click)='demoaccount()' class="btn btn-success" type="submit">Submit</button>
+
 
                           </div>
                         </div>
@@ -256,10 +253,10 @@
                   </div>
                 </div>
               </div>
-          </div>
+            </div>
 
 
-          <div aria-hidden="true" class="onboarding-modal modal fade animated" id="manageModal" role="dialog"
+            <div aria-hidden="true" class="onboarding-modal modal fade animated" id="manageModal" role="dialog"
               tabindex="-1">
               <div class="modal-dialog modal-centered" role="document">
                 <div class="modal-content text-left">
@@ -342,10 +339,10 @@
                       <div class="form-buttons-w">
                         <div class="element-box-content text-right">
                           <button class="btn btn-success"
-                          (click)="OpenApprovealert(accountid,'approved',accountgroup,leverages)"
+                            (click)="OpenApprovealert(accountid,'approved',accountgroup,leverages)"
                             type="submit">Approve</button>
                           <button class="btn btn-danger"
-                          (click)="OpendisApprovealert(accountid,'declined',accountgroup,leverages)" type="submit">
+                            (click)="OpendisApprovealert(accountid,'declined',accountgroup,leverages)" type="submit">
                             Disapprove</button>
                         </div>
                       </div>
@@ -353,7 +350,7 @@
                   </div>
                 </div>
               </div>
-          </div>
+            </div>
 
           </div>
           <div aria-hidden="true" class="onboarding-modal modal fade animated" id="Approve" role="dialog" tabindex="-1">

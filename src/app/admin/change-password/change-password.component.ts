@@ -6,6 +6,7 @@ import { catchError, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { MustMatch } from 'src/app/common/must-match-validator';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
@@ -17,6 +18,7 @@ export class ChangePasswordComponent implements OnInit {
   token = localStorage.getItem('admin_token')
   changepasswordForm: FormGroup
   errormessage: any;
+  submitted:boolean;
   constructor(private apiservice: apiService,
     private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder,
@@ -36,12 +38,20 @@ export class ChangePasswordComponent implements OnInit {
 
   updatePassword(val) {
     //this.spinner.show();
+    this.submitted=true
+    if(this.changepasswordForm.valid){
+      this.submitted=false;
     this.loadingBar.start();
     this.apiservice.put('admin/updatePassword', val)
       .pipe(
         catchError(err => {
 
-          this.errormessage = 'Something wrong happend try again!';
+          Swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+           
+          })
           this.message = '';
 
           //this.spinner.hide();
@@ -63,5 +73,9 @@ export class ChangePasswordComponent implements OnInit {
 
         }.bind(this), 3000);
       })
+    }
+    else{
+      return;
+    }
   }
 }

@@ -6,6 +6,7 @@ import { throwError } from 'rxjs'
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-account-activities-history',
@@ -19,16 +20,16 @@ export class AccountActivitiesHistoryComponent implements OnInit {
   errormessage: string;
   pager: any;
   pages: any[];
-  searchForm:FormGroup;
+  searchForm: FormGroup;
   constructor(private apiservice: apiService,
     private spinner: NgxSpinnerService,
-    private loadingBar:LoadingBarService,
-    private route: ActivatedRoute,) { }
+    private loadingBar: LoadingBarService,
+    private route: ActivatedRoute, ) { }
 
   ngOnInit() {
     this.getTranscationlist(1);
-    this.searchForm=new FormGroup({
-      search:new FormControl('')
+    this.searchForm = new FormGroup({
+      search: new FormControl('')
     })
 
   }
@@ -36,55 +37,60 @@ export class AccountActivitiesHistoryComponent implements OnInit {
   loadPage(page) {
     this.getTranscationlist(page)
   }
-  search(val){
+  search(val) {
     try {
       //this.spinner.show();
       this.loadingBar.start();
-      if(val.search){
-      this.apiservice.get(`admin/searchTransactionHistory/${val.search}`)
-        .pipe(
-          catchError(err => {
+      if (val.search) {
+        this.apiservice.get(`admin/searchTransactionHistory/${val.search}`)
+          .pipe(
+            catchError(err => {
 
-            if (err.status === 404) {
-              //this.spinner.hide();
-              this.pages = [];
+              if (err.status === 404) {
+                //this.spinner.hide();
+                this.pages = [];
+                this.loadingBar.complete();
+                this.notFound = 'No Record Found';
+                this.errormessage = ''
+              }
+              else {
+                Swal.fire({
+                  type: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong!',
+                 
+                })
+                this.pages = [];
+                this.loadingBar.complete();
+                this.notFound = '';
+              }
+
+              return throwError(err)
+            })
+          )
+          .subscribe((res: any) => {
+            if (res.status === 200) {
+
+              this.notFound = '';
+              this.errormessage = '';
+              this.pager = res.body.data;
+              this.pages = []
+              for (let i = 1; i <= res.body.data.last_page; i++) {
+                this.pages.push(i)
+              }
+              this.transcationList = res.body.data.data;
               this.loadingBar.complete();
-              this.notFound = 'No Record Found';
-              this.errormessage = ''
             }
             else {
-              this.errormessage = 'Something happend wrong try again!';
-              this.pages = [];
+              this.transcationList = [];
+              this.pages = []
+              this.notFound = 'No Record Found';
+              this.errormessage = '';
               this.loadingBar.complete();
-              this.notFound = '';
             }
-
-            return throwError(err)
           })
-        )
-        .subscribe((res: any) => {
-          if (res.status === 200) {
-
-            this.notFound = '';
-            this.errormessage = '';
-            this.pager = res.body.data;
-            this.pages = []
-            for (let i = 1; i <= res.body.data.last_page; i++) {
-              this.pages.push(i)
-            }
-            this.transcationList = res.body.data.data;
-            this.loadingBar.complete();
-          }
-          else {
-            this.transcationList = [];
-            this.pages = []
-            this.notFound = 'No Record Found';
-            this.errormessage = '';
-            this.loadingBar.complete();
-          }
-        })
       }
-      else{
+      else {
         this.getTranscationlist(1);
       }
 
@@ -92,7 +98,7 @@ export class AccountActivitiesHistoryComponent implements OnInit {
       this.loadingBar.complete();
     }
 
-  
+
   }
   getTranscationlist(page) {
 
@@ -111,7 +117,12 @@ export class AccountActivitiesHistoryComponent implements OnInit {
               this.errormessage = ''
             }
             else {
-              this.errormessage = 'Something happend wrong try again!';
+              Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+               
+              })
               this.pages = [];
               this.loadingBar.complete();
               this.notFound = '';

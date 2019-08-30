@@ -119,7 +119,12 @@ paymentmethod:''
               this.errormessage = ''
             }
             else {
-              this.errormessage = 'Something happend wrong try again!';
+              Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+               
+              })
               this.pages = [];
               this.loadingBar.complete();
               this.notFound = '';
@@ -201,7 +206,12 @@ manage(name,email,phoneNumber
               this.errormessage = ''
             }
             else {
-              this.errormessage = 'Something happend wrong try again!';
+              Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+               
+              })
               this.pages = [];
               this.loadingBar.complete();
               this.notFound = '';

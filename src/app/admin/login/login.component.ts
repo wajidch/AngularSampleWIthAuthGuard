@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   message: string;
   errormessage: any;
+  submitted: boolean;
   constructor(
     private route: Router,
     private apiservce: apiService,
@@ -39,7 +40,10 @@ export class LoginComponent implements OnInit {
   }
   login(val) {
 
+    this.submitted=true
+    if(this.loginForm.valid){
     //this.spinner.show();
+    this.submitted=false;
     this.loadingBar.start();
     this.apiservce.postwithouttoken('admin/login', val)
       .pipe(
@@ -80,7 +84,10 @@ export class LoginComponent implements OnInit {
         })
 
 
-
+      }
+      else{
+        return;
+      }
 
   }
 

@@ -92,7 +92,12 @@ export class RealAccountListComponent implements OnInit {
              this.errormessage = ''
            }
            else {
-             this.errormessage = 'Something happend wrong try again!';
+            Swal.fire({
+              type: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+             
+            })
  
              ///this.loadingBar.complete();
              //this.NoRecordFound = false;
@@ -229,7 +234,12 @@ export class RealAccountListComponent implements OnInit {
              this.pages = [];
            }
            else {
-             this.errormessage = 'Something happend wrong try again!';
+            Swal.fire({
+              type: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+             
+            })
  
              this.loadingBar.complete();
              this.NoRecordFound = false;
@@ -284,7 +294,12 @@ export class RealAccountListComponent implements OnInit {
             this.pages = [];
           }
           else {
-            this.errormessage = 'Something happend wrong try again!';
+            Swal.fire({
+              type: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+             
+            })
             this.pages = [];
             this.loadingBar.complete();
             this.NoRecordFound = false;

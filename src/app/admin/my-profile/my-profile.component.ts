@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.component.html',
@@ -49,7 +50,12 @@ export class MyProfileComponent implements OnInit {
       .pipe(
         catchError(err => {
 
-          this.errormessage = 'Something happend wrong try again!'
+          Swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+           
+          })
           //this.spinner.hide();
           this.loadingBar.complete();
           setTimeout(function () {

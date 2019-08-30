@@ -31,6 +31,7 @@ export class WithdrawRequestComponent implements OnInit {
   currency: any;
   transactionsid: any;
   file: any;
+  submitted:boolean;
   constructor(private loadingBar: LoadingBarService,
     private apiservice: apiService) { }
 
@@ -44,6 +45,10 @@ export class WithdrawRequestComponent implements OnInit {
     })
   }
   OpenApprovealert(transactionid,status){
+    this.submitted=true;
+    if(this.withdrawForm.valid){
+      this.submitted=false;
+    
     Swal.fire({
       title: 'Are you sure want to approve?',
 
@@ -68,8 +73,15 @@ export class WithdrawRequestComponent implements OnInit {
       }
     })
   }
+  else{
+    return;
+  }
+  }
 
   OpendisApprovealert(transactionid,status){
+    this.submitted=true;
+    if(this.withdrawForm.valid){
+      this.submitted=false;
     Swal.fire({
       title: 'Are you sure want to disapprove?',
 
@@ -94,6 +106,10 @@ export class WithdrawRequestComponent implements OnInit {
       }
     })
   }
+  else{
+    return;
+  }
+  }
   
   search(val) {
     try {
@@ -112,7 +128,12 @@ export class WithdrawRequestComponent implements OnInit {
                 this.errormessage = ''
               }
               else {
-                this.errormessage = 'Something happend wrong try again!';
+                Swal.fire({
+                  type: 'error',
+                  title: 'Oops...',
+                  text: 'Something went wrong!',
+                 
+                })
                 this.pages = [];
                 this.loadingBar.complete();
                 this.notFound = '';
@@ -190,7 +211,12 @@ export class WithdrawRequestComponent implements OnInit {
               this.errormessage = ''
             }
             else {
-              this.errormessage = 'Something happend wrong try again!';
+              Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+               
+              })
               this.pages = [];
               this.loadingBar.complete();
               this.notFound = '';
