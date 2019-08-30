@@ -169,8 +169,8 @@ export class RealAccountListComponent implements OnInit {
     this.accountgroup = group;
     this.leverages = leverage;
     this.leverGroupForm = new FormGroup({
-      lever: new FormControl(lever),
-      account_group: new FormControl(account_group)
+      lever: new FormControl(leverage),
+      account_group: new FormControl(group)
     })
 
     $("#manageModal").modal()

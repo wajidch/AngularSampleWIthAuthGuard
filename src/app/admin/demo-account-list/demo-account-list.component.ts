@@ -152,16 +152,27 @@ this.loadingBar.start();
   }
   manage(name,email,phoneNumber
     ,account_id,lever,account_group){
-    console.log("account id",account_id)
+    console.log("account id",account_id);
+    let group;
+    let leverage;
+    if (lever && account_group) {
+      group = account_group;
+      leverage = lever
+    }
+    else {
+      group = 'Group1';
+      leverage = 'Leverage1'
+    }
+   
     this.name=name;
     this.email=email;
     this.phone=phoneNumber
     this.accountid=account_id
-    this.accountgroup=account_group;
-    this.leverages=lever
+    this.accountgroup=group;
+    this.leverages=leverage
     this.leverGroupForm=new FormGroup({
-      lever:new FormControl(lever),
-      account_group:new FormControl(account_group)
+      lever:new FormControl(leverage),
+      account_group:new FormControl(group)
     })
     
     $("#manageModal").modal()
