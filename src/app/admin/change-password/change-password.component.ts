@@ -6,7 +6,6 @@ import { catchError, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { MustMatch } from 'src/app/common/must-match-validator';
 import { LoadingBarService } from '@ngx-loading-bar/core';
-import Swal from 'sweetalert2';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
@@ -18,11 +17,7 @@ export class ChangePasswordComponent implements OnInit {
   token = localStorage.getItem('admin_token')
   changepasswordForm: FormGroup
   errormessage: any;
-<<<<<<< HEAD:src/app/admin/change-password/change-password.component.ts
   submitted:boolean;
-=======
-  submitted: boolean;
->>>>>>> c5c31bf330bca49a6f2ed531415f4d5146b13c5c:src/app/users/change-password/change-password.component.ts
   constructor(private apiservice: apiService,
     private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder,
@@ -42,57 +37,26 @@ export class ChangePasswordComponent implements OnInit {
 
   updatePassword(val) {
     //this.spinner.show();
-<<<<<<< HEAD:src/app/admin/change-password/change-password.component.ts
     this.submitted=true
     if(this.changepasswordForm.valid){
       this.submitted=false;
+    
     this.loadingBar.start();
     this.apiservice.put('admin/updatePassword', val)
       .pipe(
         catchError(err => {
 
-          Swal.fire({
-            type: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-           
-          })
+          this.errormessage = 'Something wrong happend try again!';
           this.message = '';
 
-=======
-    this.submitted = true
-    if (this.changepasswordForm.valid) {
-      this.submitted = false;
-
-      this.loadingBar.start();
-      this.apiservice.put('updatePassword', val)
-        .pipe(
-          catchError(err => {
-
-            this.errormessage = 'Something wrong happend try again!';
-            this.message = '';
-
-            //this.spinner.hide();
-            this.loadingBar.complete();
-            setTimeout(function () {
-              this.errormessage = '';
-
-            }.bind(this), 3000);
-            return throwError(err)
-          })
-        )
-        .subscribe((res: any) => {
-          this.errormessage = ''
-          this.message = res.body.message;
->>>>>>> c5c31bf330bca49a6f2ed531415f4d5146b13c5c:src/app/users/change-password/change-password.component.ts
           //this.spinner.hide();
           this.loadingBar.complete();
           setTimeout(function () {
-            this.message = '';
+            this.errormessage = '';
 
           }.bind(this), 3000);
+          return throwError(err)
         })
-<<<<<<< HEAD:src/app/admin/change-password/change-password.component.ts
       )
       .subscribe((res: any) => {
         this.errormessage = ''
@@ -106,10 +70,6 @@ export class ChangePasswordComponent implements OnInit {
       })
     }
     else{
-=======
-    }
-    else {
->>>>>>> c5c31bf330bca49a6f2ed531415f4d5146b13c5c:src/app/users/change-password/change-password.component.ts
       return;
     }
   }

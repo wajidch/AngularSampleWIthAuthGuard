@@ -16,11 +16,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   message: string;
   errormessage: any;
-<<<<<<< HEAD:src/app/admin/login/login.component.ts
   submitted: boolean;
-=======
-  submitted:boolean;
->>>>>>> c5c31bf330bca49a6f2ed531415f4d5146b13c5c:src/app/users/login/login.component.ts
   constructor(
     private route: Router,
     private apiservce: apiService,
@@ -44,19 +40,12 @@ export class LoginComponent implements OnInit {
   }
   login(val) {
 
-<<<<<<< HEAD:src/app/admin/login/login.component.ts
-    this.submitted=true
-    if(this.loginForm.valid){
     //this.spinner.show();
-    this.submitted=false;
-=======
     this.submitted=true;
     //this.spinner.show();
     if(this.loginForm.valid){
 
       this.submitted=false;
-    
->>>>>>> c5c31bf330bca49a6f2ed531415f4d5146b13c5c:src/app/users/login/login.component.ts
     this.loadingBar.start();
     this.apiservce.postwithouttoken('admin/login', val)
       .pipe(
@@ -98,14 +87,7 @@ export class LoginComponent implements OnInit {
 
 
       }
-      else{
-        return;
-      }
 
   }
-  else{
-    return;
-  }
-}
 
 }

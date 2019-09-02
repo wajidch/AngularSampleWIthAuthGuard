@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl:'http://api.trendfxturkiye.com:8080/',
-  imageUrl:'http://api.trendfxturkiye.com:8080/'
+  apiUrl:'https://api.trendfxturkiye.com/',
+  imageUrl:'https://api.trendfxturkiye.com/'
 
 };
 
