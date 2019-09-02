@@ -17,11 +17,21 @@
         <div class="form-group">
           <label for="">Email</label>
           <div *ngIf="submitted && !loginForm.controls['email'].valid">
+<<<<<<< HEAD:src/app/admin/login/login.component.html
             <span class="help-block" style="color:red" *ngIf="submitted && loginForm.controls['email'].hasError('required')">
               Email is required</span>
           </div>
           <div *ngIf="submitted &&  !loginForm.controls['email'].valid">
             <span class="help-block" style="color:red" *ngIf="submitted && loginForm.controls['email'].hasError('email')">
+=======
+            <span class="help-block" style="color:red"
+             *ngIf="submitted && loginForm.controls['email'].hasError('required')">
+              Email is required</span>
+          </div>
+          <div *ngIf="submitted && !loginForm.controls['email'].valid">
+            <span class="help-block" style="color:red" 
+            *ngIf="submitted && loginForm.controls['email'].hasError('email')">
+>>>>>>> c5c31bf330bca49a6f2ed531415f4d5146b13c5c:src/app/users/login/login.component.html
               Email format not valid</span>
           </div>
           <input class="form-control" name="email" formControlName="email" placeholder="Enter your email" type="text">
@@ -31,8 +41,14 @@
         </div>
         <div class="form-group">
           <label for="">Password</label>
+<<<<<<< HEAD:src/app/admin/login/login.component.html
           <div *ngIf="submitted &&!loginForm.controls['password'].valid">
             <span class="help-block" style="color:red" *ngIf="submitted && loginForm.controls['password'].hasError('required')">
+=======
+          <div *ngIf="submitted && !loginForm.controls['password'].valid">
+            <span class="help-block" style="color:red" 
+            *ngIf="submitted && loginForm.controls['password'].hasError('required')">
+>>>>>>> c5c31bf330bca49a6f2ed531415f4d5146b13c5c:src/app/users/login/login.component.html
               Password is required</span>
           </div>
 
@@ -47,8 +63,12 @@
 
         </div>
         <div class="buttons-w">
+<<<<<<< HEAD:src/app/admin/login/login.component.html
           <button class="btn btn-primary" 
            (click)='login(loginForm.value)'>Log me
+=======
+          <button class="btn btn-primary"  (click)='login(loginForm.value)'>Log me
+>>>>>>> c5c31bf330bca49a6f2ed531415f4d5146b13c5c:src/app/users/login/login.component.html
             in</button>
           <div class="form-check-inline">
             <label class="form-check-label">
